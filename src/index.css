@@ -8,7 +8,7 @@ html {
   display: block;
   font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   quotes: '“' '”';
-  /*text-size-adjust: 100%;*/
+  text-size-adjust: 100%;
   overflow-x: hidden;
 }
 
