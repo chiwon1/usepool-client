@@ -20,6 +20,7 @@ const AppHeader: FC = () => {
         <LogoWrapper>
           <Logo />
         </LogoWrapper>
+        <Center />
         <RightWrapper>
           <a>{CONSTANTS.PUBLICH_A_RIDE}</a>
           <MyPageWrapper>
@@ -28,7 +29,9 @@ const AppHeader: FC = () => {
                 <img src={myPageIcon} />
               </ProfileWrapper>
               <img src={menuIcon} />
-              {isShowMenu && <Menu show={isShowMenu} onCloseMenu={showMenu} />}
+              {isShowMenu && (
+                <Menu show={isShowMenu} onCloseMenu={showMenu}></Menu>
+              )}
             </MenuButton>
           </MyPageWrapper>
         </RightWrapper>
@@ -36,6 +39,8 @@ const AppHeader: FC = () => {
     </Wrapper>
   );
 };
+
+export default AppHeader;
 
 const ProfileWrapper = styled.div`
   border: 2px dashed rgb(221, 221, 221);
@@ -110,6 +115,14 @@ const LogoWrapper = styled.div`
   justify-content: flex-start;
 `;
 
+const Center = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+`;
+
 const RightWrapper = styled.div`
   flex: 1 1 0;
   display: flex;
@@ -117,7 +130,7 @@ const RightWrapper = styled.div`
   justify-content: flex-end;
 
   @media (min-width: 800px) {
-    margin-right: 24px !important;
+    flex: 0 0 auto;
   }
 
   a {
@@ -126,5 +139,3 @@ const RightWrapper = styled.div`
     font-size: 1.5em;
   }
 `;
-
-export default AppHeader;
