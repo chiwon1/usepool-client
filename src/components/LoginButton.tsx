@@ -10,11 +10,11 @@ const LoginButton: FC = () => {
   return (
     <ListWrapper>
       <div onClick={login}>
-        <span>
+        <Span>
           <span>
             <span>{CONSTANTS.LOG_IN}</span>
           </span>
-        </span>
+        </Span>
       </div>
     </ListWrapper>
   );
@@ -33,8 +33,7 @@ const ListWrapper = styled.li`
     border-width: 0;
     box-sizing: border-box;
     color: #00aff5;
-    //display: flex;
-    display: block;
+    display: flex;
     flex: 1 1 0;
     font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 16px;

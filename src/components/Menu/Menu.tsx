@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useCallback } from 'react';
+import React, { FC } from 'react';
 import { CreateMenu } from './styles';
 import styled from 'styled-components';
 import LoginButton from '../LoginButton';
@@ -31,14 +31,13 @@ export default Menu;
 const NavWrapper = styled.div`
   position: relative;
   z-index: 2;
-  left: 0px;
+  left: 0;
   top: 56px;
-  bottom: 0px;
+  bottom: 0;
   overflow-y: auto;
   background-color: rgb(255, 255, 255);
   transition: transform 200ms ease-in-out 0s;
   will-change: transform;
-  transform: translateY(-100%);
   max-width: 100%;
 
   @media (min-width: 800px) {
@@ -50,15 +49,13 @@ const NavWrapper = styled.div`
     position: relative;
   }
 
-  box-shadow: rgb(0 0 0 / 30%) 0px 36px 36px 0px;
+  box-shadow: rgb(0 0 0 / 30%) 0 36px 36px 0;
   transform: translateY(0%);
-
   width: 400px;
 `;
 
 const Nav = styled.nav`
   background-color: #fff !important;
-
   max-height: calc(100vh - 72px);
   overflow-y: auto;
 
@@ -66,6 +63,5 @@ const Nav = styled.nav`
     list-style: none;
     display: flex;
     flex-direction: column;
-    list-style-type: none;
   }
 `;
