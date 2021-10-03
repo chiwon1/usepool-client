@@ -7,19 +7,24 @@ const Logo: FC = () => {
 };
 
 const Wrapper = styled.a`
-  color: rgb(0, 175, 245);
-  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
-  display: flex !important;
-  align-items: center !important;
+  align-items: center;
+  border-width: 0;
+  box-sizing: border-box;
+  color: #00aff5;
+  display: flex;
+  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 2em;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 0 24px 0 0;
+  padding: 0;
+  text-decoration: none;
+  vertical-align: baseline;
 
   @media (min-width: 800px) {
     margin-left: 0 !important;
-  }
-
-  @media (min-width: 800px) {
-    margin-right: 24px !important;
   }
 `;
 

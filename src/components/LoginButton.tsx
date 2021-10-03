@@ -8,51 +8,112 @@ const LoginButton: FC = () => {
   };
 
   return (
-    <Wrapper onClick={login}>
-      <span>
+    <ListWrapper>
+      <div onClick={login}>
         <span>
-          <span>{CONSTANTS.LOG_IN}</span>
+          <span>
+            <span>{CONSTANTS.LOG_IN}</span>
+          </span>
         </span>
-      </span>
-    </Wrapper>
+      </div>
+    </ListWrapper>
   );
 };
 
 export default LoginButton;
 
-const Wrapper = styled.a`
-  position: relative;
-  display: flex;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  -webkit-box-align: center;
-  align-items: center;
-  flex: 1 1 0%;
-  border: 0px;
-  background: none;
-  white-space: pre-line;
+const ListWrapper = styled.li`
+  div {
+    -webkit-box-align: center;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: rgba(221, 221, 221, 0.4);
+    align-items: center;
+    background-color: initial;
+    background-image: none;
+    border-width: 0;
+    box-sizing: border-box;
+    color: #00aff5;
+    //display: flex;
+    display: block;
+    flex: 1 1 0;
+    font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+    margin: 0;
+    padding: 16px 24px;
+    position: relative;
+    text-decoration: none;
+    user-select: none;
+    vertical-align: baseline;
+    white-space: pre-line;
 
-  background: none;
-  text-decoration: none;
-  user-select: none;
-  -webkit-tap-highlight-color: rgba(221, 221, 221, 0.4);
+    &:hover {
+      background-color: #ededed;
+      cursor: pointer;
+    }
 
-  padding-left: 24px;
-  padding-right: 24px;
+    &:disabled {
+      cursor: default;
+    }
+  }
 `;
 
 const Span = styled.span`
-  display: flex;
-  -webkit-box-flex: 1;
-  flex-grow: 1;
   -webkit-box-align: center;
+  -webkit-box-flex: 1;
+  -webkit-font-smoothing: antialiased;
   align-items: center;
+  border-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-grow: 1;
+  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
 
   span {
-    flex: 1 1 0%;
+    -webkit-font-smoothing: antialiased;
+    border-width: 0;
+    box-sizing: border-box;
+    flex: 1 1 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-stretch: inherit;
+    font-style: inherit;
+    font-variant-caps: inherit;
+    font-variant-east-asian: inherit;
+    font-variant-ligatures: inherit;
+    font-variant-numeric: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
 
     span {
+      -webkit-font-smoothing: antialiased;
+      border-width: 0;
+      box-sizing: border-box;
+
       display: block;
+      font-family: inherit;
+      font-size: 18px;
+      font-stretch: inherit;
+      font-style: inherit;
+      font-variant-caps: inherit;
+      font-variant-east-asian: inherit;
+      font-variant-ligatures: inherit;
+      font-variant-numeric: inherit;
+      font-weight: 400;
+      line-height: 20px;
+      margin: 0;
+      padding: 0;
+      vertical-align: baseline;
       color: #054752;
     }
   }

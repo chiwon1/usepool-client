@@ -10,19 +10,21 @@ import Menu from '../Menu';
 const AppHeader: FC = () => {
   const [isShowMenu, setIsShowMenu] = useState(false);
 
-  const showMenu = useCallback(() => {
+  const showMenu = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
+    console.log('showMenu');
+    e.stopPropagation();
     setIsShowMenu((prev) => !prev);
   }, []);
 
   return (
     <Wrapper>
-      <HeaderButtonWrapper>
+      <InnerWrapper>
         <LogoWrapper>
           <Logo />
         </LogoWrapper>
         <Center />
         <RightWrapper>
-          <a>{CONSTANTS.PUBLICH_A_RIDE}</a>
+          <CreateRideButton>{CONSTANTS.PUBLICH_A_RIDE}</CreateRideButton>
           <MyPageWrapper>
             <MenuButton onClick={showMenu}>
               <ProfileWrapper>
@@ -35,7 +37,7 @@ const AppHeader: FC = () => {
             </MenuButton>
           </MyPageWrapper>
         </RightWrapper>
-      </HeaderButtonWrapper>
+      </InnerWrapper>
     </Wrapper>
   );
 };
@@ -60,7 +62,7 @@ const ProfileWrapper = styled.div`
   }
 `;
 
-const MenuButton = styled.button`
+const MenuButton = styled.a`
   display: flex;
   -webkit-box-pack: justify;
   justify-content: space-between;
@@ -84,15 +86,24 @@ const MyPageWrapper = styled.div`
 `;
 
 const Wrapper = styled.header`
-  position: fixed;
-  width: 100%;
-  height: 56px;
-  padding: 0 16px;
-  background-color: rgb(255, 255, 255);
-  display: flex;
   -webkit-box-align: center;
+  -webkit-font-smoothing: antialiased;
   align-items: center;
+  background-color: #fff;
+  border-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  height: 72px;
+  line-height: 16px;
+  margin: 0;
+  padding: 0 24px;
+  position: fixed;
   top: 0;
+  vertical-align: baseline;
+  width: 100%;
   z-index: 60;
 
   @media (min-width: 800px) {
@@ -101,11 +112,19 @@ const Wrapper = styled.header`
   }
 `;
 
-const HeaderButtonWrapper = styled.div`
+const InnerWrapper = styled.div`
+  -webkit-font-smoothing: antialiased;
+  border-width: 0;
+  box-sizing: border-box;
   display: flex;
-  width: 100%;
-  margin: auto;
+  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
   font-weight: 500;
+  line-height: 16px;
+  margin: auto;
+  padding: 0;
+  vertical-align: baseline;
+  width: 1280px;
 `;
 
 const LogoWrapper = styled.div`
@@ -124,6 +143,25 @@ const Center = styled.div`
 `;
 
 const RightWrapper = styled.div`
+  -webkit-box-pack: end;
+  -webkit-font-smoothing: antialiased;
+  border-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 0;
+  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  justify-content: flex-end;
+  line-height: 16px;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+
+  &:nth-child(3n) {
+    flex: 0 0 auto;
+  }
+
   flex: 1 1 0;
   display: flex;
   -webkit-box-pack: end;
@@ -132,10 +170,22 @@ const RightWrapper = styled.div`
   @media (min-width: 800px) {
     flex: 0 0 auto;
   }
+`;
 
-  a {
-    display: flex;
-    align-items: center;
-    font-size: 1.5em;
-  }
+const CreateRideButton = styled.a`
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  align-items: center;
+  border-width: 0;
+  box-sizing: border-box;
+  color: #00aff5;
+  display: flex;
+  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  margin: 0 24px 0 0;
+  padding: 0;
+  text-decoration: none;
+  vertical-align: baseline;
 `;

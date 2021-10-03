@@ -1,34 +1,24 @@
 import React, { FC, ReactNode, useCallback } from 'react';
-import { CloseMenuButton, CreateMenu } from './styles';
+import { CreateMenu } from './styles';
 import styled from 'styled-components';
 import LoginButton from '../LoginButton';
 
 interface Props {
   show: boolean;
-  onCloseMenu: () => void;
-  closeButton?: boolean;
+  onCloseMenu: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
-const Menu: FC<Props> = ({ show, onCloseMenu, closeButton }: Props) => {
-  const stopPropagation = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-  }, []);
-
+const Menu: FC<Props> = ({ show, onCloseMenu }: Props) => {
   if (!show) {
     return null;
   }
 
   return (
     <CreateMenu onClick={onCloseMenu}>
-      <NavWrapper onClick={stopPropagation}>
-        {closeButton && (
-          <CloseMenuButton onClick={onCloseMenu}>&times;</CloseMenuButton>
-        )}
+      <NavWrapper>
         <Nav>
           <ul>
-            <li>
-              <LoginButton />
-            </li>
+            <LoginButton />
           </ul>
         </Nav>
       </NavWrapper>
@@ -79,7 +69,3 @@ const Nav = styled.nav`
     list-style-type: none;
   }
 `;
-
-Menu.defaultProps = {
-  closeButton: true,
-};

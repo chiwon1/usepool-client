@@ -13,13 +13,3 @@ export const CreateMenu = styled.aside`
     transform: translate(-50%, 0px);
   }
 `;
-
-export const CloseMenuButton = styled.button`
-  position: absolute;
-  right: 10px;
-  top: 6px;
-  background: transparent;
-  border: none;
-  font-size: 30px;
-  cursor: pointer;
-`;
