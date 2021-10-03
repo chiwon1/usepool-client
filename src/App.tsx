@@ -2,16 +2,17 @@ import React, { FC } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme';
-import Layouts from './components/Layout';
-import Pages from './pages';
+
+import Layout from './components/Layout';
+import Pages from './Pages';
 
 const App: FC = () => {
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <Layouts>
+        <Layout>
           <Pages />
-        </Layouts>
+        </Layout>
       </ThemeProvider>
     </BrowserRouter>
   );
