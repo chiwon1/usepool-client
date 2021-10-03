@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import APP_TITLE from '../constants';
+import CONSTANTS from '../constants';
 
 const Logo: FC = () => {
-  return <Wrapper href="/">{APP_TITLE}</Wrapper>;
+  return <Wrapper href="/">{CONSTANTS.APP_TITLE}</Wrapper>;
 };
 
 const Wrapper = styled.a`

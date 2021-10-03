@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import AppHeader from './AppHeader';
 import ContentBox from './ContentBox';
 
-const Layouts: FC = ({ children }) => {
+const Layout: FC = ({ children }) => {
   return (
     <>
       <AppHeader />
@@ -11,4 +11,4 @@ const Layouts: FC = ({ children }) => {
   );
 };
 
-export default Layouts;
+export default Layout;
