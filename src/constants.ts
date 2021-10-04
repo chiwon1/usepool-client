@@ -1,7 +1,7 @@
 const CONSTANTS = {
-  APP_TITLE: 'UsePool',
+  APP_TITLE: 'Usepool',
   PUBLICH_A_RIDE: 'Publish a ride',
-  LOG_IN: 'Log in',
+  LOGIN: 'Log in',
 };
 
 export default CONSTANTS;

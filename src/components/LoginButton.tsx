@@ -1,26 +1,21 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { loginWithGoogle } from '../config/firebaseAuth';
 import CONSTANTS from '../constants';
 
 const LoginButton: FC = () => {
-  const login = () => {
-    console.log('here');
-  };
-
   return (
     <ListWrapper>
-      <div onClick={login}>
+      <div onClick={loginWithGoogle}>
         <Span>
           <span>
-            <span>{CONSTANTS.LOG_IN}</span>
+            <span>{CONSTANTS.LOGIN}</span>
           </span>
         </Span>
       </div>
     </ListWrapper>
   );
 };
-
-export default LoginButton;
 
 const ListWrapper = styled.li`
   div {
@@ -117,3 +112,5 @@ const Span = styled.span`
     }
   }
 `;
+
+export default LoginButton;

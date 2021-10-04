@@ -26,8 +26,6 @@ const Menu: FC<Props> = ({ show, onCloseMenu }: Props) => {
   );
 };
 
-export default Menu;
-
 const NavWrapper = styled.div`
   position: relative;
   z-index: 2;
@@ -65,3 +63,5 @@ const Nav = styled.nav`
     flex-direction: column;
   }
 `;
+
+export default Menu;

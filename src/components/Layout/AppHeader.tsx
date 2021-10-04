@@ -42,8 +42,6 @@ const AppHeader: FC = () => {
   );
 };
 
-export default AppHeader;
-
 const ProfileWrapper = styled.div`
   border: 2px dashed rgb(221, 221, 221);
   box-sizing: border-box;
@@ -189,3 +187,5 @@ const CreateRideButton = styled.a`
   text-decoration: none;
   vertical-align: baseline;
 `;
+
+export default AppHeader;
