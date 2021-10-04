@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { CreateMenu } from './styles';
 import styled from 'styled-components';
 import LoginButton from '../LoginButton';
+import LogoutButton from '../LogoutButton';
 
 interface Props {
   show: boolean;
@@ -19,6 +20,7 @@ const Menu: FC<Props> = ({ show, onCloseMenu }: Props) => {
         <Nav>
           <ul>
             <LoginButton />
+            <LogoutButton />
           </ul>
         </Nav>
       </NavWrapper>
