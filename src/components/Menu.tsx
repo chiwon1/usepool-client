@@ -1,9 +1,8 @@
 import React, { FC, useContext } from 'react';
-import { CreateMenu } from './styles';
 import styled from 'styled-components';
-import LoginButton from '../LoginButton';
-import LogoutButton from '../LogoutButton';
-import { UserContext } from '../../contexts/AuthProvider';
+import LoginButton from './LoginButton';
+import LogoutButton from './LogoutButton';
+import { UserContext } from '../contexts/AuthProvider';
 
 interface Props {
   onCloseMenu: (e: React.MouseEvent<HTMLAnchorElement>) => void;
@@ -22,6 +21,20 @@ const Menu: FC<Props> = ({ onCloseMenu }: Props) => {
     </CreateMenu>
   );
 };
+
+export const CreateMenu = styled.aside`
+  position: fixed;
+  inset: 0px;
+  z-index: 50;
+  visibility: visible;
+
+  @media (min-width: 800px) {
+    inset: 0px auto 0px 50%;
+    width: 1280px;
+    position: fixed;
+    transform: translate(-50%, 0px);
+  }
+`;
 
 const NavWrapper = styled.div`
   position: relative;

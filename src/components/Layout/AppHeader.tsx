@@ -1,87 +1,25 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
+
+import MenuOpenButton from '../MenuOpenButton';
 import Logo from '../Logo';
-import UI from '../../constants/ui';
-// TODO 2021/10/03 cw: svg 를 컴포넌트 형태로 가져오기
-import myPageIcon from '../../assets/my-page-icon.svg';
-import menuIcon from '../../assets/menu-icon.svg';
-import Menu from '../Menu';
+
+import NewRideButton from '../NewRideButton';
 
 const AppHeader: FC = () => {
-  const [isShowMenu, setIsShowMenu] = useState(false);
-
-  const toggleShowMenu = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>) => {
-      console.log('toggleShowMenu');
-      e.stopPropagation();
-      setIsShowMenu((prev) => !prev);
-    },
-    [],
-  );
-
   return (
     <Wrapper>
       <InnerWrapper>
-        <LogoWrapper>
-          <Logo />
-        </LogoWrapper>
+        <Logo />
         <Center />
         <RightWrapper>
-          <CreateRideButton>{UI.PUBLICH_A_RIDE}</CreateRideButton>
-          <MyPageWrapper>
-            <MenuButton onClick={toggleShowMenu}>
-              <ProfileWrapper>
-                <img src={myPageIcon} alt="myPageIcon" />
-              </ProfileWrapper>
-              <img src={menuIcon} alt="menuIcon" />
-              {isShowMenu && <Menu onCloseMenu={toggleShowMenu}></Menu>}
-            </MenuButton>
-          </MyPageWrapper>
+          <NewRideButton />
+          <MenuOpenButton />
         </RightWrapper>
       </InnerWrapper>
     </Wrapper>
   );
 };
-
-const ProfileWrapper = styled.div`
-  box-sizing: border-box;
-  border-radius: 50%;
-  position: relative;
-  width: 48px;
-  height: 48px;
-  margin-right: 16px !important;
-  border: 1px solid #ddd;
-
-  img {
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
-const MenuButton = styled.a`
-  display: flex;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  align-items: center;
-  color: rgb(0, 175, 245);
-  background: none;
-  border: 0;
-  font-size: 16px;
-  cursor: pointer;
-`;
-
-const MyPageWrapper = styled.div`
-  display: flex !important;
-  margin-left: 8px !important;
-  margin-right: 8px !important;
-
-  @media (min-width: 800px) {
-    flex: 0 0 auto;
-  }
-`;
 
 const Wrapper = styled.header`
   -webkit-box-align: center;
@@ -125,13 +63,6 @@ const InnerWrapper = styled.div`
   width: 1280px;
 `;
 
-const LogoWrapper = styled.div`
-  flex: 1 1 0;
-  display: flex;
-  -webkit-box-pack: start;
-  justify-content: flex-start;
-`;
-
 const Center = styled.div`
   position: absolute;
   top: 50%;
@@ -163,24 +94,6 @@ const RightWrapper = styled.div`
   @media (min-width: 800px) {
     flex: 0 0 auto;
   }
-`;
-
-const CreateRideButton = styled.a`
-  -webkit-font-smoothing: antialiased;
-  -webkit-tap-highlight-color: transparent;
-  align-items: center;
-  border-width: 0;
-  box-sizing: border-box;
-  color: #00aff5;
-  display: flex;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 16px;
-  margin: 0 24px 0 0;
-  padding: 0;
-  text-decoration: none;
-  vertical-align: baseline;
 `;
 
 export default AppHeader;

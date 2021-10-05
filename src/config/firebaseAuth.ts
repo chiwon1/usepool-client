@@ -22,4 +22,4 @@ googleProvider.setCustomParameters({ prompt: 'select_account' });
 export const loginWithGoogle = (): Promise<firebase.auth.UserCredential> =>
   auth.signInWithPopup(googleProvider);
 
-export const logout = () => auth.signOut();
+export const logout = (): Promise<void> => auth.signOut();

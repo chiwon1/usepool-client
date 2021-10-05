@@ -10,7 +10,7 @@ interface Props {
   children: ReactElement;
 }
 
-const AuthProvider = ({ children }: Props) => {
+const AuthProvider = ({ children }: Props): JSX.Element => {
   const [user, setUser] = useState<firebase.User | null>(null);
 
   useEffect(() => {

@@ -1,25 +1,16 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
 import UI from '../constants/ui';
+import styled from 'styled-components';
 
-const Logo: FC = () => {
+const NewRideButton: FC = () => {
   return (
-    <Wrapper>
-      <LogoButton onClick={() => console.log('Go to Home')}>
-        {UI.APP_TITLE}
-      </LogoButton>
+    <Wrapper onClick={() => console.log('New Ride!')}>
+      {UI.PUBLICH_A_RIDE}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div`
-  flex: 1 1 0;
-  display: flex;
-  -webkit-box-pack: start;
-  justify-content: flex-start;
-`;
-
-const LogoButton = styled.a`
+const Wrapper = styled.a`
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   align-items: center;
@@ -28,7 +19,7 @@ const LogoButton = styled.a`
   color: #00aff5;
   display: flex;
   font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 2em;
+  font-size: 16px;
   font-weight: 500;
   line-height: 16px;
   margin: 0 24px 0 0;
@@ -36,10 +27,6 @@ const LogoButton = styled.a`
   text-decoration: none;
   vertical-align: baseline;
   cursor: pointer;
-
-  @media (min-width: 800px) {
-    margin-left: 0 !important;
-  }
 `;
 
-export default Logo;
+export default NewRideButton;
