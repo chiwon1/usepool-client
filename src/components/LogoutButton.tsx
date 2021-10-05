@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { loginWithGoogle } from '../config/firebaseAuth';
 import UI from '../constants/ui';
+import { logout } from '../config/firebaseAuth';
 
-const LoginButton: FC = () => {
+const LogoutButton: FC = () => {
   return (
     <ListWrapper>
-      <div onClick={loginWithGoogle}>
+      <div onClick={logout}>
         <Span>
           <span>
-            <span>{UI.LOGIN}</span>
+            <span>{UI.LOGOUT}</span>
           </span>
         </Span>
       </div>
@@ -113,4 +113,4 @@ const Span = styled.span`
   }
 `;
 
-export default LoginButton;
+export default LogoutButton;

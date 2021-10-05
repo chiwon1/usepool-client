@@ -30,7 +30,7 @@ module.exports = {
     },
   },
   ignorePatterns: [
-    '!.eslintrc.js',
+    '.eslintrc.js',
     '!.prettierrc.json',
     'src/service-worker.ts',
     'src/serviceWorkerRegistration.ts',

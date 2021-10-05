@@ -1,8 +1,8 @@
 import React, { FC, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import Logo from '../Logo';
-import CONSTANTS from '../../constants';
-// TODO 2021/10/03 cw: svg를 컴포넌트 형태로 가져오기
+import UI from '../../constants/ui';
+// TODO 2021/10/03 cw: svg 를 컴포넌트 형태로 가져오기
 import myPageIcon from '../../assets/my-page-icon.svg';
 import menuIcon from '../../assets/menu-icon.svg';
 import Menu from '../Menu';
@@ -10,11 +10,14 @@ import Menu from '../Menu';
 const AppHeader: FC = () => {
   const [isShowMenu, setIsShowMenu] = useState(false);
 
-  const showMenu = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-    console.log('showMenu');
-    e.stopPropagation();
-    setIsShowMenu((prev) => !prev);
-  }, []);
+  const toggleShowMenu = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      console.log('toggleShowMenu');
+      e.stopPropagation();
+      setIsShowMenu((prev) => !prev);
+    },
+    [],
+  );
 
   return (
     <Wrapper>
@@ -24,16 +27,14 @@ const AppHeader: FC = () => {
         </LogoWrapper>
         <Center />
         <RightWrapper>
-          <CreateRideButton>{CONSTANTS.PUBLICH_A_RIDE}</CreateRideButton>
+          <CreateRideButton>{UI.PUBLICH_A_RIDE}</CreateRideButton>
           <MyPageWrapper>
-            <MenuButton onClick={showMenu}>
+            <MenuButton onClick={toggleShowMenu}>
               <ProfileWrapper>
-                <img src={myPageIcon} />
+                <img src={myPageIcon} alt="myPageIcon" />
               </ProfileWrapper>
-              <img src={menuIcon} />
-              {isShowMenu && (
-                <Menu show={isShowMenu} onCloseMenu={showMenu}></Menu>
-              )}
+              <img src={menuIcon} alt="menuIcon" />
+              {isShowMenu && <Menu onCloseMenu={toggleShowMenu}></Menu>}
             </MenuButton>
           </MyPageWrapper>
         </RightWrapper>
@@ -42,10 +43,7 @@ const AppHeader: FC = () => {
   );
 };
 
-export default AppHeader;
-
 const ProfileWrapper = styled.div`
-  border: 2px dashed rgb(221, 221, 221);
   box-sizing: border-box;
   border-radius: 50%;
   position: relative;
@@ -70,7 +68,7 @@ const MenuButton = styled.a`
   align-items: center;
   color: rgb(0, 175, 245);
   background: none;
-  border: 0px;
+  border: 0;
   font-size: 16px;
   cursor: pointer;
 `;
@@ -162,11 +160,6 @@ const RightWrapper = styled.div`
     flex: 0 0 auto;
   }
 
-  flex: 1 1 0;
-  display: flex;
-  -webkit-box-pack: end;
-  justify-content: flex-end;
-
   @media (min-width: 800px) {
     flex: 0 0 auto;
   }
@@ -189,3 +182,5 @@ const CreateRideButton = styled.a`
   text-decoration: none;
   vertical-align: baseline;
 `;
+
+export default AppHeader;
