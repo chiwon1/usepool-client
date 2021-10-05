@@ -6,6 +6,34 @@ export const axiosInstance = axios.create({
   timeout: 4000,
 });
 
+const setResponseInterceptor = () => {
+  const parseResponseData = (res: AxiosResponse) => res.data;
+
+  const handleResponseError = (err: AxiosError) => {
+    if (err.response) {
+      const error =
+        err.response?.status < 500
+          ? {
+              statusCode: err.response?.status,
+              message: err.response?.data,
+            }
+          : {
+              statusCode: 500,
+              message: ERROR.INTERNAL_SERVER_ERROR,
+            };
+
+      console.log('error', error);
+    } else {
+      console.log('error', err);
+    }
+  };
+
+  axiosInstance.interceptors.response.use(
+    parseResponseData,
+    handleResponseError,
+  );
+};
+
 export const updateToken = (token: string): void => {
   // axiosInstance.interceptors.request.use((req) => {
   //   if (req.headers) {
@@ -26,28 +54,9 @@ export const updateToken = (token: string): void => {
 
   const handleRequestError = (err: AxiosError) => Promise.reject(err);
 
-  const parseResponseData = (res: AxiosResponse) => res.data;
-
-  const handleResponseError = (err: AxiosError) => {
-    const error =
-      err.response!.status < 500
-        ? {
-            statusCode: err.response?.status,
-            message: err.response?.data,
-          }
-        : {
-            statusCode: 500,
-            message: ERROR.INTERNAL_SERVER_ERROR,
-          };
-
-    console.log('error', error);
-  };
-
   axiosInstance.interceptors.request.use(setAccessToken, handleRequestError);
-  axiosInstance.interceptors.response.use(
-    parseResponseData,
-    handleResponseError,
-  );
 };
+
+setResponseInterceptor();
 
 export default axiosInstance;

@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { loginWithGoogle } from '../config/firebaseAuth';
+
+import { loginWithKakao } from '../api/auth';
 import UI from '../constants/ui';
 
 const LoginButton: FC = () => {
   return (
     <ListWrapper>
-      <div onClick={loginWithGoogle}>
+      <div onClick={loginWithKakao}>
         <Span>
           <span>
             <span>{UI.LOGIN}</span>
