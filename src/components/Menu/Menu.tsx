@@ -1,27 +1,22 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { CreateMenu } from './styles';
 import styled from 'styled-components';
 import LoginButton from '../LoginButton';
 import LogoutButton from '../LogoutButton';
+import { UserContext } from '../../contexts/AuthProvider';
 
 interface Props {
-  show: boolean;
   onCloseMenu: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
-const Menu: FC<Props> = ({ show, onCloseMenu }: Props) => {
-  if (!show) {
-    return null;
-  }
+const Menu: FC<Props> = ({ onCloseMenu }: Props) => {
+  const user = useContext(UserContext);
 
   return (
     <CreateMenu onClick={onCloseMenu}>
       <NavWrapper>
         <Nav>
-          <ul>
-            <LoginButton />
-            <LogoutButton />
-          </ul>
+          <ul>{user ? <LogoutButton /> : <LoginButton />}</ul>
         </Nav>
       </NavWrapper>
     </CreateMenu>

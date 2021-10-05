@@ -34,9 +34,7 @@ const AppHeader: FC = () => {
                 <img src={myPageIcon} alt="myPageIcon" />
               </ProfileWrapper>
               <img src={menuIcon} alt="menuIcon" />
-              {isShowMenu && (
-                <Menu show={isShowMenu} onCloseMenu={toggleShowMenu}></Menu>
-              )}
+              {isShowMenu && <Menu onCloseMenu={toggleShowMenu}></Menu>}
             </MenuButton>
           </MyPageWrapper>
         </RightWrapper>

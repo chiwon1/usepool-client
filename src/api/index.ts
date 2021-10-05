@@ -6,7 +6,7 @@ export const axiosInstance = axios.create({
   timeout: 4000,
 });
 
-export const updateToken = (token: string) => {
+export const updateToken = (token: string): void => {
   // axiosInstance.interceptors.request.use((req) => {
   //   if (req.headers) {
   //     req.headers.authorization = token;

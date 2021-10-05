@@ -4,10 +4,7 @@ import { auth } from '../config/firebaseAuth';
 import { updateToken } from '../api';
 import firebase from 'firebase/compat';
 
-export const UserContext = createContext<{
-  user: firebase.User | null;
-  setUser: React.Dispatch<React.SetStateAction<firebase.User | null>>;
-} | null>(null);
+export const UserContext = createContext<firebase.User | null>(null);
 
 interface Props {
   children: ReactElement;
@@ -32,11 +29,7 @@ const AuthProvider = ({ children }: Props) => {
     });
   }, []);
 
-  return (
-    <UserContext.Provider value={{ user, setUser }}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 };
 
 export default AuthProvider;
