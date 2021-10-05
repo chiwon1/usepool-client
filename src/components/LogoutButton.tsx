@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import CONSTANTS from '../constants';
 import { logout } from '../config/firebaseAuth';
 
-const LoginButton: FC = () => {
+const LogoutButton: FC = () => {
   return (
     <ListWrapper>
       <div onClick={logout}>
@@ -113,4 +113,4 @@ const Span = styled.span`
   }
 `;
 
-export default LoginButton;
+export default LogoutButton;

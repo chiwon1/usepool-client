@@ -1,7 +1,6 @@
 import firebase from 'firebase/compat';
 import initializeApp = firebase.initializeApp;
 import 'firebase/auth';
-import React from 'react';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
@@ -23,6 +22,4 @@ googleProvider.setCustomParameters({ prompt: 'select_account' });
 export const loginWithGoogle = (): Promise<firebase.auth.UserCredential> =>
   auth.signInWithPopup(googleProvider);
 
-// TODO 2021/10/05 cw: logout 함수 type 체크
-export const logout =
-  auth.signOut() as unknown as React.MouseEventHandler<HTMLDivElement>;
+export const logout = () => auth.signOut();
