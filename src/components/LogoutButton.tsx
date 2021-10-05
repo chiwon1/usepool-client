@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import CONSTANTS from '../constants';
+import UI from '../constants/ui';
 import { logout } from '../config/firebaseAuth';
 
 const LogoutButton: FC = () => {
@@ -9,7 +9,7 @@ const LogoutButton: FC = () => {
       <div onClick={logout}>
         <Span>
           <span>
-            <span>{CONSTANTS.LOGOUT}</span>
+            <span>{UI.LOGOUT}</span>
           </span>
         </Span>
       </div>

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { loginWithGoogle } from '../config/firebaseAuth';
-import CONSTANTS from '../constants';
+import UI from '../constants/ui';
 
 const LoginButton: FC = () => {
   return (
@@ -9,7 +9,7 @@ const LoginButton: FC = () => {
       <div onClick={loginWithGoogle}>
         <Span>
           <span>
-            <span>{CONSTANTS.LOGIN}</span>
+            <span>{UI.LOGIN}</span>
           </span>
         </Span>
       </div>
