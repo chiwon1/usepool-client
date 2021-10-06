@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import ERROR from '../constants/error';
 
 export const axiosInstance = axios.create({
@@ -32,22 +32,6 @@ const setResponseInterceptor = () => {
     parseResponseData,
     handleResponseError,
   );
-};
-
-export const updateToken = (token: string): void => {
-  const setAccessToken = (config: AxiosRequestConfig) => {
-    if (!token) {
-      throw new axios.Cancel(ERROR.INVALID_ACCESS_TOKEN);
-    }
-
-    config.headers!.authorization = `Bearer ${token}`;
-
-    return config;
-  };
-
-  const handleRequestError = (err: AxiosError) => Promise.reject(err);
-
-  axiosInstance.interceptors.request.use(setAccessToken, handleRequestError);
 };
 
 setResponseInterceptor();

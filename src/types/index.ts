@@ -1,6 +1,7 @@
 import { IKakao } from './Kakao';
 
 export interface userInfo {
+  kakaoId: string;
   nickname: string;
   profilePicture?: string;
 }
@@ -8,6 +9,5 @@ export interface userInfo {
 declare global {
   interface Window {
     Kakao: IKakao;
-    foo: string;
   }
 }

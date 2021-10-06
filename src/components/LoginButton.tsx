@@ -1,24 +1,18 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import UI from '../constants/ui';
-import { useHistory } from 'react-router-dom';
 import { kakao } from '../config/kakao';
 import { getAuth } from '../api/kakao';
-import { updateToken } from '../api';
+import UI from '../constants/ui';
 
 const LoginButton: FC = () => {
-  const history = useHistory();
-
   const loginWithKakao = () => {
     kakao.Auth.login({
-      success: async (res) => {
+      success: (res) => {
         try {
-          console.log(res);
-          const token = await getAuth(res.access_token);
-
-          updateToken(token);
+          getAuth(res.access_token);
         } catch (err) {
+          console.log('err', err);
           console.log('토큰 가져오기 실패');
         }
       },
