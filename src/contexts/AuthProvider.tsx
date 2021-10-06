@@ -1,35 +1,27 @@
-import React, { ReactElement, useEffect, useState } from 'react';
-import { createContext } from 'react';
-import { auth } from '../config/firebaseAuth';
-import { updateToken } from '../api';
-import firebase from 'firebase/compat';
+import React, { ReactElement, useState, createContext } from 'react';
+import { userInfo } from '../types';
 
-export const UserContext = createContext<firebase.User | null>(null);
+export const UserContext = createContext<{
+  user: null;
+  handleUser: ((value: any) => void) | null;
+}>({ user: null, handleUser: null });
 
 interface Props {
   children: ReactElement;
 }
 
 const AuthProvider = ({ children }: Props): JSX.Element => {
-  const [user, setUser] = useState<firebase.User | null>(null);
+  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    auth.onAuthStateChanged(async (firebaseUser) => {
-      if (firebaseUser) {
-        console.log('로그인됨');
+  const handleUser = (value: any) => {
+    setUser(value);
+  };
 
-        const token = await firebaseUser.getIdToken();
-
-        updateToken(token);
-        setUser(firebaseUser);
-      } else {
-        console.log('로그인 안됨');
-        setUser(null);
-      }
-    });
-  }, []);
-
-  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ user, handleUser }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export default AuthProvider;

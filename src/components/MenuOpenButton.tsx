@@ -1,6 +1,7 @@
 import React, { FC, useCallback, useState } from 'react';
-import Menu from './Menu';
 import styled from 'styled-components';
+
+import Menu from './Menu';
 
 // TODO 2021/10/03 cw: svg 를 컴포넌트 형태로 가져오기
 import myPageIcon from '../assets/my-page-icon.svg';

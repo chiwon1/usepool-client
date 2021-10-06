@@ -1,12 +1,36 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { loginWithGoogle } from '../config/firebaseAuth';
+
 import UI from '../constants/ui';
+import { useHistory } from 'react-router-dom';
+import { kakao } from '../config/kakao';
+import { getAuth } from '../api/kakao';
+import { updateToken } from '../api';
 
 const LoginButton: FC = () => {
+  const history = useHistory();
+
+  const loginWithKakao = () => {
+    kakao.Auth.login({
+      success: async (res) => {
+        try {
+          console.log(res);
+          const token = await getAuth(res.access_token);
+
+          updateToken(token);
+        } catch (err) {
+          console.log('토큰 가져오기 실패');
+        }
+      },
+      fail: (err: string) => {
+        console.log(err);
+      },
+    });
+  };
+
   return (
     <ListWrapper>
-      <div onClick={loginWithGoogle}>
+      <div onClick={loginWithKakao}>
         <Span>
           <span>
             <span>{UI.LOGIN}</span>

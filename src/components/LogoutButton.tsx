@@ -1,12 +1,11 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import UI from '../constants/ui';
-import { logout } from '../config/firebaseAuth';
 
 const LogoutButton: FC = () => {
   return (
     <ListWrapper>
-      <div onClick={logout}>
+      <div onClick={() => console.log('로그아웃!')}>
         <Span>
           <span>
             <span>{UI.LOGOUT}</span>

@@ -1,15 +1,16 @@
 import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
+import { UserContext } from '../contexts/AuthProvider';
+
 import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
-import { UserContext } from '../contexts/AuthProvider';
 
 interface Props {
   onCloseMenu: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 const Menu: FC<Props> = ({ onCloseMenu }: Props) => {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   return (
     <CreateMenu onClick={onCloseMenu}>
