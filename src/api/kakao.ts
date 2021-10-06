@@ -1,8 +1,16 @@
 import { userInfo } from '../types';
 import axiosInstance from './index';
+import { kakao } from '../config/kakao';
 
 export const loginWithKakao = () => {
-  window.location.href = process.env.REACT_APP_KAKAO_AUTH_URL!;
+  kakao.Auth.login({
+    success: function (res: string) {
+      console.log(res);
+    },
+    fail: function (err: string) {
+      console.log(err);
+    },
+  });
 };
 
 export const getAuth = async (authCode: string) => {

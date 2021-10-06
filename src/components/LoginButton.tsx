@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { loginWithKakao } from '../api/auth';
+import { loginWithKakao } from '../api/kakao';
 import UI from '../constants/ui';
 
 const LoginButton: FC = () => {
