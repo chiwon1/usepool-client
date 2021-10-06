@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 const Pages: FC = () => {
-  return <div></div>;
+  return <Switch></Switch>;
 };
 
 export default Pages;

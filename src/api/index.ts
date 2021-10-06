@@ -35,13 +35,6 @@ const setResponseInterceptor = () => {
 };
 
 export const updateToken = (token: string): void => {
-  // axiosInstance.interceptors.request.use((req) => {
-  //   if (req.headers) {
-  //     req.headers.authorization = token;
-  //     return req;
-  //   }
-  // });
-
   const setAccessToken = (config: AxiosRequestConfig) => {
     if (!token) {
       throw new axios.Cancel(ERROR.INVALID_ACCESS_TOKEN);

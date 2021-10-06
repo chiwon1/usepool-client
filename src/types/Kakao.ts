@@ -1,5 +1,6 @@
 interface ISuccessCallback {
-  (res: string): void;
+  // eslint-disable-next-line camelcase
+  (res: { access_token: string }): void;
 }
 
 interface IFailCallback {

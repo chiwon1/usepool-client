@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Menu: FC<Props> = ({ onCloseMenu }: Props) => {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   return (
     <CreateMenu onClick={onCloseMenu}>

@@ -1,24 +1,27 @@
-import React, { ReactElement, useEffect, useState, createContext } from 'react';
-import { useHistory } from 'react-router-dom';
-
-import { initKakao } from '../config/kakao';
+import React, { ReactElement, useState, createContext } from 'react';
 import { userInfo } from '../types';
 
-export const UserContext = createContext<userInfo | null>(null);
+export const UserContext = createContext<{
+  user: null;
+  handleUser: ((value: any) => void) | null;
+}>({ user: null, handleUser: null });
 
 interface Props {
   children: ReactElement;
 }
 
 const AuthProvider = ({ children }: Props): JSX.Element => {
-  const [user, setUser] = useState<userInfo | null>(null);
-  const history = useHistory();
+  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    initKakao();
-  }, []);
+  const handleUser = (value: any) => {
+    setUser(value);
+  };
 
-  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ user, handleUser }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
 export default AuthProvider;
