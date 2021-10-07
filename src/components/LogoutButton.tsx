@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import UI from '../constants/ui';
-import axiosInstance from '../api';
+import axiosInstance from '../api/axios';
 
 const LogoutButton: FC = () => {
   const logout = () => {

@@ -1,4 +1,4 @@
-import axiosInstance from './index';
+import axiosInstance from './axios';
 import { IUserInfo } from '../types';
 
 export const getUser = async () => {
