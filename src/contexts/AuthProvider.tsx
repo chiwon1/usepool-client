@@ -1,9 +1,9 @@
 import React, { ReactElement, useState, createContext } from 'react';
-import { userInfo } from '../types';
+import { IUserInfo } from '../types';
 
 export const UserContext = createContext<{
-  user: null;
-  handleUser: ((value: any) => void) | null;
+  user: IUserInfo | null;
+  handleUser: ((value: IUserInfo) => void) | null;
 }>({ user: null, handleUser: null });
 
 interface Props {
@@ -11,9 +11,9 @@ interface Props {
 }
 
 const AuthProvider = ({ children }: Props): JSX.Element => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<IUserInfo | null>(null);
 
-  const handleUser = (value: any) => {
+  const handleUser = (value: IUserInfo) => {
     setUser(value);
   };
 
