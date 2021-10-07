@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import UI from '../constants/ui';
+import { Link } from 'react-router-dom';
 
 const Logo: FC = () => {
   return (
     <Wrapper>
-      <LogoButton onClick={() => console.log('Go to Home')}>
-        {UI.APP_TITLE}
-      </LogoButton>
+      <StyledLink to="/">{UI.APP_TITLE}</StyledLink>
     </Wrapper>
   );
 };
@@ -19,7 +18,7 @@ const Wrapper = styled.div`
   justify-content: flex-start;
 `;
 
-const LogoButton = styled.a`
+const StyledLink = styled(Link)`
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   align-items: center;

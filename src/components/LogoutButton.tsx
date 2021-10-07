@@ -1,11 +1,16 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import UI from '../constants/ui';
+import axiosInstance from '../api';
 
 const LogoutButton: FC = () => {
+  const logout = () => {
+    void axiosInstance.post('/logout');
+  };
+
   return (
     <ListWrapper>
-      <div onClick={() => console.log('로그아웃!')}>
+      <div onClick={logout}>
         <Span>
           <span>
             <span>{UI.LOGOUT}</span>

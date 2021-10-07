@@ -4,6 +4,7 @@ import ERROR from '../constants/error';
 export const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
   timeout: 4000,
+  withCredentials: true,
 });
 
 const setResponseInterceptor = () => {
