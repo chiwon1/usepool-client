@@ -1,36 +1,10 @@
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { kakao } from '../config/kakao';
-import { getAuth } from '../api/kakao';
 import UI from '../constants/ui';
-import { UserContext } from '../contexts/AuthProvider';
-import { getUser } from '../api/user';
+import { loginWithKakao } from '../utils/kakaoLogin';
 
 const LoginButton: FC = () => {
-  const { handleUser } = useContext(UserContext);
-
-  const loginWithKakao = () => {
-    kakao.Auth.login({
-      success: async (res) => {
-        try {
-          await getAuth(res.access_token);
-
-          const userInfo = await getUser();
-
-          if (userInfo) {
-            handleUser!(userInfo);
-          }
-        } catch (err) {
-          console.log('LoginButton err', err);
-        }
-      },
-      fail: (err: string) => {
-        console.log(err);
-      },
-    });
-  };
-
   return (
     <ListWrapper>
       <div onClick={loginWithKakao}>

@@ -1,11 +1,18 @@
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
 import UI from '../constants/ui';
 import axiosInstance from '../api/axios';
+import { useHistory } from 'react-router-dom';
+import { UserContext } from '../contexts/AuthProvider';
 
 const LogoutButton: FC = () => {
-  const logout = () => {
-    void axiosInstance.post('/logout');
+  const history = useHistory();
+  const { handleUser } = useContext(UserContext);
+
+  const logout = async () => {
+    handleUser!(null);
+    await axiosInstance.post('/logout');
+    history.push('/');
   };
 
   return (

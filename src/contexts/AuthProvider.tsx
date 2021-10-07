@@ -4,7 +4,7 @@ import { getUser } from '../api/user';
 
 export const UserContext = createContext<{
   user: IUserInfo | null;
-  handleUser: ((value: IUserInfo) => void) | null;
+  handleUser: ((value: IUserInfo | null) => void) | null;
 }>({ user: null, handleUser: null });
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 const AuthProvider = ({ children }: Props): JSX.Element => {
   const [user, setUser] = useState<IUserInfo | null>(null);
 
-  const handleUser = (value: IUserInfo) => {
+  const handleUser = (value: IUserInfo | null) => {
     setUser(value);
   };
 
@@ -27,8 +27,6 @@ const AuthProvider = ({ children }: Props): JSX.Element => {
       }
     })();
   }, []);
-
-  console.log('user', user);
 
   return (
     <UserContext.Provider value={{ user, handleUser }}>

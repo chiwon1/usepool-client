@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import theme from './contexts/theme';
@@ -6,13 +6,8 @@ import theme from './contexts/theme';
 import Layout from './components/Layout';
 import Pages from './Pages';
 import AuthProvider from './contexts/AuthProvider';
-import { initKakao } from './config/kakao';
 
 const App: FC = () => {
-  useEffect(() => {
-    initKakao();
-  }, []);
-
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>

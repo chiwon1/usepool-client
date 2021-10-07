@@ -1,8 +1,9 @@
-import React, { createContext, useState } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import Departure from './Departure';
 import Arrival from './Arrival';
 import Seats from './Seats';
+import { UserContext } from '../../contexts/AuthProvider';
 
 export const NewRideContext = createContext<{
   newRideInfo: INewRide | null;
@@ -24,6 +25,17 @@ const NewRide = () => {
   const handleNewRideInfo = (value: INewRide) => {
     setNewRideInfo(value);
   };
+
+  const history = useHistory();
+
+  const { user } = useContext(UserContext);
+  console.log(user);
+
+  useEffect(() => {
+    if (!user) {
+      history.push('/login');
+    }
+  }, [user]);
 
   return (
     <NewRideContext.Provider value={{ newRideInfo, handleNewRideInfo }}>
