@@ -1,6 +1,6 @@
 import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
-import { UserContext } from '../contexts/AuthProvider';
+// import { UserContext } from '../contexts/AuthProvider';
 
 import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
@@ -10,13 +10,16 @@ interface Props {
 }
 
 const Menu: FC<Props> = ({ onCloseMenu }: Props) => {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
 
   return (
     <CreateMenu onClick={onCloseMenu}>
       <NavWrapper>
         <Nav>
-          <ul>{user ? <LogoutButton /> : <LoginButton />}</ul>
+          <ul>
+            <LogoutButton />
+            <LoginButton />
+          </ul>
         </Nav>
       </NavWrapper>
     </CreateMenu>

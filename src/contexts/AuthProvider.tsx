@@ -1,9 +1,10 @@
-import React, { ReactElement, useState, createContext } from 'react';
-import { userInfo } from '../types';
+import React, { ReactElement, useState, createContext, useEffect } from 'react';
+import { IUserInfo } from '../types';
+import { getUser } from '../api/user';
 
 export const UserContext = createContext<{
-  user: null;
-  handleUser: ((value: any) => void) | null;
+  user: IUserInfo | null;
+  handleUser: ((value: IUserInfo | null) => void) | null;
 }>({ user: null, handleUser: null });
 
 interface Props {
@@ -11,11 +12,21 @@ interface Props {
 }
 
 const AuthProvider = ({ children }: Props): JSX.Element => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<IUserInfo | null>(null);
 
-  const handleUser = (value: any) => {
+  const handleUser = (value: IUserInfo | null) => {
     setUser(value);
   };
+
+  useEffect(() => {
+    void (async function () {
+      const userInfo = await getUser();
+
+      if (userInfo) {
+        setUser(userInfo);
+      }
+    })();
+  }, []);
 
   return (
     <UserContext.Provider value={{ user, handleUser }}>

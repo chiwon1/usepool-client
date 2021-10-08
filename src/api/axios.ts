@@ -2,8 +2,9 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import ERROR from '../constants/error';
 
 export const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_URL,
+  baseURL: `${process.env.REACT_APP_SERVER_URL!}/api`,
   timeout: 4000,
+  withCredentials: true,
 });
 
 const setResponseInterceptor = () => {

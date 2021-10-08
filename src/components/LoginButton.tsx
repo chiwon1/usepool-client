@@ -1,27 +1,10 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import { kakao } from '../config/kakao';
-import { getAuth } from '../api/kakao';
 import UI from '../constants/ui';
+import { loginWithKakao } from '../utils/kakaoLogin';
 
 const LoginButton: FC = () => {
-  const loginWithKakao = () => {
-    kakao.Auth.login({
-      success: (res) => {
-        try {
-          getAuth(res.access_token);
-        } catch (err) {
-          console.log('err', err);
-          console.log('토큰 가져오기 실패');
-        }
-      },
-      fail: (err: string) => {
-        console.log(err);
-      },
-    });
-  };
-
   return (
     <ListWrapper>
       <div onClick={loginWithKakao}>

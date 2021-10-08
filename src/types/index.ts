@@ -1,6 +1,6 @@
-import { IKakao } from './Kakao';
+import { IKakao } from './kakao';
 
-export interface userInfo {
+export interface IUserInfo {
   kakaoId: string;
   nickname: string;
   profilePicture?: string;

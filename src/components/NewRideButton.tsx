@@ -1,16 +1,13 @@
 import React, { FC } from 'react';
 import UI from '../constants/ui';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const NewRideButton: FC = () => {
-  return (
-    <Wrapper onClick={() => console.log('New Ride!')}>
-      {UI.PUBLICH_A_RIDE}
-    </Wrapper>
-  );
+  return <StyledLink to="/newRide">{UI.PUBLICH_A_RIDE}</StyledLink>;
 };
 
-const Wrapper = styled.a`
+const StyledLink = styled(Link)`
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   align-items: center;
