@@ -22,7 +22,7 @@ const Arrival: FC = () => {
       arriveAt: inputArriveAt,
     });
 
-    history.push('/newRide/date');
+    history.push('/newRide/departure-date');
   };
 
   return (

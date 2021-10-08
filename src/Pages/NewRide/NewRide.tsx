@@ -3,9 +3,10 @@ import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import Departure from './departure/Departure';
 import Arrival from './Arrival';
 import DepartureDate from './departure/DepatureDate';
-import Seats from './Seats';
+import SeatCapacity from './SeatCapacity';
 import { UserContext } from '../../contexts/AuthProvider';
 import DepartureTime from './departure/DepartureTime';
+import Submit from './Submit';
 
 export const NewRideContext = createContext<{
   newRideInfo: INewRide | null;
@@ -18,8 +19,8 @@ export interface INewRide {
   departTime?: string | null;
   arriveAt?: string;
   arriveTime?: string | null;
-  capacity?: number | null;
-  driver?: string;
+  seatCapacity?: number | null;
+  driverNickname?: string;
 }
 
 const NewRide = () => {
@@ -29,14 +30,12 @@ const NewRide = () => {
     departFrom: '',
     departTime: null,
     arriveAt: '',
-    arriveTime: null,
-    capacity: null,
-    driver: user?.nickname,
+    seatCapacity: null,
+    driverNickname: user?.nickname,
   });
 
   console.log('newRideInfo', newRideInfo);
 
-  console.log('New Ride page');
   const handleNewRideInfo = (value: INewRide) => {
     setNewRideInfo(value);
   };
@@ -59,7 +58,8 @@ const NewRide = () => {
         <Route exact path="/newRide/arrival" component={Arrival} />
         <Route exact path="/newRide/departure-date" component={DepartureDate} />
         <Route exact path="/newRide/departure-time" component={DepartureTime} />
-        <Route exact path="/newRide/seats" component={Seats} />
+        <Route exact path="/newRide/seatCapacity" component={SeatCapacity} />
+        <Route exact path="/newRide/submit" component={Submit} />
       </Switch>
     </NewRideContext.Provider>
   );

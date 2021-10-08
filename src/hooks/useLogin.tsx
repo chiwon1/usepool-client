@@ -7,7 +7,7 @@ const useLogin = (authCode: string) => {
   const { handleUser } = useContext(UserContext);
 
   return useCallback(() => {
-    void (async function () {
+    async () => {
       await getAuth(authCode);
 
       const userInfo = await getUser();
@@ -15,7 +15,7 @@ const useLogin = (authCode: string) => {
       if (userInfo) {
         handleUser!(userInfo);
       }
-    })();
+    };
   }, []);
 };
 
