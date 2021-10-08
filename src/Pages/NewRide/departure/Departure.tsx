@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { NewRideContext } from './NewRide';
+import { NewRideContext } from '../NewRide';
 import { useHistory } from 'react-router-dom';
-import InputNewRide from '../../components/InputNewRide';
+import InputLocation from '../../../components/InputLocation';
+import FormNewRide from '../../../components/FormNewRide';
 
 const Departure = () => {
   const history = useHistory();
@@ -10,7 +11,7 @@ const Departure = () => {
   const [inputDepartFrom, setInputDepartFrom] = useState('');
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    setInputDepartFrom((prev) => ev.target.value);
+    setInputDepartFrom(ev.target.value);
   };
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
@@ -25,13 +26,15 @@ const Departure = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <InputNewRide
+    <FormNewRide
+      handleSubmit={handleSubmit}
+      InputTitle={'Where are you leaving from?'}
+    >
+      <InputLocation
         inputDepartFrom={inputDepartFrom}
         handleChange={handleChange}
-        InputTitle={'Where are you leaving from?'}
       />
-    </form>
+    </FormNewRide>
   );
 };
 

@@ -1,10 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
-import Departure from './Departure';
+import Departure from './departure/Departure';
 import Arrival from './Arrival';
-import Date from './Date';
+import DepartureDate from './departure/DepatureDate';
 import Seats from './Seats';
 import { UserContext } from '../../contexts/AuthProvider';
+import DepartureTime from './departure/DepartureTime';
 
 export const NewRideContext = createContext<{
   newRideInfo: INewRide | null;
@@ -13,9 +14,10 @@ export const NewRideContext = createContext<{
 
 export interface INewRide {
   departFrom?: string;
-  departTime?: Date | null;
+  departDate?: string | null;
+  departTime?: string | null;
   arriveAt?: string;
-  arriveTime?: Date | null;
+  arriveTime?: string | null;
   capacity?: number | null;
   driver?: string;
 }
@@ -55,7 +57,8 @@ const NewRide = () => {
         </Route>
         <Route exact path="/newRide/departure" component={Departure} />
         <Route exact path="/newRide/arrival" component={Arrival} />
-        <Route exact path="/newRide/date" component={Date} />
+        <Route exact path="/newRide/departure-date" component={DepartureDate} />
+        <Route exact path="/newRide/departure-time" component={DepartureTime} />
         <Route exact path="/newRide/seats" component={Seats} />
       </Switch>
     </NewRideContext.Provider>

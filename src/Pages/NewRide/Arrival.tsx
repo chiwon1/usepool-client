@@ -1,7 +1,8 @@
 import React, { FC, useContext, useState } from 'react';
-import InputNewRide from '../../components/InputNewRide';
+import InputLocation from '../../components/InputLocation';
 import { useHistory } from 'react-router-dom';
 import { NewRideContext } from './NewRide';
+import FormNewRide from '../../components/FormNewRide';
 
 const Arrival: FC = () => {
   const history = useHistory();
@@ -10,7 +11,7 @@ const Arrival: FC = () => {
   const [inputArriveAt, setInputArriveAt] = useState('');
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    setInputArriveAt((prev) => ev.target.value);
+    setInputArriveAt(ev.target.value);
   };
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
@@ -25,13 +26,15 @@ const Arrival: FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <InputNewRide
+    <FormNewRide
+      handleSubmit={handleSubmit}
+      InputTitle={'Where are you heading?'}
+    >
+      <InputLocation
         inputDepartFrom={inputArriveAt}
         handleChange={handleChange}
-        InputTitle={'Where are you heading?'}
       />
-    </form>
+    </FormNewRide>
   );
 };
 

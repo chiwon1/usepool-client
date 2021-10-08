@@ -23,7 +23,11 @@ module.exports = {
     project: './tsconfig.json',
   },
   plugins: ['html', 'react', '@typescript-eslint', 'prettier'],
-  rules: {},
+  rules: {
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+  },
   settings: {
     react: {
       version: 'detect',
