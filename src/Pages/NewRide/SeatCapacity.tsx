@@ -36,6 +36,7 @@ const SeatCapacity: FC = () => {
     >
       <>
         <select value={inputCapacity} onChange={handleChange}>
+          <option value="default">&nbsp;</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>

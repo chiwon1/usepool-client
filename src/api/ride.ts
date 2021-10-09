@@ -16,6 +16,6 @@ export const searchRide = async (value: IRide) => {
   }
 
   return await axiosInstance.get(
-    `/rides/search?departFrom=${departFrom}&departDate=${departDate}&arriveAt=${arriveAt}`,
+    `/rides/search?departFrom=${departFrom}&arriveAt=${arriveAt}&departDate=${departDate}`,
   );
 };

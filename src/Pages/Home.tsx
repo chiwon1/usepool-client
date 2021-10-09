@@ -9,7 +9,7 @@ import ReverseLocationButton from '../components/ReverseLocationButton';
 import HomeContentBox from '../components/HomeContentBox';
 import UI from '../constants/ui';
 import { searchRide } from '../api/ride';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const Home = () => {
   const history = useHistory();
@@ -54,6 +54,7 @@ const Home = () => {
   return (
     <HomeContentBox>
       <Form onSubmit={handleSubmit}>
+        <Link to="/search">SEARCH 페이지로 이동</Link>
         <LocationSearchInput
           placeholder={UI.LEAVING_FROM}
           departFrom={inputDepartFrom}
