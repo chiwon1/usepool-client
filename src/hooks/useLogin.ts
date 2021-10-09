@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { UserContext } from '../contexts/AuthProvider';
 import { getAuth } from '../api/auth';
 import { getUser } from '../api/user';
@@ -7,7 +7,7 @@ const useLogin = (authCode: string) => {
   const { handleUser } = useContext(UserContext);
 
   return useCallback(() => {
-    async () => {
+    void (async () => {
       await getAuth(authCode);
 
       const userInfo = await getUser();
@@ -15,7 +15,7 @@ const useLogin = (authCode: string) => {
       if (userInfo) {
         handleUser!(userInfo);
       }
-    };
+    })();
   }, []);
 };
 
