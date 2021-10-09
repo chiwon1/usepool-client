@@ -7,26 +7,17 @@ import SeatCapacity from './SeatCapacity';
 import { UserContext } from '../../contexts/AuthProvider';
 import DepartureTime from './departure/DepartureTime';
 import Submit from './Submit';
+import { IRide } from '../../types/ride';
 
 export const NewRideContext = createContext<{
-  newRideInfo: INewRide | null;
-  handleNewRideInfo: (value: INewRide) => void;
+  newRideInfo: IRide | null;
+  handleNewRideInfo: (value: IRide) => void;
 }>({ newRideInfo: null, handleNewRideInfo: () => null });
-
-export interface INewRide {
-  departFrom?: string;
-  departDate?: string | null;
-  departTime?: string | null;
-  arriveAt?: string;
-  arriveTime?: string | null;
-  seatCapacity?: number | null;
-  driverNickname?: string;
-}
 
 const NewRide = () => {
   const { user } = useContext(UserContext);
 
-  const [newRideInfo, setNewRideInfo] = useState<INewRide | null>({
+  const [newRideInfo, setNewRideInfo] = useState<IRide | null>({
     departFrom: '',
     departTime: null,
     arriveAt: '',
@@ -36,7 +27,7 @@ const NewRide = () => {
 
   console.log('newRideInfo', newRideInfo);
 
-  const handleNewRideInfo = (value: INewRide) => {
+  const handleNewRideInfo = (value: IRide) => {
     setNewRideInfo(value);
   };
 

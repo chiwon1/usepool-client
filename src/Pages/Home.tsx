@@ -8,9 +8,11 @@ import LocationSearchInput from '../components/LocationSearchInput';
 import ReverseLocationButton from '../components/ReverseLocationButton';
 import HomeContentBox from '../components/HomeContentBox';
 import UI from '../constants/ui';
-import { getToday } from '../utils';
+import { searchRide } from '../api/ride';
+import { useHistory } from 'react-router-dom';
 
 const Home = () => {
+  const history = useHistory();
   const [inputDepartFrom, setInputDepartFrom] = useState('');
   const [inputArriveAt, setInputArriveAt] = useState('');
   const [inputDepartDate, setInputDepartDate] = useState('');
@@ -39,10 +41,9 @@ const Home = () => {
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
-    console.log('inputDepartFrom', inputDepartFrom);
-    console.log('inputArriveAt', inputArriveAt);
-    console.log('inputDepartDate', inputDepartDate);
-    console.log('inputNumberOfPassenger', inputNumberOfPassenger);
+    history.push(
+      `/search?departFrom=${inputDepartFrom}&departDate=${inputDepartDate}&arriveAt=${inputArriveAt}`,
+    );
 
     setInputDepartFrom('');
     setInputArriveAt('');
@@ -50,7 +51,6 @@ const Home = () => {
     setInputNumberOfPassenger('');
   };
 
-  console.log('home');
   return (
     <HomeContentBox>
       <Form onSubmit={handleSubmit}>

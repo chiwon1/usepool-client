@@ -8,6 +8,7 @@ const KakaoAuth = () => {
   const authCode = new URL(window.location.href).searchParams.get('code');
 
   const handleGetAuth = useLogin(authCode!);
+
   handleGetAuth();
 
   return <Redirect to="/" />;
