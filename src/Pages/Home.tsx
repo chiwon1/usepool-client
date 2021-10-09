@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import RideSearchButton from '../components/RideSearchButton';
 import DateWrapper from '../components/DateWrapper';
@@ -7,25 +7,80 @@ import PassengerNumberInput from '../components/PassengerNumberInput';
 import LocationSearchInput from '../components/LocationSearchInput';
 import ReverseLocationButton from '../components/ReverseLocationButton';
 import HomeContentBox from '../components/HomeContentBox';
+import UI from '../constants/ui';
+import { getToday } from '../utils';
 
 const Home = () => {
+  const [inputDepartFrom, setInputDepartFrom] = useState('');
+  const [inputArriveAt, setInputArriveAt] = useState('');
+  const [inputDepartDate, setInputDepartDate] = useState('');
+  const [inputNumberOfPassenger, setInputNumberOfPassenger] = useState('');
+
+  const handleDepartFromChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    setInputDepartFrom(ev.target.value);
+  };
+
+  const handleArriveAtChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    setInputArriveAt(ev.target.value);
+  };
+
+  const handleDepartDateChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    const date = new window.Date(ev.target.value).toLocaleDateString();
+
+    setInputDepartDate(date);
+  };
+
+  const handleNumberOfPassengerInput = (
+    ev: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setInputNumberOfPassenger(ev.target.value);
+  };
+
+  const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+    ev.preventDefault();
+
+    console.log('inputDepartFrom', inputDepartFrom);
+    console.log('inputArriveAt', inputArriveAt);
+    console.log('inputDepartDate', inputDepartDate);
+    console.log('inputNumberOfPassenger', inputNumberOfPassenger);
+
+    setInputDepartFrom('');
+    setInputArriveAt('');
+    setInputDepartDate('');
+    setInputNumberOfPassenger('');
+  };
+
   console.log('home');
   return (
     <HomeContentBox>
-      <Form>
-        <LocationSearchInput placeholder="Leaving from..." />
+      <Form onSubmit={handleSubmit}>
+        <LocationSearchInput
+          placeholder={UI.LEAVING_FROM}
+          departFrom={inputDepartFrom}
+          handleChange={handleDepartFromChange}
+        />
         <ReverseLocationButton />
         <hr></hr>
         <div></div>
-        <LocationSearchInput placeholder="Going to.." />
+        <LocationSearchInput
+          placeholder={UI.GOING_TO}
+          departFrom={inputArriveAt}
+          handleChange={handleArriveAtChange}
+        />
         <Wrapper>
           <DateWrapper>
-            <DateInput />
+            <DateInput
+              departDate={inputDepartDate}
+              handleChange={handleDepartDateChange}
+            />
           </DateWrapper>
           <div></div>
           <hr></hr>
           <DateWrapper>
-            <PassengerNumberInput />
+            <PassengerNumberInput
+              numberOfPassenger={inputNumberOfPassenger}
+              handleChange={handleNumberOfPassengerInput}
+            />
           </DateWrapper>
         </Wrapper>
         <RideSearchButton />

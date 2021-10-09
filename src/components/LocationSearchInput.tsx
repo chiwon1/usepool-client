@@ -3,32 +3,41 @@ import styled from 'styled-components';
 
 type Props = {
   placeholder: string;
+  departFrom: string;
+  handleChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
-const LocationSearchInput = ({ placeholder }: Props) => {
+const LocationSearchInput = ({
+  placeholder,
+  departFrom,
+  handleChange,
+}: Props) => {
   return (
-    <>
-      <Wrapper5>
-        <Wrapper6>
-          <Wrapper7>
-            <Wrapper8>
-              <Wrapper9>
-                <SpanWrapper>
-                  <Wrapper10 aria-hidden="true"></Wrapper10>
-                </SpanWrapper>
-                <SpanWrapper2></SpanWrapper2>
-                <input placeholder={placeholder} />
-              </Wrapper9>
-            </Wrapper8>
-          </Wrapper7>
-        </Wrapper6>
-        <div></div>
-      </Wrapper5>
-    </>
+    <Wrapper>
+      <Wrapper6>
+        <Wrapper7>
+          <Wrapper8>
+            <Wrapper9>
+              <SpanWrapper>
+                <Wrapper10 aria-hidden="true"></Wrapper10>
+              </SpanWrapper>
+              <SpanWrapper2></SpanWrapper2>
+              <input
+                type="text"
+                value={departFrom}
+                placeholder={placeholder}
+                onChange={handleChange}
+              />
+            </Wrapper9>
+          </Wrapper8>
+        </Wrapper7>
+      </Wrapper6>
+      <div></div>
+    </Wrapper>
   );
 };
 
-const Wrapper5 = styled.div`
+const Wrapper = styled.div`
   -webkit-font-smoothing: antialiased;
   border-width: 0;
   box-sizing: border-box;

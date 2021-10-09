@@ -1,7 +1,12 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-const PassengerNumberInput: FC = () => {
+type Props = {
+  numberOfPassenger: string;
+  handleChange: React.ChangeEventHandler<HTMLSelectElement>;
+};
+
+const PassengerNumberInput = ({ numberOfPassenger, handleChange }: Props) => {
   return (
     <Wrapper>
       <svg viewBox="0 0 24 24" width="24" height="24">
@@ -13,7 +18,8 @@ const PassengerNumberInput: FC = () => {
           />
         </g>
       </svg>
-      <select>
+      <select value={numberOfPassenger} onChange={handleChange}>
+        <option value="default">&nbsp;</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
