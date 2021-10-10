@@ -1,5 +1,5 @@
 import axiosInstance from './axios';
-import { IRide } from '../types/ride';
+import { IRide, ISearchRide } from '../types/ride';
 
 export const postNewRide = (value: IRide) => {
   console.log('postNewRide');
@@ -15,7 +15,9 @@ export const searchRide = async (value: IRide) => {
     return console.log('invalid parameter input for searchRide');
   }
 
-  return await axiosInstance.get(
+  const { searchResult } = (await axiosInstance.get(
     `/rides/search?departFrom=${departFrom}&arriveAt=${arriveAt}&departDate=${departDate}`,
-  );
+  )) as any;
+
+  return searchResult;
 };

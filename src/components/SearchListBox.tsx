@@ -3,9 +3,17 @@ import styled from 'styled-components';
 
 type Props = {
   children: ReactElement;
+  departFrom: string;
+  arriveAt: string;
+  availableNumber: number;
 };
 
-const SearchListBox = ({ children }: Props) => {
+const SearchListBox = ({
+  departFrom,
+  arriveAt,
+  availableNumber,
+  children,
+}: Props) => {
   return (
     <div>
       <div>

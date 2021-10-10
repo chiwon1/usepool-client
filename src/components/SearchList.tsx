@@ -9,7 +9,7 @@ type Props = {
   profilePicture?: string;
 };
 
-const SearchListLi = ({
+const SearchList = ({
   departFrom,
   arriveAt,
   departTime,
@@ -185,4 +185,4 @@ const SpanWrapper4 = styled.span`
   display: block;
 `;
 
-export default SearchListLi;
+export default SearchList;

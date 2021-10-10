@@ -1,40 +1,44 @@
 import React, { FC, useEffect, useState } from 'react';
-import { searchRide } from '../api/ride';
-import useQueryString from '../hooks/useQueryString';
 import { useHistory } from 'react-router-dom';
 import SearchTopBar from '../components/SearchTopBar';
 import styled from 'styled-components';
+
 import SearchHeader from '../components/SearchHeader';
-import SearchListLi from '../components/SearchListLi';
-import SearchListBox from '../components/SearchListBox';
+import SearchList from '../components/SearchList';
 import SearchContentBox from '../components/SearchContentBox';
+import SearchListBox from '../components/SearchListBox';
+
+import useQueryString from '../hooks/useQueryString';
+import { searchRide } from '../api/ride';
+import { ISearchRide } from '../types/ride';
 
 const Search: FC = () => {
   const history = useHistory();
   // const { departFrom, arriveAt, departDate } = useQueryString();
-  const [rideList, setRideList] = useState();
+  const { departFrom, arriveAt, departDate } = useQueryString();
+  const [rideList, setRideList] = useState<ISearchRide[]>();
+  const [availableNumber, setAvailableNumber] = useState<number>(0);
 
-  const departFrom = '강남역';
-  const arriveAt = '수원역';
-  const departDate = '10/16/2021';
+  if (!departFrom || !departDate || !arriveAt) {
+    history.push('/');
+  }
 
   // if (!departFrom || !departDate || !arriveAt) {
   //   history.push('/');
   // }
+  useEffect(() => {
+    void (async () => {
+      const list = await searchRide({
+        departFrom: departFrom as string,
+        departDate: departDate as string,
+        arriveAt: arriveAt as string,
+      });
 
-  // useEffect(() => {
-  //   void (async () => {
-  //     const list = (await searchRide({
-  //       departFrom: departFrom as string,
-  //       departDate: departDate as string,
-  //       arriveAt: arriveAt as string,
-  //     })) as any;
-  //
-  //     console.log('list', list);
-  //
-  //     setSearchedList(list);
-  //   })();
-  // }, []);
+      setAvailableNumber(list.length);
+
+      setRideList(list);
+    })();
+  }, []);
 
   return (
     <>
@@ -45,27 +49,24 @@ const Search: FC = () => {
       />
       <SearchContentBox>
         <Wrapper role="presentation">
-          <SearchHeader availableNumber={2} />
-          <SearchListBox>
+          {availableNumber && (
+            <SearchHeader availableNumber={availableNumber} />
+          )}
+          <SearchListBox
+            departFrom={departFrom as string}
+            arriveAt={arriveAt as string}
+            availableNumber={availableNumber}
+          >
             <StyledUl>
-              <SearchListLi
-                departFrom="출발지"
-                arriveAt="도착지"
-                departTime="10:25"
-                profilePicture=""
-              />
-              <SearchListLi
-                departFrom="출발지"
-                arriveAt="도착지"
-                departTime="10:25"
-                profilePicture=""
-              />
-              <SearchListLi
-                departFrom="출발지"
-                arriveAt="도착지"
-                departTime="10:25"
-                profilePicture=""
-              />
+              {rideList?.map((ride) => (
+                <SearchList
+                  key={ride._id.$oid}
+                  departFrom={ride.departFrom}
+                  arriveAt={ride.arriveAt}
+                  departTime={ride.departTime}
+                  profilePicture={ride.driver.profilePicture}
+                />
+              ))}
             </StyledUl>
           </SearchListBox>
         </Wrapper>
