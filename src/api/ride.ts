@@ -21,3 +21,9 @@ export const searchRide = async (value: IRide) => {
 
   return searchResult;
 };
+
+export const getRideDetails = async (id: string) => {
+  const { details } = (await axiosInstance.get(`/rides/${id}`)) as any;
+
+  return details as ISearchRide;
+};

@@ -7,6 +7,7 @@ type Props = {
   arriveAt: string;
   departTime: string;
   profilePicture?: string;
+  handleClick: () => void;
 };
 
 const SearchList = ({
@@ -14,11 +15,12 @@ const SearchList = ({
   arriveAt,
   departTime,
   profilePicture,
+  handleClick,
 }: Props) => {
   // TODO 2021/10/10 cw: profilePicture default prop 지정하기
 
   return (
-    <StyledLi>
+    <StyledLi onClick={handleClick}>
       <Wrapper11>
         <Wrapper12 />
         <Awrapper>

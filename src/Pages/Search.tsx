@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import SearchTopBar from '../components/SearchTopBar';
+import { Redirect, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import SearchHeader from '../components/SearchHeader';
@@ -19,8 +19,12 @@ const Search: FC = () => {
   const [rideList, setRideList] = useState<ISearchRide[]>();
   const [availableNumber, setAvailableNumber] = useState<number>(0);
 
-  if (!departFrom || !departDate || !arriveAt) {
-    history.push('/');
+  const handleClick = (id: string) => {
+    history.push(`/ride/${id}`);
+  };
+
+  if (!departFrom || !arriveAt || !departDate) {
+    history.push(`/`);
   }
 
   // if (!departFrom || !departDate || !arriveAt) {
@@ -58,15 +62,18 @@ const Search: FC = () => {
             availableNumber={availableNumber}
           >
             <StyledUl>
-              {rideList?.map((ride) => (
-                <SearchList
-                  key={ride._id.$oid}
-                  departFrom={ride.departFrom}
-                  arriveAt={ride.arriveAt}
-                  departTime={ride.departTime}
-                  profilePicture={ride.driver.profilePicture}
-                />
-              ))}
+              {rideList?.map(
+                ({ _id, departFrom, arriveAt, departTime, driver }) => (
+                  <SearchList
+                    key={_id}
+                    departFrom={departFrom}
+                    arriveAt={arriveAt}
+                    departTime={departTime}
+                    profilePicture={driver.profilePicture}
+                    handleClick={() => handleClick(_id)}
+                  />
+                ),
+              )}
             </StyledUl>
           </SearchListBox>
         </Wrapper>

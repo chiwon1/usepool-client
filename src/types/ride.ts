@@ -8,9 +8,7 @@ export interface IRide {
 }
 
 export interface ISearchRide {
-  _id: {
-    $oid: string;
-  };
+  _id: string;
   departFrom: string;
   departDate: string;
   departTime: string;

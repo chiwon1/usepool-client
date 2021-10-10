@@ -6,15 +6,17 @@ import Login from './Login';
 import KakaoAuth from './KakaoAuth';
 import NewRide from './NewRide';
 import Search from './Search';
+import RideDetails from './RideDetails';
 
 const Pages: FC = () => {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/login" component={Login} />
-      <Route path="/kakaoAuth" component={KakaoAuth} />
+      <Route exact path="/login" component={Login} />
+      <Route exact path="/kakaoAuth" component={KakaoAuth} />
       <Route path="/newRide" component={NewRide} />
-      <Route path="/:search?" component={Search} />
+      <Route exact path="/:search?" component={Search} />
+      <Route exact path="/ride/:id" component={RideDetails} />
       <Route path="*">
         <Redirect to="/" />
       </Route>

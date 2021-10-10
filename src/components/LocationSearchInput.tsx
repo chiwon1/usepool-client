@@ -27,6 +27,7 @@ const LocationSearchInput = ({
                 value={departFrom}
                 placeholder={placeholder}
                 onChange={handleChange}
+                required
               />
             </Wrapper9>
           </Wrapper8>

@@ -28,7 +28,8 @@ const SearchListBox = ({
                   <Wrapper9>
                     <Wrapper10>
                       <H1wrapper>
-                        Lille → Amsterdam: 4 rides available
+                        {`${departFrom} → ${arriveAt}: 
+                        ${availableNumber} rides available`}
                       </H1wrapper>
                     </Wrapper10>
                   </Wrapper9>
