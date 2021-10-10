@@ -1,20 +1,22 @@
-import React, { FC, useEffect, useState } from 'react';
-import SearchTopBar from '../components/SearchTopBar';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import SearchHeader from '../components/SearchHeader';
-import SearchList from '../components/SearchList';
-import SearchContentBox from '../components/SearchContentBox';
-import SearchListBox from '../components/SearchListBox';
+import SearchTopBar from '../components/searchPage/SearchTopBar';
+import SearchHeader from '../components/searchPage/SearchHeader';
+import SearchList from '../components/searchPage/SearchList';
+import SearchContentBox from '../components/searchPage/SearchContentBox';
+import SearchListBox from '../components/searchPage/SearchListBox';
 
 import useQueryString from '../hooks/useQueryString';
 import { searchRide } from '../api/ride';
 import { ISearchRide } from '../types/ride';
+import { UserContext } from '../contexts/AuthProvider';
 
 const Search: FC = () => {
   const history = useHistory();
   // const { departFrom, arriveAt, departDate } = useQueryString();
+  const { user } = useContext(UserContext);
   const { departFrom, arriveAt, departDate } = useQueryString();
   const [rideList, setRideList] = useState<ISearchRide[]>();
   const [availableNumber, setAvailableNumber] = useState<number>(0);
@@ -30,6 +32,12 @@ const Search: FC = () => {
   // if (!departFrom || !departDate || !arriveAt) {
   //   history.push('/');
   // }
+  useEffect(() => {
+    if (!user) {
+      history.push('/login');
+    }
+  }, [user]);
+
   useEffect(() => {
     void (async () => {
       const list = await searchRide({

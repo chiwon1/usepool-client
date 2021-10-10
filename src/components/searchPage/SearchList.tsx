@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import LocationDiv from './LocationDiv';
+import LocationDiv from '../LocationDiv';
 
 type Props = {
   departFrom: string;
   arriveAt: string;
   departTime: string;
   profilePicture?: string;
-  handleClick: () => void;
+  handleClick?: () => void;
 };
 
 const SearchList = ({

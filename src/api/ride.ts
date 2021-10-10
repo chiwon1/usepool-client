@@ -25,5 +25,12 @@ export const searchRide = async (value: IRide) => {
 export const getRideDetails = async (id: string) => {
   const { details } = (await axiosInstance.get(`/rides/${id}`)) as any;
 
+  console.log('details', details);
+
   return details as ISearchRide;
+};
+
+export const bookRide = (rideId: string) => {
+  console.log('bookRide', rideId);
+  void axiosInstance.post(`/rides/${rideId}`);
 };
