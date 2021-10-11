@@ -32,7 +32,7 @@ const Menu: FC<Props> = ({ onCloseMenu }: Props) => {
               <>
                 <MenuList
                   buttonName={UI.MY_RIDES_AS_DRIVER}
-                  handleClick={() => history.push('/myRides/')}
+                  handleClick={() => history.push('/myRides/asDriver')}
                 />
                 <MenuList
                   buttonName={UI.MY_RIDES_AS_PASSENGER}

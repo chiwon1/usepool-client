@@ -7,6 +7,7 @@ import KakaoAuth from './KakaoAuth';
 import NewRide from './NewRide';
 import Search from './Search';
 import RideDetails from './RideDetails';
+import RidesAsDriver from './myPage/RidesAsDriver';
 
 const Pages: FC = () => {
   return (
@@ -17,6 +18,7 @@ const Pages: FC = () => {
       <Route path="/newRide" component={NewRide} />
       <Route exact path="/:search?" component={Search} />
       <Route exact path="/ride/:id" component={RideDetails} />
+      <Route exact path="/myRides/asDriver" component={RidesAsDriver} />
       <Route path="*">
         <Redirect to="/" />
       </Route>
