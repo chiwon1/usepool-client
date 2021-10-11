@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import SearchTopBar from '../components/searchPage/SearchTopBar';
 import SearchHeader from '../components/searchPage/SearchHeader';
 import SearchList from '../components/searchPage/SearchList';
-import SearchContentBox from '../components/searchPage/SearchContentBox';
+import PageWrapper from '../components/PageWrapper';
 import SearchListBox from '../components/searchPage/SearchListBox';
 
 import useQueryString from '../hooks/useQueryString';
@@ -59,7 +59,7 @@ const Search: FC = () => {
         arriveAt={arriveAt as string}
         departDate={departDate as string}
       />
-      <SearchContentBox>
+      <PageWrapper>
         <Wrapper role="presentation">
           {availableNumber && (
             <SearchHeader availableNumber={availableNumber} />
@@ -85,7 +85,7 @@ const Search: FC = () => {
             </StyledUl>
           </SearchListBox>
         </Wrapper>
-      </SearchContentBox>
+      </PageWrapper>
     </>
   );
 };

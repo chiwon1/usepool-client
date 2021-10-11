@@ -1,24 +1,52 @@
 import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
-// import { UserContext } from '../contexts/AuthProvider';
+import { UserContext } from '../contexts/AuthProvider';
 
-import LoginButton from './LoginButton';
-import LogoutButton from './LogoutButton';
+import MenuList from './MenuList';
+import { useHistory } from 'react-router-dom';
+import axiosInstance from '../api/axios';
+import UI from '../constants/ui';
+import { loginWithKakao } from '../utils/kakaoLogin';
 
 interface Props {
   onCloseMenu: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 const Menu: FC<Props> = ({ onCloseMenu }: Props) => {
-  // const { user } = useContext(UserContext);
+  const { user, handleUser } = useContext(UserContext);
+
+  const history = useHistory();
+
+  const logout = async () => {
+    handleUser!(null);
+    await axiosInstance.post('/logout');
+    history.push('/');
+  };
 
   return (
     <CreateMenu onClick={onCloseMenu}>
       <NavWrapper>
         <Nav>
           <ul>
-            <LogoutButton />
-            <LoginButton />
+            {user ? (
+              <>
+                <MenuList
+                  buttonName={UI.MY_RIDES_AS_DRIVER}
+                  handleClick={() => history.push('/myRides/')}
+                />
+                <MenuList
+                  buttonName={UI.MY_RIDES_AS_PASSENGER}
+                  handleClick={() => console.log('MY_RIDES_AS_PASSENGER')}
+                />
+                <MenuList
+                  buttonName={UI.INBOX}
+                  handleClick={() => console.log('INBOX')}
+                />
+                <MenuList buttonName={UI.LOGOUT} handleClick={logout} />
+              </>
+            ) : (
+              <MenuList buttonName={UI.LOGIN} handleClick={loginWithKakao} />
+            )}
           </ul>
         </Nav>
       </NavWrapper>

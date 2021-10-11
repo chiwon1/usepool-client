@@ -12,7 +12,6 @@ const MenuOpenButton: FC = () => {
 
   const toggleShowMenu = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>) => {
-      console.log('toggleShowMenu');
       e.stopPropagation();
       setIsShowMenu((prev) => !prev);
     },

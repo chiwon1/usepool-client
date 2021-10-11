@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const NewRideButton: FC = () => {
-  return <StyledLink to="/newRide">{UI.PUBLICH_A_RIDE}</StyledLink>;
+  return <StyledLink to="/newRide">{UI.PUBLISH_A_RIDE}</StyledLink>;
 };
 
 const StyledLink = styled(Link)`

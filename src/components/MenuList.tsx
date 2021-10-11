@@ -1,34 +1,27 @@
-import React, { FC, useContext } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import UI from '../constants/ui';
-import axiosInstance from '../api/axios';
-import { useHistory } from 'react-router-dom';
-import { UserContext } from '../contexts/AuthProvider';
+import styled from 'styled-components';
 
-const LogoutButton: FC = () => {
-  const history = useHistory();
-  const { handleUser } = useContext(UserContext);
+type Props = {
+  handleClick: () => void;
+  buttonName: string;
+};
 
-  const logout = async () => {
-    handleUser!(null);
-    await axiosInstance.post('/logout');
-    history.push('/');
-  };
-
+const MenuList = ({ handleClick, buttonName }: Props) => {
   return (
-    <ListWrapper>
-      <div onClick={logout}>
+    <MenuListWrapper onClick={handleClick}>
+      <div>
         <Span>
           <span>
-            <span>{UI.LOGOUT}</span>
+            <span>{buttonName}</span>
           </span>
         </Span>
       </div>
-    </ListWrapper>
+    </MenuListWrapper>
   );
 };
 
-const ListWrapper = styled.li`
+const MenuListWrapper = styled.li`
   div {
     -webkit-box-align: center;
     -webkit-font-smoothing: antialiased;
@@ -124,4 +117,4 @@ const Span = styled.span`
   }
 `;
 
-export default LogoutButton;
+export default MenuList;

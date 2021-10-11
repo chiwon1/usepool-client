@@ -5,7 +5,7 @@ type Props = {
   children: ReactElement;
 };
 
-const SearchContentBox = ({ children }: Props) => {
+const PageWrapper = ({ children }: Props) => {
   return (
     <Wrapper>
       <Wrapper2>{children}</Wrapper2>
@@ -39,4 +39,4 @@ const Wrapper2 = styled.div`
   vertical-align: baseline;
 `;
 
-export default SearchContentBox;
+export default PageWrapper;
