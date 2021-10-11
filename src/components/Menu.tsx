@@ -36,7 +36,7 @@ const Menu: FC<Props> = ({ onCloseMenu }: Props) => {
                 />
                 <MenuList
                   buttonName={UI.MY_RIDES_AS_PASSENGER}
-                  handleClick={() => console.log('MY_RIDES_AS_PASSENGER')}
+                  handleClick={() => history.push('/myRides/asPassenger')}
                 />
                 <MenuList
                   buttonName={UI.INBOX}

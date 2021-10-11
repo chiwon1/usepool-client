@@ -6,3 +6,9 @@ export const getMyRidesAsDriver = async () => {
 
   return rides as ISearchRide[];
 };
+
+export const getMyRidesAsPassenger = async () => {
+  const { rides } = (await axiosInstance.get('/myRides/asPassenger')) as any;
+
+  return rides as ISearchRide[];
+};
