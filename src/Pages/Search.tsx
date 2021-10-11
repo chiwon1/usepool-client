@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import SearchTopBar from '../components/searchPage/SearchTopBar';
 import SearchHeader from '../components/searchPage/SearchHeader';
 import SearchList from '../components/searchPage/SearchList';
-import SearchContentBox from '../components/searchPage/SearchContentBox';
+import PageWrapper from '../components/PageWrapper';
 import SearchListBox from '../components/searchPage/SearchListBox';
 
 import useQueryString from '../hooks/useQueryString';
@@ -15,11 +15,11 @@ import { UserContext } from '../contexts/AuthProvider';
 
 const Search: FC = () => {
   const history = useHistory();
-  // const { departFrom, arriveAt, departDate } = useQueryString();
   const { user } = useContext(UserContext);
   const { departFrom, arriveAt, departDate } = useQueryString();
   const [rideList, setRideList] = useState<ISearchRide[]>();
   const [availableNumber, setAvailableNumber] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleClick = (id: string) => {
     history.push(`/ride/${id}`);
@@ -29,9 +29,6 @@ const Search: FC = () => {
     history.push(`/`);
   }
 
-  // if (!departFrom || !departDate || !arriveAt) {
-  //   history.push('/');
-  // }
   useEffect(() => {
     if (!user) {
       history.push('/login');
@@ -46,46 +43,58 @@ const Search: FC = () => {
         arriveAt: arriveAt as string,
       });
 
+      if (!list) {
+        return console.log('Fail to fetch searchRide');
+      }
+
       setAvailableNumber(list.length);
 
       setRideList(list);
+
+      setIsLoading(false);
     })();
   }, []);
 
   return (
     <>
-      <SearchTopBar
-        departFrom={departFrom as string}
-        arriveAt={arriveAt as string}
-        departDate={departDate as string}
-      />
-      <SearchContentBox>
-        <Wrapper role="presentation">
-          {availableNumber && (
-            <SearchHeader availableNumber={availableNumber} />
-          )}
-          <SearchListBox
+      {isLoading ? (
+        <div />
+      ) : (
+        <>
+          <SearchTopBar
             departFrom={departFrom as string}
             arriveAt={arriveAt as string}
-            availableNumber={availableNumber}
-          >
-            <StyledUl>
-              {rideList?.map(
-                ({ _id, departFrom, arriveAt, departTime, driver }) => (
-                  <SearchList
-                    key={_id}
-                    departFrom={departFrom}
-                    arriveAt={arriveAt}
-                    departTime={departTime}
-                    profilePicture={driver.profilePicture}
-                    handleClick={() => handleClick(_id)}
-                  />
-                ),
+            departDate={departDate as string}
+          />
+          <PageWrapper>
+            <Wrapper role="presentation">
+              {availableNumber && (
+                <SearchHeader availableNumber={availableNumber} />
               )}
-            </StyledUl>
-          </SearchListBox>
-        </Wrapper>
-      </SearchContentBox>
+              <SearchListBox
+                departFrom={departFrom as string}
+                arriveAt={arriveAt as string}
+                availableNumber={availableNumber}
+              >
+                <StyledUl>
+                  {rideList?.map(
+                    ({ _id, departFrom, arriveAt, departTime, driver }) => (
+                      <SearchList
+                        key={_id}
+                        departFrom={departFrom}
+                        arriveAt={arriveAt}
+                        departTime={departTime}
+                        profilePicture={driver.profilePicture}
+                        handleClick={() => handleClick(_id)}
+                      />
+                    ),
+                  )}
+                </StyledUl>
+              </SearchListBox>
+            </Wrapper>
+          </PageWrapper>
+        </>
+      )}
     </>
   );
 };
@@ -104,7 +113,7 @@ const Wrapper = styled.div`
   vertical-align: baseline;
 `;
 
-const StyledUl = styled.ul`
+export const StyledUl = styled.ul`
   list-style: none;
 
   ul {

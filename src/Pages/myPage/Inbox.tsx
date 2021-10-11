@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Mypage = () => {
+const Inbox = () => {
   return <div></div>;
 };
 
-export default Mypage;
+export default Inbox;

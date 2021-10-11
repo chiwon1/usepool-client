@@ -19,7 +19,6 @@ export interface ISearchRide {
     kakaoId: number;
     nickname: string;
     profilePicture: string;
-    ridesAsDriver: string[];
     ridesAsPassenger: string[];
     __v: number;
     token: string;
