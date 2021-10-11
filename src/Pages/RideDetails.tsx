@@ -1,22 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { bookRide, getRideDetails } from '../api/ride';
+import { bookRide, fetchRideDetails, fetchSearchedRides } from '../api/ride';
 import { ISearchRide } from '../types/ride';
 import SearchList from '../components/searchPage/SearchList';
 import styled from 'styled-components';
 import { UserContext } from '../contexts/AuthProvider';
+import { useQuery } from 'react-query';
 
 const RideDetails = () => {
   const { id } = useParams<{ id: string }>();
-  const [rideDetails, setRideDetails] = useState<ISearchRide>();
   const { user } = useContext(UserContext);
   const history = useHistory();
-
-  const fetchDetails = async () => {
-    const details = await getRideDetails(id);
-
-    setRideDetails(details);
-  };
+  const { isLoading, error, data } = useQuery(
+    'fetchRideDetails',
+    fetchRideDetails(id),
+  );
 
   useEffect(() => {
     if (!user) {
@@ -24,24 +22,24 @@ const RideDetails = () => {
     }
   }, [user]);
 
-  useEffect(() => {
-    void fetchDetails();
-  }, []);
+  if (isLoading) {
+    return <div />;
+  }
 
   return (
     <Wrapper>
-      {rideDetails && (
+      {data && (
         <>
           <SearchList
-            departFrom={rideDetails.departFrom}
-            arriveAt={rideDetails.arriveAt}
-            departTime={rideDetails.departTime}
-            nickname={rideDetails.driver.nickname}
-            profilePicture={rideDetails.driver.profilePicture}
+            departFrom={data.departFrom}
+            arriveAt={data.arriveAt}
+            departTime={data.departTime}
+            nickname={data.driver?.nickname}
+            profilePicture={data.driver?.profilePicture}
           />
           <button
             onClick={() =>
-              console.log('rideDetails.driver._id', rideDetails.driver._id)
+              console.log('rideDetails.driver._id', data.driver._id)
             }
           >
             Chat
@@ -50,7 +48,7 @@ const RideDetails = () => {
           <br />
           <button
             onClick={() => {
-              bookRide(rideDetails._id);
+              bookRide(data._id);
 
               history.push('/');
             }}

@@ -6,15 +6,20 @@ import theme from './contexts/theme';
 import Layout from './components/Layout';
 import Pages from './Pages';
 import AuthProvider from './contexts/AuthProvider';
+import { QueryClientProvider, QueryClient } from 'react-query';
 
 const App: FC = () => {
+  const queryClient = new QueryClient();
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <AuthProvider>
-          <Layout>
-            <Pages />
-          </Layout>
+          <QueryClientProvider client={queryClient}>
+            <Layout>
+              <Pages />
+            </Layout>
+          </QueryClientProvider>
         </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>

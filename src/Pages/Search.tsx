@@ -1,5 +1,5 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import SearchTopBar from '../components/searchPage/SearchTopBar';
@@ -9,38 +9,28 @@ import PageWrapper from '../components/PageWrapper';
 import SearchListBox from '../components/searchPage/SearchListBox';
 
 import useQueryString from '../hooks/useQueryString';
-import { searchRide } from '../api/ride';
-import { ISearchRide } from '../types/ride';
+import { fetchSearchedRides } from '../api/ride';
 import { UserContext } from '../contexts/AuthProvider';
+import { useQuery } from 'react-query';
 
 const Search: FC = () => {
   const history = useHistory();
   const { user } = useContext(UserContext);
   const { departFrom, arriveAt, departDate } = useQueryString();
-  const [rideList, setRideList] = useState<ISearchRide[]>();
   const [availableNumber, setAvailableNumber] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleClick = (id: string) => {
-    history.push(`/ride/${id}`);
-  };
-
-  const fetchRides = async () => {
-    const list = await searchRide({
+  const { isLoading, error, data } = useQuery(
+    'fetchSearchedRides',
+    fetchSearchedRides({
       departFrom: departFrom as string,
       departDate: departDate as string,
       arriveAt: arriveAt as string,
-    });
+    }),
+  );
 
-    if (!list) {
-      return console.log('Fail to fetch searchRide');
-    }
+  console.log(data);
 
-    setAvailableNumber(list.length);
-
-    setRideList(list);
-
-    setIsLoading(false);
+  const handleClick = (id: string) => {
+    history.push(`/ride/${id}`);
   };
 
   if (!departFrom || !arriveAt || !departDate) {
@@ -54,50 +44,50 @@ const Search: FC = () => {
   }, [user]);
 
   useEffect(() => {
-    void fetchRides();
-  }, []);
+    if (data) {
+      setAvailableNumber(data.length);
+    }
+  }, [data]);
+
+  if (isLoading) {
+    return <div />;
+  }
 
   return (
     <>
-      {isLoading ? (
-        <div />
-      ) : (
-        <>
-          <SearchTopBar
+      <SearchTopBar
+        departFrom={departFrom as string}
+        arriveAt={arriveAt as string}
+        departDate={departDate as string}
+      />
+      <PageWrapper>
+        <Wrapper role="presentation">
+          {availableNumber && (
+            <SearchHeader availableNumber={availableNumber} />
+          )}
+          <SearchListBox
             departFrom={departFrom as string}
             arriveAt={arriveAt as string}
-            departDate={departDate as string}
-          />
-          <PageWrapper>
-            <Wrapper role="presentation">
-              {availableNumber && (
-                <SearchHeader availableNumber={availableNumber} />
+            availableNumber={availableNumber}
+          >
+            <StyledUl>
+              {data?.map(
+                ({ _id, departFrom, arriveAt, departTime, driver }) => (
+                  <SearchList
+                    key={_id}
+                    departFrom={departFrom}
+                    arriveAt={arriveAt}
+                    departTime={departTime}
+                    nickname={driver.nickname}
+                    profilePicture={driver.profilePicture}
+                    handleClick={() => handleClick(_id)}
+                  />
+                ),
               )}
-              <SearchListBox
-                departFrom={departFrom as string}
-                arriveAt={arriveAt as string}
-                availableNumber={availableNumber}
-              >
-                <StyledUl>
-                  {rideList?.map(
-                    ({ _id, departFrom, arriveAt, departTime, driver }) => (
-                      <SearchList
-                        key={_id}
-                        departFrom={departFrom}
-                        arriveAt={arriveAt}
-                        departTime={departTime}
-                        nickname={driver.nickname}
-                        profilePicture={driver.profilePicture}
-                        handleClick={() => handleClick(_id)}
-                      />
-                    ),
-                  )}
-                </StyledUl>
-              </SearchListBox>
-            </Wrapper>
-          </PageWrapper>
-        </>
-      )}
+            </StyledUl>
+          </SearchListBox>
+        </Wrapper>
+      </PageWrapper>
     </>
   );
 };

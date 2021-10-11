@@ -5,7 +5,7 @@ export const postNewRide = (value: IRide) => {
   void axiosInstance.post(`/rides/new`, value);
 };
 
-export const searchRide = async (value: IRide) => {
+export const fetchSearchedRides = (value: IRide) => async () => {
   const { departFrom, departDate, arriveAt } = value;
 
   if (!departFrom || !departDate || !arriveAt) {
@@ -19,7 +19,7 @@ export const searchRide = async (value: IRide) => {
   return searchResult as ISearchRide[];
 };
 
-export const getRideDetails = async (id: string) => {
+export const fetchRideDetails = (id: string) => async () => {
   const { details } = (await axiosInstance.get(`/rides/${id}`)) as any;
 
   return details as ISearchRide;
