@@ -6,6 +6,7 @@ type Props = {
   departFrom: string;
   arriveAt: string;
   departTime: string;
+  nickname: string;
   profilePicture?: string;
   handleClick?: () => void;
 };
@@ -14,6 +15,7 @@ const SearchList = ({
   departFrom,
   arriveAt,
   departTime,
+  nickname,
   profilePicture,
   handleClick,
 }: Props) => {
@@ -47,7 +49,7 @@ const SearchList = ({
                   </Wrapper17>
                 </SpanWrapper2>
                 <SpanWrapper3>
-                  <SpanWrapper4>Chiwon</SpanWrapper4>
+                  <SpanWrapper4>{nickname}</SpanWrapper4>
                 </SpanWrapper3>
               </SpanWrapper1>
             </Wrapper16>

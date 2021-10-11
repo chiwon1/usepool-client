@@ -18,14 +18,16 @@ const AuthProvider = ({ children }: Props): JSX.Element => {
     setUser(value);
   };
 
-  useEffect(() => {
-    void (async function () {
-      const userInfo = await getUser();
+  const fetchUser = async function () {
+    const userInfo = await getUser();
 
-      if (userInfo) {
-        setUser(userInfo);
-      }
-    })();
+    if (userInfo) {
+      setUser(userInfo);
+    }
+  };
+
+  useEffect(() => {
+    void fetchUser();
   }, []);
 
   return (

@@ -13,6 +13,22 @@ const RidesAsPassenger = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [rideList, setRideList] = useState<ISearchRide[]>();
 
+  const handleClick = (id: string) => {
+    history.push(`/ride/${id}`);
+  };
+
+  const fetchRides = async () => {
+    const rides = await getMyRidesAsPassenger();
+
+    if (!rides) {
+      return console.log('Fail to fetch rides');
+    }
+
+    setRideList(rides);
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     if (!user) {
       history.push('/login');
@@ -20,19 +36,7 @@ const RidesAsPassenger = () => {
   }, [user]);
 
   useEffect(() => {
-    void (async () => {
-      const rides = await getMyRidesAsPassenger();
-
-      console.log(rides);
-
-      if (!rides) {
-        return console.log('Fail to fetch rides');
-      }
-
-      setRideList(rides);
-
-      setIsLoading(false);
-    })();
+    void fetchRides();
   }, []);
 
   return (
@@ -50,8 +54,9 @@ const RidesAsPassenger = () => {
                   departFrom={departFrom}
                   arriveAt={arriveAt}
                   departTime={departTime}
+                  nickname={driver.nickname}
                   profilePicture={driver.profilePicture}
-                  handleClick={() => console.log('_id', _id)}
+                  handleClick={() => handleClick(_id)}
                 />
               ),
             )}

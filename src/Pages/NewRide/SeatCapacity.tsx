@@ -16,15 +16,12 @@ const SeatCapacity: FC = () => {
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
-    handleNewRideInfo({
-      ...newRideInfo,
-      seatCapacity: Number(inputCapacity),
-    });
-
     postNewRide({
       ...newRideInfo,
       seatCapacity: Number(inputCapacity),
     });
+
+    handleNewRideInfo(null);
 
     history.push('/');
   };

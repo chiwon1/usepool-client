@@ -4,7 +4,6 @@ export interface IRide {
   departTime?: string | null;
   arriveAt?: string;
   seatCapacity?: number | null;
-  driverNickname?: string;
 }
 
 export interface ISearchRide {
@@ -23,7 +22,6 @@ export interface ISearchRide {
     __v: number;
     token: string;
   };
-  driverNickname: string;
   passengers: string[];
   createdAt: Date;
   updatedAt: Date;

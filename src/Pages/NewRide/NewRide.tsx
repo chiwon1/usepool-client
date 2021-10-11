@@ -11,23 +11,15 @@ import { IRide } from '../../types/ride';
 
 export const NewRideContext = createContext<{
   newRideInfo: IRide | null;
-  handleNewRideInfo: (value: IRide) => void;
+  handleNewRideInfo: (value: IRide | null) => void;
 }>({ newRideInfo: null, handleNewRideInfo: () => null });
 
 const NewRide = () => {
   const { user } = useContext(UserContext);
 
-  const [newRideInfo, setNewRideInfo] = useState<IRide | null>({
-    departFrom: '',
-    departTime: null,
-    arriveAt: '',
-    seatCapacity: null,
-    driverNickname: user?.nickname,
-  });
+  const [newRideInfo, setNewRideInfo] = useState<IRide | null>(null);
 
-  console.log('newRideInfo', newRideInfo);
-
-  const handleNewRideInfo = (value: IRide) => {
+  const handleNewRideInfo = (value: IRide | null) => {
     setNewRideInfo(value);
   };
 

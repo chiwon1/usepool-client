@@ -25,6 +25,24 @@ const Search: FC = () => {
     history.push(`/ride/${id}`);
   };
 
+  const fetchRides = async () => {
+    const list = await searchRide({
+      departFrom: departFrom as string,
+      departDate: departDate as string,
+      arriveAt: arriveAt as string,
+    });
+
+    if (!list) {
+      return console.log('Fail to fetch searchRide');
+    }
+
+    setAvailableNumber(list.length);
+
+    setRideList(list);
+
+    setIsLoading(false);
+  };
+
   if (!departFrom || !arriveAt || !departDate) {
     history.push(`/`);
   }
@@ -36,23 +54,7 @@ const Search: FC = () => {
   }, [user]);
 
   useEffect(() => {
-    void (async () => {
-      const list = await searchRide({
-        departFrom: departFrom as string,
-        departDate: departDate as string,
-        arriveAt: arriveAt as string,
-      });
-
-      if (!list) {
-        return console.log('Fail to fetch searchRide');
-      }
-
-      setAvailableNumber(list.length);
-
-      setRideList(list);
-
-      setIsLoading(false);
-    })();
+    void fetchRides();
   }, []);
 
   return (
@@ -84,6 +86,7 @@ const Search: FC = () => {
                         departFrom={departFrom}
                         arriveAt={arriveAt}
                         departTime={departTime}
+                        nickname={driver.nickname}
                         profilePicture={driver.profilePicture}
                         handleClick={() => handleClick(_id)}
                       />

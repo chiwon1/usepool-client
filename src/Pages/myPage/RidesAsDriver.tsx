@@ -13,7 +13,17 @@ const RidesAsDriver = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [rideList, setRideList] = useState<ISearchRide[]>();
 
-  console.log('My ride page');
+  const fetchRides = async () => {
+    const rides = await getMyRidesAsDriver();
+
+    if (!rides) {
+      return console.log('Fail to fetch rides');
+    }
+
+    setRideList(rides);
+
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     if (!user) {
@@ -22,19 +32,7 @@ const RidesAsDriver = () => {
   }, [user]);
 
   useEffect(() => {
-    void (async () => {
-      const rides = await getMyRidesAsDriver();
-
-      console.log(rides);
-
-      if (!rides) {
-        return console.log('Fail to fetch rides');
-      }
-
-      setRideList(rides);
-
-      setIsLoading(false);
-    })();
+    void fetchRides();
   }, []);
 
   return (
@@ -52,6 +50,7 @@ const RidesAsDriver = () => {
                   departFrom={departFrom}
                   arriveAt={arriveAt}
                   departTime={departTime}
+                  nickname={driver.nickname}
                   profilePicture={driver.profilePicture}
                   handleClick={() => console.log('_id', _id)}
                 />
