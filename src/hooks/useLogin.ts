@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { UserContext } from '../contexts/AuthProvider';
 import { getAuth } from '../api/auth';
 import { getUser } from '../api/user';

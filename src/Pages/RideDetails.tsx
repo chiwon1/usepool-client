@@ -1,20 +1,27 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { bookRide, fetchRideDetails, fetchSearchedRides } from '../api/ride';
-import { ISearchRide } from '../types/ride';
+import { bookRide, fetchRideDetails } from '../api/ride';
 import SearchList from '../components/searchPage/SearchList';
 import styled from 'styled-components';
 import { UserContext } from '../contexts/AuthProvider';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 const RideDetails = () => {
   const { id } = useParams<{ id: string }>();
   const { user } = useContext(UserContext);
   const history = useHistory();
+  const queryClient = useQueryClient();
   const { isLoading, error, data } = useQuery(
     'fetchRideDetails',
     fetchRideDetails(id),
   );
+
+  const { mutate } = useMutation(bookRide, {
+    onSuccess: () => {
+      void queryClient.invalidateQueries('fetchRideDetails');
+      void queryClient.invalidateQueries('fetchMyRidesAsPassenger');
+    },
+  });
 
   useEffect(() => {
     if (!user) {
@@ -48,7 +55,7 @@ const RideDetails = () => {
           <br />
           <button
             onClick={() => {
-              bookRide(data._id);
+              mutate(data._id);
 
               history.push('/');
             }}

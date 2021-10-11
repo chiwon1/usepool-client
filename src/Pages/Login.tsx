@@ -1,10 +1,9 @@
-import React, { FC, useContext, useEffect } from 'react';
+import React, { FC, useContext } from 'react';
 import { loginWithKakao } from '../utils/kakaoLogin';
 import { UserContext } from '../contexts/AuthProvider';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 const Login: FC = () => {
-  const history = useHistory();
   const { user } = useContext(UserContext);
 
   console.log('Login page');

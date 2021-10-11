@@ -27,8 +27,6 @@ const Search: FC = () => {
     }),
   );
 
-  console.log(data);
-
   const handleClick = (id: string) => {
     history.push(`/ride/${id}`);
   };

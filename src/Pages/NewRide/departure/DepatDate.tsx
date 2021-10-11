@@ -3,24 +3,26 @@ import FormNewRide from '../../../components/FormNewRide';
 import { useHistory } from 'react-router-dom';
 import { NewRideContext } from '../NewRide';
 
-const DepartureTime: FC = () => {
+const DepartureDate: FC = () => {
   const history = useHistory();
   const { newRideInfo, handleNewRideInfo } = useContext(NewRideContext);
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    const date = new window.Date(ev.target.value).toLocaleDateString();
+
     handleNewRideInfo({
       ...newRideInfo,
-      departTime: ev.target.value,
+      departDate: date,
     });
 
-    history.push('/newRide/seatCapacity');
+    history.push('/newRide/departure-time');
   };
 
   return (
-    <FormNewRide InputTitle={'At what time will you pick passengers up?'}>
-      <input type="time" onChange={handleChange} />
+    <FormNewRide InputTitle={'When are you going?'}>
+      <input type="date" min="2021-10-01" onChange={handleChange} />
     </FormNewRide>
   );
 };
 
-export default DepartureTime;
+export default DepartureDate;

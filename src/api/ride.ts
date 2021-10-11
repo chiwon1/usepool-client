@@ -1,8 +1,8 @@
 import axiosInstance from './axios';
 import { IRide, ISearchRide } from '../types/ride';
 
-export const postNewRide = (value: IRide) => {
-  void axiosInstance.post(`/rides/new`, value);
+export const postNewRide = async (value: IRide) => {
+  return await axiosInstance.post(`/rides/new`, value);
 };
 
 export const fetchSearchedRides = (value: IRide) => async () => {
@@ -25,6 +25,6 @@ export const fetchRideDetails = (id: string) => async () => {
   return details as ISearchRide;
 };
 
-export const bookRide = (rideId: string) => {
-  void axiosInstance.post(`/rides/${rideId}`);
+export const bookRide = async (rideId: string) => {
+  return await axiosInstance.post(`/rides/${rideId}`);
 };

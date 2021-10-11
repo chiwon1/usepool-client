@@ -1,5 +1,4 @@
 import React from 'react';
-import UI from '../constants/ui';
 import styled from 'styled-components';
 
 type Props = {

@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../contexts/AuthProvider';
-import { ISearchRide } from '../../types/ride';
 import { fetchMyRidesAsPassenger } from '../../api/myRides';
 import PageWrapper from '../../components/PageWrapper';
 import { StyledUl } from '../Search';
@@ -11,7 +10,6 @@ import { useQuery } from 'react-query';
 const RidesAsPassenger = () => {
   const history = useHistory();
   const { user } = useContext(UserContext);
-  const [rideList, setRideList] = useState<ISearchRide[]>();
   const { isLoading, error, data } = useQuery(
     'fetchMyRidesAsPassenger',
     fetchMyRidesAsPassenger(),

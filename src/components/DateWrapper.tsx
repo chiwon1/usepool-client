@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 const DateWrapper: FC = ({ children }) => {

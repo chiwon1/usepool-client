@@ -2,28 +2,25 @@ import React, { FC, useContext, useState } from 'react';
 import FormNewRide from '../../components/FormNewRide';
 import { useHistory } from 'react-router-dom';
 import { NewRideContext } from './NewRide';
-import { postNewRide } from '../../api/ride';
 
 const SeatCapacity: FC = () => {
   const history = useHistory();
   const { newRideInfo, handleNewRideInfo } = useContext(NewRideContext);
-  const [inputCapacity, setInputCapacity] = useState<string>();
+  const [inputCapacity, setInputCapacity] = useState<number>();
 
   const handleChange = (ev: React.ChangeEvent<HTMLSelectElement>) => {
-    setInputCapacity(ev.target.value);
+    setInputCapacity(Number(ev.target.value));
   };
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
-    postNewRide({
+    handleNewRideInfo({
       ...newRideInfo,
-      seatCapacity: Number(inputCapacity),
+      seatCapacity: inputCapacity,
     });
 
-    handleNewRideInfo(null);
-
-    history.push('/');
+    history.push('/newRide/submit');
   };
 
   return (

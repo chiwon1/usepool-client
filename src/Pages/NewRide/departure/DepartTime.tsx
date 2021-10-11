@@ -1,28 +1,26 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext } from 'react';
 import FormNewRide from '../../../components/FormNewRide';
 import { useHistory } from 'react-router-dom';
 import { NewRideContext } from '../NewRide';
 
-const DepartureDate: FC = () => {
+const DepartTime: FC = () => {
   const history = useHistory();
   const { newRideInfo, handleNewRideInfo } = useContext(NewRideContext);
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    const date = new window.Date(ev.target.value).toLocaleDateString();
-
     handleNewRideInfo({
       ...newRideInfo,
-      departDate: date,
+      departTime: ev.target.value,
     });
 
-    history.push('/newRide/departure-time');
+    history.push('/newRide/seatCapacity');
   };
 
   return (
-    <FormNewRide InputTitle={'When are you going?'}>
-      <input type="date" min="2021-10-01" onChange={handleChange} />
+    <FormNewRide InputTitle={'At what time will you pick passengers up?'}>
+      <input type="time" onChange={handleChange} />
     </FormNewRide>
   );
 };
 
-export default DepartureDate;
+export default DepartTime;
