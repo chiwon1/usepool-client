@@ -1,14 +1,15 @@
 import React, { FC } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import loadable from '@loadable/component';
 
-import Home from './Home';
-import Login from './Login';
-import KakaoAuth from './KakaoAuth';
-import NewRide from './NewRide';
-import Search from './Search';
-import RideDetails from './RideDetails';
-import RidesAsDriver from './myPage/RidesAsDriver';
-import RidesAsPassenger from './myPage/RidesAsPassenger';
+const Home = loadable(() => import('./Home'));
+const Login = loadable(() => import('./Login'));
+const KakaoAuth = loadable(() => import('./KakaoAuth'));
+const NewRide = loadable(() => import('./NewRide'));
+const Search = loadable(() => import('./Search'));
+const RideDetails = loadable(() => import('./RideDetails'));
+const RidesAsDriver = loadable(() => import('./myPage/RidesAsDriver'));
+const RidesAsPassenger = loadable(() => import('./myPage/RidesAsPassenger'));
 
 const Pages: FC = () => {
   return (

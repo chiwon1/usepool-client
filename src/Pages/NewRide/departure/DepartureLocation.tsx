@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import InputLocation from '../../../components/InputLocation';
 import FormNewRide from '../../../components/FormNewRide';
 
-const DepartLocation = () => {
+const DepartureLocation = () => {
   const history = useHistory();
 
   const { newRideInfo, handleNewRideInfo } = useContext(NewRideContext);
@@ -22,7 +22,7 @@ const DepartLocation = () => {
       departFrom: inputDepartFrom,
     });
 
-    history.push('/newRide/arrival');
+    history.push('/newRide/destination');
   };
 
   return (
@@ -38,4 +38,4 @@ const DepartLocation = () => {
   );
 };
 
-export default DepartLocation;
+export default DepartureLocation;

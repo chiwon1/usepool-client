@@ -3,7 +3,7 @@ import FormNewRide from '../../../components/FormNewRide';
 import { useHistory } from 'react-router-dom';
 import { NewRideContext } from '../NewRide';
 
-const DepartTime: FC = () => {
+const DepartureTime: FC = () => {
   const history = useHistory();
   const { newRideInfo, handleNewRideInfo } = useContext(NewRideContext);
 
@@ -23,4 +23,4 @@ const DepartTime: FC = () => {
   );
 };
 
-export default DepartTime;
+export default DepartureTime;

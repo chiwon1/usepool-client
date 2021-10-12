@@ -60,9 +60,7 @@ const Search: FC = () => {
       />
       <PageWrapper>
         <Wrapper role="presentation">
-          {availableNumber && (
-            <SearchHeader availableNumber={availableNumber} />
-          )}
+          <SearchHeader availableNumber={availableNumber} />
           <SearchListBox
             departFrom={departFrom as string}
             arriveAt={arriveAt as string}

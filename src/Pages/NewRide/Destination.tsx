@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { NewRideContext } from './NewRide';
 import FormNewRide from '../../components/FormNewRide';
 
-const Arrival: FC = () => {
+const Destination: FC = () => {
   const history = useHistory();
 
   const { newRideInfo, handleNewRideInfo } = useContext(NewRideContext);
@@ -38,4 +38,4 @@ const Arrival: FC = () => {
   );
 };
 
-export default Arrival;
+export default Destination;
