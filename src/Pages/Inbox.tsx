@@ -2,13 +2,15 @@ import React, { FC, useContext } from 'react';
 import { useQuery } from 'react-query';
 import { fetchChatRoomList } from '../api/chatRoom';
 import { useHistory } from 'react-router-dom';
+import { UserContext } from '../contexts/AuthProvider';
 
 const Inbox: FC = () => {
+  const { user } = useContext(UserContext);
   const {
     isLoading,
     error,
     data: chatRoomList,
-  } = useQuery('fetchChatRoomList', fetchChatRoomList);
+  } = useQuery(['fetchChatRoomList', { id: user?.userId }], fetchChatRoomList);
 
   const history = useHistory();
 

@@ -14,7 +14,10 @@ const RidesAsPassenger = () => {
     isLoading,
     error,
     data: rideList,
-  } = useQuery('fetchMyRidesAsPassenger', fetchMyRidesAsPassenger());
+  } = useQuery(
+    ['fetchMyRidesAsPassenger', { id: user?.userId }],
+    fetchMyRidesAsPassenger(),
+  );
 
   const handleClick = (id: string) => {
     history.push(`/ride/${id}`);

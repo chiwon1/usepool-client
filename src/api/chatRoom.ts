@@ -6,3 +6,13 @@ export const fetchChatRoomList = async () => {
 
   return res.chatRoomList as IChatRoom[];
 };
+
+export const joinChatRoom = (roomId: string) => async () => {
+  return await axiosInstance.get(`/chatRooms/${roomId}/join`);
+};
+
+export const fetchChatList = (roomId: string) => async () => {
+  const res = (await axiosInstance.get(`/chatRooms/${roomId}`)) as any;
+
+  return res.chatList;
+};

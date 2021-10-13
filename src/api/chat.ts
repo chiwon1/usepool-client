@@ -1,7 +1,11 @@
 import axiosInstance from './axios';
 
-export const joinChat = async (rideId: string) => {
-  const res = (await axiosInstance.post(`/rides/${rideId}/joinChat`)) as any;
-
-  return res.roomId;
+export const postNewChat = async ({
+  roomId,
+  contents,
+}: {
+  roomId: string;
+  contents: string;
+}) => {
+  return await axiosInstance.post(`/chats/${roomId}`, { contents });
 };

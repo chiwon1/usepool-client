@@ -9,50 +9,40 @@ import { IChat } from '../../types/chat';
 import Chat from './Chat';
 import makeSection from '../../utils/makeSection';
 import Scrollbars from 'react-custom-scrollbars-2';
+import { fetchChatList } from '../../api/chatRoom';
 
 const ChatList = () => {
-  const { rideId } = useParams<{ rideId: string; id: string }>();
+  const { chatRoomId } = useParams<{ chatRoomId: string }>();
   const { user } = useContext(UserContext);
   const scrollbarRef = useRef<Scrollbars>(null);
 
-  const { data: rideDetails } = useQuery(
-    'fetchRideDetails',
-    fetchRideDetails(rideId),
+  const { data: chatList } = useQuery<any, any, IChat[]>(
+    ['fetchChatList', { chatRoomId }],
+    fetchChatList(chatRoomId),
   );
 
-  const { data: chatData } = useQuery<any, any, IChat[]>(
-    'fetchChatList',
-    async () => {
-      const res = (await axiosInstance.get(
-        `/rides/${rideId}/chats/${user!.userId}`,
-      )) as any;
-
-      return res.chats;
-    },
-  );
-
-  const chatSections = chatData ? makeSection(chatData) : [];
+  const chatSections = chatList ? makeSection(chatList) : [];
 
   useEffect(() => {
-    if (chatData?.length !== 1) {
+    if (chatList?.length !== 1) {
       setTimeout(() => {
         scrollbarRef.current?.scrollToBottom();
       }, 100);
     }
-  }, [chatData]);
+  }, [chatList]);
 
   return (
     <ChatZone>
       <Scrollbars autoHide ref={scrollbarRef}>
         <div>
-          {Object.entries(chatSections).map(([date, chats]) => {
+          {Object.entries(chatSections).map(([date, chatList], index) => {
             return (
               <Section className={`section-${date}`} key={date}>
                 <StickyHeader>
                   <button>{date}</button>
                 </StickyHeader>
-                {chats.map((chat) => (
-                  <Chat key={chat._id} data={chat} />
+                {chatList.map((chat, index) => (
+                  <Chat key={index} data={chat} />
                 ))}
               </Section>
             );

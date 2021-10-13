@@ -15,12 +15,7 @@ interface Props {
 }
 
 const ChatBox = ({ chat, onChangeChat, onSubmitForm }: Props) => {
-  const { user } = useContext(UserContext);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  const queryClient = useQueryClient();
-  const { rideId } = useParams<{ rideId: string; id: string }>();
-
   const onKeydownChat = useCallback(
     (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
@@ -47,7 +42,7 @@ const ChatBox = ({ chat, onChangeChat, onSubmitForm }: Props) => {
           onKeyPress={onKeydownChat}
           placeholder="Your message"
           ref={textareaRef}
-        ></MentionsTextarea>
+        />
         <Toolbox>
           <SendButton
             className={

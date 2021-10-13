@@ -1,177 +1,90 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../contexts/AuthProvider';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { fetchRideDetails, postNewRide } from '../api/ride';
 import ChatBox from '../components/chat/ChatBox';
 import ChatList from '../components/chat/ChatList';
 import styled from 'styled-components';
 import useSocket from '../hooks/useSocket';
 import Scrollbars from 'react-custom-scrollbars-2';
 import useInput from '../hooks/useInput';
-import axiosInstance from '../api/axios';
 import { IChat } from '../types/chat';
-import { joinChat } from '../api/chat';
-import { Socket } from 'socket.io-client';
+import { fetchChatList, joinChatRoom } from '../api/chatRoom';
+import { postNewChat } from '../api/chat';
 
 const ChatRoom = () => {
-  const { rideId, id } = useParams<{ rideId: string; id: string }>();
-  const { user } = useContext(UserContext);
   const queryClient = useQueryClient();
-  const { data: rideDetails } = useQuery(
-    'fetchRideDetails',
-    fetchRideDetails(rideId),
-  );
-  const [socket, disconnect] = useSocket(rideId);
+  const { user } = useContext(UserContext);
+  const { chatRoomId } = useParams<{ chatRoomId: string }>();
+  const [socket, disconnect] = useSocket(chatRoomId);
+
   const [chat, onChangeChat, setChat] = useInput<string>('');
-  const [state, setState] = useState('');
-
-  const handleChange = (e: any) => {
-    setState(e.target.value);
-
-    socket?.emit('send-changes', e.target.value);
-    console.log('socket.id', socket?.id);
-  };
-
-  const { data: roomid, mutate: postJoinChat } = useMutation(
-    'joinChat',
-    joinChat,
+  const { data } = useQuery(
+    ['joinChatRoom', { chatRoomId }],
+    joinChatRoom(chatRoomId),
     {
-      onSuccess: (roomid) => {
-        console.log('join-room', roomid);
-        socket?.emit('join-room', roomid);
+      onSuccess: () => {
+        socket?.emit('join-room', chatRoomId);
       },
     },
   );
 
-  // const { data: chatData } = useQuery<any, any, IChat[]>(
-  //   'fetchChatList',
-  //   async () => {
-  //     const res = (await axiosInstance.get(
-  //       `/rides/${rideId}/chats/${user!.userId}`,
-  //     )) as any;
-  //
-  //     return res.chats;
-  //   },
-  // );
+  const { data: chatList } = useQuery<any, any, IChat[]>(
+    ['fetchChatList', { chatRoomId }],
+    fetchChatList(chatRoomId),
+  );
 
-  const scrollbarRef = useRef<Scrollbars>(null);
-  // const { mutate } = useMutation(
-  //   'fetchChatList',
-  //   async (value: { contents: string }) => {
-  //     return await axiosInstance.post(
-  //       `/rides/${rideId}/chats/${user!.userId}`,
-  //       value,
-  //     );
-  //   },
-  //   {
-  //     onMutate: async (value: { contents: string }) => {
-  //       await queryClient.cancelQueries('fetchChatList');
-  //
-  //       const prevChatList = queryClient.getQueryData('fetchChatList');
-  //
-  //       const newChat = {
-  //         senderNickname: user?.nickname,
-  //         senderProfilePicture: user?.profilePicture,
-  //         contents: value.contents,
-  //         createdAt: new Date(),
-  //       } as IChat;
-  //
-  //       queryClient.setQueryData<IChat[]>('fetchChatList', (prev) =>
-  //         prev ? [...prev, newChat] : [newChat],
-  //       );
-  //
-  //       return { prevChatList };
-  //     },
-  //     onSuccess: () => {
-  //       void queryClient.invalidateQueries('fetchChatList');
-  //     },
-  //   },
-  // );
+  // TODO 2021/10/14 cw: forward ref로 리팩토링하기
+  // const scrollbarRef = useRef<Scrollbars>(null);
+
+  useEffect(() => {
+    joinChatRoom(chatRoomId);
+  }, [chatRoomId]);
+
+  const { mutate } = useMutation(['postNewChat', { chatRoomId }], postNewChat);
 
   const onSubmitForm = useCallback(
     (e) => {
       e.preventDefault();
 
-      socket?.emit('chat', chat);
-
-      // if (chat?.trim() && chatData) {
-      //   mutate({
-      //     contents: chat,
-      //   });
-      //
-      //   setChat('');
-      // }
+      if (chat?.trim()) {
+        mutate({
+          roomId: chatRoomId,
+          contents: chat,
+        });
+      }
 
       setChat('');
-      console.log('submit');
     },
     [chat],
   );
-  //
-  // const onMessage2 = (data: IChat) => {
-  //   if (data.senderId === id && user?.userId !== id) {
-  //     // chatData = [...chatData, data];
-  //
-  //     return queryClient.setQueryData<IChat[]>('fetchChatList', (prev) => {
-  //       console.log('prev', prev);
-  //       return prev ? [...prev, data] : [data];
-  //     });
-  //   }
-  // };
-  //
-  // const onMessage = useCallback((data: IChat) => {
-  //   console.log('data', data);
-  //   // id는 상대방 아이디
-  //   if (data.senderId === id && user?.userId !== id) {
-  //     // chatData = [...chatData, data];
-  //
-  //     queryClient.setQueryData<IChat[]>('fetchChatList', (prev) =>
-  //       prev ? [...prev, data] : [data],
-  //     );
-  //   }
-  // }, []);
 
-  // const queryClient = useQueryClient()
-  //
-  // return useMutation(editTodo, {
-  //   // Notice the second argument is the variables object that the `mutate` function receives
-  //   onSuccess: (data, variables) => {
-  //     queryClient.setQueryData(['todo', { id: variables.id }], data)
-  //   },
-  // })
+  const onMessage = useCallback((data: IChat) => {
+    queryClient.setQueryData<IChat[]>(
+      ['fetchChatList', { chatRoomId }],
+      (prev) => {
+        console.log('prev', prev);
+        return prev ? [...prev, data] : [data];
+      },
+    );
+  }, []);
 
   useEffect(() => {
-    postJoinChat(rideId);
-  }, [rideId]);
+    socket?.on('chat', onMessage);
+    return () => {
+      socket?.off('chat', onMessage);
+    };
+  }, [socket]);
 
   useEffect(() => {
-    if (socket && rideId) {
-      socket.on('hello', (world) => {
-        console.log('world', world);
-      });
-    }
-
     return () => {
       disconnect();
-      console.log('disconnected');
     };
-  }, [rideId, disconnect]);
-
-  if (!rideDetails) {
-    return null;
-  }
+  }, [chatRoomId, disconnect]);
 
   return (
     <Container>
       <ChatList />
-      <input value={state} onChange={handleChange} />
       <ChatBox
         chat={chat}
         onChangeChat={onChangeChat}

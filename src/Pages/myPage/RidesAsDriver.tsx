@@ -14,7 +14,10 @@ const RidesAsDriver = () => {
     isLoading,
     error,
     data: rideList,
-  } = useQuery('fetchMyRidesAsDriver', fetchMyRidesAsDriver());
+  } = useQuery(
+    ['fetchMyRidesAsDriver', { id: user?.userId }],
+    fetchMyRidesAsDriver(),
+  );
 
   useEffect(() => {
     if (!user) {

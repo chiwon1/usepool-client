@@ -5,7 +5,7 @@ export interface IChatRoom {
   ride: IRideNotPopulated;
   passenger: IUser;
   status: boolean;
-  chats: string[];
+  chatList: string[];
   _id: string;
 }
 

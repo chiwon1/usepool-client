@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { bookRide, fetchRideDetails } from '../api/ride';
+import { bookRide, fetchRideDetails, postNewChatRoom } from '../api/ride';
 import SearchList from '../components/searchPage/SearchList';
 import styled from 'styled-components';
 import { UserContext } from '../contexts/AuthProvider';
@@ -15,12 +15,15 @@ const RideDetails = () => {
     isLoading,
     error,
     data: rideDetails,
-  } = useQuery('fetchRideDetails', fetchRideDetails(rideId));
+  } = useQuery(['fetchRideDetails', { rideId }], fetchRideDetails(rideId));
 
   const { mutate } = useMutation(bookRide, {
     onSuccess: () => {
-      void queryClient.invalidateQueries('fetchRideDetails');
-      void queryClient.invalidateQueries('fetchMyRidesAsPassenger');
+      void queryClient.invalidateQueries(['fetchRideDetails', { rideId }]);
+      void queryClient.invalidateQueries([
+        'fetchMyRidesAsPassenger',
+        { id: user?.userId },
+      ]);
     },
   });
 
@@ -46,8 +49,10 @@ const RideDetails = () => {
             profilePicture={rideDetails.driver?.profilePicture}
           />
           <button
-            onClick={() => {
-              history.push(`/rides/${rideId}/chats/${user!.userId}`);
+            onClick={async () => {
+              const roomId = await postNewChatRoom(rideId);
+
+              history.push(`/chatRooms/${roomId}`);
             }}
           >
             Chat

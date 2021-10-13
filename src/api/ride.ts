@@ -28,3 +28,9 @@ export const fetchRideDetails = (id: string) => async () => {
 export const bookRide = async (rideId: string) => {
   return await axiosInstance.post(`/rides/${rideId}`);
 };
+
+export const postNewChatRoom = async (rideId: string) => {
+  const res = (await axiosInstance.post(`/rides/${rideId}/newChatRoom`)) as any;
+
+  return res.roomId as string;
+};
