@@ -17,7 +17,7 @@ const useSocket = (ride: string): [Socket | undefined, () => void] => {
   }
 
   if (!sockets[ride]) {
-    sockets[ride] = io(`${process.env.REACT_APP_SERVER_URL!}/${ride}`, {
+    sockets[ride] = io(`${process.env.REACT_APP_SERVER_URL!}`, {
       transports: [`websocket`],
     });
   }

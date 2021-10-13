@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, createContext, useEffect } from 'react';
-import { IUserInfo } from '../types';
+import { IUserInfo } from '../types/user';
 import { getUser } from '../api/user';
 
 export const UserContext = createContext<{
