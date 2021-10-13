@@ -17,8 +17,14 @@ const Search: FC = () => {
   const history = useHistory();
   const { user } = useContext(UserContext);
   const { departFrom, arriveAt, departDate } = useQueryString();
+  const query = useQueryString();
+
   const [availableNumber, setAvailableNumber] = useState<number>(0);
-  const { isLoading, error, data } = useQuery(
+  const {
+    isLoading,
+    error,
+    data: rideList,
+  } = useQuery(
     'fetchSearchedRides',
     fetchSearchedRides({
       departFrom: departFrom as string,
@@ -28,7 +34,7 @@ const Search: FC = () => {
   );
 
   const handleClick = (id: string) => {
-    history.push(`/ride/${id}`);
+    history.push(`/rides/${id}`);
   };
 
   if (!departFrom || !arriveAt || !departDate) {
@@ -42,10 +48,10 @@ const Search: FC = () => {
   }, [user]);
 
   useEffect(() => {
-    if (data) {
-      setAvailableNumber(data.length);
+    if (rideList) {
+      setAvailableNumber(rideList.length);
     }
-  }, [data]);
+  }, [rideList]);
 
   if (isLoading) {
     return <div />;
@@ -67,7 +73,7 @@ const Search: FC = () => {
             availableNumber={availableNumber}
           >
             <StyledUl>
-              {data?.map(
+              {rideList?.map(
                 ({ _id, departFrom, arriveAt, departTime, driver }) => (
                   <SearchList
                     key={_id}

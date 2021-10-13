@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import loadable from '@loadable/component';
+import DirectMessage from './DirectMessage';
 
 const Home = loadable(() => import('./Home'));
 const Login = loadable(() => import('./Login'));
@@ -10,6 +11,7 @@ const Search = loadable(() => import('./Search'));
 const RideDetails = loadable(() => import('./RideDetails'));
 const RidesAsDriver = loadable(() => import('./myPage/RidesAsDriver'));
 const RidesAsPassenger = loadable(() => import('./myPage/RidesAsPassenger'));
+const Inbox = loadable(() => import('./Inbox'));
 
 const Pages: FC = () => {
   return (
@@ -18,10 +20,12 @@ const Pages: FC = () => {
       <Route exact path="/login" component={Login} />
       <Route exact path="/kakaoAuth" component={KakaoAuth} />
       <Route path="/newRide" component={NewRide} />
-      <Route exact path="/:search?" component={Search} />
-      <Route exact path="/ride/:id" component={RideDetails} />
+      <Route exact path="/search" component={Search} />
+      <Route exact path="/rides/:rideId" component={RideDetails} />
+      <Route path="/rides/:rideId/chats/:userId" component={DirectMessage} />
       <Route exact path="/myRides/asDriver" component={RidesAsDriver} />
       <Route exact path="/myRides/asPassenger" component={RidesAsPassenger} />
+      <Route exact path="/inbox" component={Inbox} />
       <Route path="*">
         <Redirect to="/" />
       </Route>

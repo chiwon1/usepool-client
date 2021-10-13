@@ -7,14 +7,15 @@ import { UserContext } from '../contexts/AuthProvider';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 const RideDetails = () => {
-  const { id } = useParams<{ id: string }>();
+  const { rideId } = useParams<{ rideId: string }>();
   const { user } = useContext(UserContext);
   const history = useHistory();
   const queryClient = useQueryClient();
-  const { isLoading, error, data } = useQuery(
-    'fetchRideDetails',
-    fetchRideDetails(id),
-  );
+  const {
+    isLoading,
+    error,
+    data: rideDetails,
+  } = useQuery('fetchRideDetails', fetchRideDetails(rideId));
 
   const { mutate } = useMutation(bookRide, {
     onSuccess: () => {
@@ -35,19 +36,19 @@ const RideDetails = () => {
 
   return (
     <Wrapper>
-      {data && (
+      {rideDetails && (
         <>
           <SearchList
-            departFrom={data.departFrom}
-            arriveAt={data.arriveAt}
-            departTime={data.departTime}
-            nickname={data.driver?.nickname}
-            profilePicture={data.driver?.profilePicture}
+            departFrom={rideDetails.departFrom}
+            arriveAt={rideDetails.arriveAt}
+            departTime={rideDetails.departTime}
+            nickname={rideDetails.driver?.nickname}
+            profilePicture={rideDetails.driver?.profilePicture}
           />
           <button
-            onClick={() =>
-              console.log('rideDetails.driver._id', data.driver._id)
-            }
+            onClick={() => {
+              history.push(`/rides/${rideId}/chats/${user!.userId}`);
+            }}
           >
             Chat
           </button>
@@ -55,7 +56,7 @@ const RideDetails = () => {
           <br />
           <button
             onClick={() => {
-              mutate(data._id);
+              mutate(rideDetails._id);
 
               history.push('/');
             }}

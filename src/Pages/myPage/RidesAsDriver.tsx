@@ -10,10 +10,11 @@ import { useQuery } from 'react-query';
 const RidesAsDriver = () => {
   const history = useHistory();
   const { user } = useContext(UserContext);
-  const { isLoading, error, data } = useQuery(
-    'fetchMyRidesAsDriver',
-    fetchMyRidesAsDriver(),
-  );
+  const {
+    isLoading,
+    error,
+    data: rideList,
+  } = useQuery('fetchMyRidesAsDriver', fetchMyRidesAsDriver());
 
   useEffect(() => {
     if (!user) {
@@ -30,17 +31,19 @@ const RidesAsDriver = () => {
       <div>
         <div>My rides as driver</div>
         <StyledUl>
-          {data?.map(({ _id, departFrom, arriveAt, departTime, driver }) => (
-            <SearchList
-              key={_id}
-              departFrom={departFrom}
-              arriveAt={arriveAt}
-              departTime={departTime}
-              nickname={driver.nickname}
-              profilePicture={driver.profilePicture}
-              handleClick={() => console.log('_id', _id)}
-            />
-          ))}
+          {rideList?.map(
+            ({ _id, departFrom, arriveAt, departTime, driver }) => (
+              <SearchList
+                key={_id}
+                departFrom={departFrom}
+                arriveAt={arriveAt}
+                departTime={departTime}
+                nickname={driver.nickname}
+                profilePicture={driver.profilePicture}
+                handleClick={() => console.log('_id', _id)}
+              />
+            ),
+          )}
         </StyledUl>
       </div>
     </PageWrapper>

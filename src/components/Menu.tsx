@@ -40,7 +40,7 @@ const Menu: FC<Props> = ({ onCloseMenu }: Props) => {
                 />
                 <MenuList
                   buttonName={UI.INBOX}
-                  handleClick={() => console.log('INBOX')}
+                  handleClick={() => history.push('/inbox')}
                 />
                 <MenuList buttonName={UI.LOGOUT} handleClick={logout} />
               </>

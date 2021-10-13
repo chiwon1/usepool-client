@@ -10,10 +10,11 @@ import { useQuery } from 'react-query';
 const RidesAsPassenger = () => {
   const history = useHistory();
   const { user } = useContext(UserContext);
-  const { isLoading, error, data } = useQuery(
-    'fetchMyRidesAsPassenger',
-    fetchMyRidesAsPassenger(),
-  );
+  const {
+    isLoading,
+    error,
+    data: rideList,
+  } = useQuery('fetchMyRidesAsPassenger', fetchMyRidesAsPassenger());
 
   const handleClick = (id: string) => {
     history.push(`/ride/${id}`);
@@ -34,17 +35,19 @@ const RidesAsPassenger = () => {
       <div>
         <div>My rides as passenger</div>
         <StyledUl>
-          {data?.map(({ _id, departFrom, arriveAt, departTime, driver }) => (
-            <SearchList
-              key={_id}
-              departFrom={departFrom}
-              arriveAt={arriveAt}
-              departTime={departTime}
-              nickname={driver.nickname}
-              profilePicture={driver.profilePicture}
-              handleClick={() => handleClick(_id)}
-            />
-          ))}
+          {rideList?.map(
+            ({ _id, departFrom, arriveAt, departTime, driver }) => (
+              <SearchList
+                key={_id}
+                departFrom={departFrom}
+                arriveAt={arriveAt}
+                departTime={departTime}
+                nickname={driver.nickname}
+                profilePicture={driver.profilePicture}
+                handleClick={() => handleClick(_id)}
+              />
+            ),
+          )}
         </StyledUl>
       </div>
     </PageWrapper>

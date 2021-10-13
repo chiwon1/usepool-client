@@ -21,6 +21,8 @@ const AuthProvider = ({ children }: Props): JSX.Element => {
   const fetchUser = async function () {
     const userInfo = await getUser();
 
+    console.log('userInfo', userInfo);
+
     if (userInfo) {
       setUser(userInfo);
     }
