@@ -1,6 +1,8 @@
 import React, { ReactElement, useState, createContext, useEffect } from 'react';
 import { IUserInfo } from '../types/user';
-import { getUser } from '../api/user';
+import { fetchUserInfo } from '../api/user';
+import { useQuery } from 'react-query';
+import { fetchRideDetails } from '../api/ride';
 
 export const UserContext = createContext<{
   user: IUserInfo | null;
@@ -11,26 +13,20 @@ interface Props {
   children: ReactElement;
 }
 
-const AuthProvider = ({ children }: Props): JSX.Element => {
+const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<IUserInfo | null>(null);
 
   const handleUser = (value: IUserInfo | null) => {
     setUser(value);
   };
 
-  const fetchUser = async function () {
-    const userInfo = await getUser();
-
-    console.log('userInfo', userInfo);
-
-    if (userInfo) {
-      setUser(userInfo);
-    }
-  };
-
-  useEffect(() => {
-    void fetchUser();
-  }, []);
+  const { data: userInfo } = useQuery(['fetchUserInfo'], fetchUserInfo(), {
+    onSuccess: () => {
+      if (userInfo) {
+        setUser(userInfo);
+      }
+    },
+  });
 
   return (
     <UserContext.Provider value={{ user, handleUser }}>

@@ -8,15 +8,12 @@ import axiosInstance from '../api/axios';
 import UI from '../constants/ui';
 import { loginWithKakao } from '../utils/kakaoLogin';
 
-interface Props {
-  onCloseMenu: (e: React.MouseEvent<HTMLAnchorElement>) => void;
-}
-
-const Menu: FC<Props> = ({ onCloseMenu }: Props) => {
+const Menu: FC = () => {
   const { user, handleUser } = useContext(UserContext);
 
   const history = useHistory();
 
+  // TODO 2021/10/14 cw: hook으로 리팩토링
   const logout = async () => {
     handleUser!(null);
     await axiosInstance.post('/logout');
@@ -24,7 +21,7 @@ const Menu: FC<Props> = ({ onCloseMenu }: Props) => {
   };
 
   return (
-    <CreateMenu onClick={onCloseMenu}>
+    <CreateMenu>
       <NavWrapper>
         <Nav>
           <ul>

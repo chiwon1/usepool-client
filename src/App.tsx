@@ -14,13 +14,13 @@ const App: FC = () => {
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <AuthProvider>
-          <QueryClientProvider client={queryClient}>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
             <Layout>
               <Pages />
             </Layout>
-          </QueryClientProvider>
-        </AuthProvider>
+          </AuthProvider>
+        </QueryClientProvider>
       </ThemeProvider>
     </BrowserRouter>
   );

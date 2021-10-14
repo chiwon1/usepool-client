@@ -1,17 +1,19 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useContext, useState } from 'react';
 import styled from 'styled-components';
 
 import Menu from './Menu';
 
 // TODO 2021/10/03 cw: svg 를 컴포넌트 형태로 가져오기
-import myPageIcon from '../assets/my-page-icon.svg';
+import defaultProfile from '../assets/default-profile.svg';
 import menuIcon from '../assets/menu-icon.svg';
+import { UserContext } from '../contexts/AuthProvider';
 
 const MenuOpenButton: FC = () => {
   const [isShowMenu, setIsShowMenu] = useState(false);
+  const { user } = useContext(UserContext);
 
   const toggleShowMenu = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>) => {
+    (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
       e.stopPropagation();
       setIsShowMenu((prev) => !prev);
     },
@@ -21,11 +23,15 @@ const MenuOpenButton: FC = () => {
   return (
     <Wrapper>
       <MenuButton onClick={toggleShowMenu}>
+        {user && <span>{user.nickname}</span>}
         <ProfileWrapper>
-          <img src={myPageIcon} alt="myPageIcon" />
+          <img
+            src={user ? user.profilePicture : defaultProfile}
+            alt="myPageIcon"
+          />
         </ProfileWrapper>
         <img src={menuIcon} alt="menuIcon" />
-        {isShowMenu && <Menu onCloseMenu={toggleShowMenu}></Menu>}
+        {isShowMenu && <Menu />}
       </MenuButton>
     </Wrapper>
   );
@@ -41,7 +47,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const MenuButton = styled.a`
+const MenuButton = styled.div`
   display: flex;
   -webkit-box-pack: justify;
   justify-content: space-between;
@@ -52,6 +58,12 @@ const MenuButton = styled.a`
   border: 0;
   font-size: 16px;
   cursor: pointer;
+
+  span {
+    margin-left: 16px !important;
+    margin-right: 20px !important;
+    color: #054752;
+  }
 `;
 
 const ProfileWrapper = styled.div`
