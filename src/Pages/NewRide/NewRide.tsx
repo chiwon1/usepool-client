@@ -11,7 +11,6 @@ const DepartureLocation = loadable(
 const Destination = loadable(() => import('./Destination'));
 const DepartureDate = loadable(() => import('./departure/DepartureDate'));
 const DepartureTime = loadable(() => import('./departure/DepartureTime'));
-const SeatCapacity = loadable(() => import('./SeatCapacity'));
 const Submit = loadable(() => import('./Submit'));
 
 export const NewRideContext = createContext<{
@@ -50,7 +49,6 @@ const NewRide = () => {
         <Route exact path="/newRide/destination" component={Destination} />
         <Route exact path="/newRide/departure-date" component={DepartureDate} />
         <Route exact path="/newRide/departure-time" component={DepartureTime} />
-        <Route exact path="/newRide/seatCapacity" component={SeatCapacity} />
         <Route exact path="/newRide/submit" component={Submit} />
       </Switch>
     </NewRideContext.Provider>

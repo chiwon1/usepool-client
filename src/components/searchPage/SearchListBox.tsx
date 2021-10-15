@@ -1,11 +1,13 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
 
 type Props = {
   children: ReactElement;
   departFrom: string;
   arriveAt: string;
   availableNumber: number;
+  departDate: string;
 };
 
 const SearchListBox = ({
@@ -13,6 +15,7 @@ const SearchListBox = ({
   arriveAt,
   availableNumber,
   children,
+  departDate,
 }: Props) => {
   return (
     <div>
@@ -24,7 +27,7 @@ const SearchListBox = ({
             <div>
               <Wrapper7>
                 <Wrapper8>
-                  <H2wrapper>Tue, 12 Oct</H2wrapper>
+                  <H2wrapper>{dayjs(departDate).format('MM/D')}</H2wrapper>
                   <Wrapper9>
                     <Wrapper10>
                       <H1wrapper>

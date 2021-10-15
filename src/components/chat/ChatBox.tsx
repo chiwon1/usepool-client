@@ -1,12 +1,6 @@
-import React, { useCallback, useContext, useEffect, useRef, VFC } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { Mention, MentionsInput } from 'react-mentions';
-import { UserContext } from '../../contexts/AuthProvider';
 import autosize from 'autosize';
-import useInput from '../../hooks/useInput';
-import { useMutation, useQueryClient } from 'react-query';
-import axiosInstance from '../../api/axios';
-import { useParams } from 'react-router-dom';
 
 interface Props {
   chat: string;

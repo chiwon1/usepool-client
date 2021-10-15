@@ -52,14 +52,13 @@ const StyledButton = styled.button`
   font-weight: 400;
   height: 40px;
   line-height: 24px;
-  margin: 0 8px 0 0;
   min-width: 0;
-  overflow: hidden;
   overflow: hidden;
   padding: 0;
   text-align: left;
   vertical-align: baseline;
   white-space: nowrap;
+  width: 27px;
 
   &:disabled {
     cursor: default;

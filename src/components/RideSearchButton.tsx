@@ -1,14 +1,21 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import SearchIcon from './SearchIcon';
 
 const RideSearchButton: FC = () => {
   return (
     <Wrapper>
       <button>
         <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24">
-          <g>
-            <line></line>
-            <circle></circle>
+          <g
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeMiterlimit="10"
+            strokeWidth="2"
+            stroke="#FFF"
+          >
+            <SearchIcon />
           </g>
         </svg>
       </button>

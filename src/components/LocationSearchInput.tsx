@@ -202,7 +202,6 @@ const ButtonWrapper1 = styled.div`
   margin: 0 8px 0 0;
   min-width: 0;
   overflow: hidden;
-  overflow: hidden;
   padding: 0;
   text-align: left;
   vertical-align: baseline;

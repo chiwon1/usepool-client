@@ -20,6 +20,7 @@ const Wrapper6 = styled.div`
   margin: 0;
   padding: 0;
   vertical-align: baseline;
+  margin-right: 14px;
 `;
 
 const Wrapper7 = styled.div`

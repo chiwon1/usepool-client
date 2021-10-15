@@ -71,6 +71,7 @@ const Search: FC = () => {
             departFrom={departFrom as string}
             arriveAt={arriveAt as string}
             availableNumber={availableNumber}
+            departDate={departDate as string}
           >
             <StyledUl>
               {rideList?.map(

@@ -101,6 +101,7 @@ const Wrapper7 = styled.div`
   margin: 0;
   padding: 0;
   vertical-align: baseline;
+  text-align: center;
 `;
 
 export default FormNewRide;

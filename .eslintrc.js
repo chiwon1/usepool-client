@@ -28,6 +28,8 @@ module.exports = {
     '@typescript-eslint/no-unsafe-call': 'off',
     '@typescript-eslint/no-unsafe-assignment': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
+    'no-invalid-this': 'off',
+    'require-jsdoc': 'off',
   },
   settings: {
     react: {

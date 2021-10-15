@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import SearchIcon from './SearchIcon';
 
 type Props = {
   inputDepartFrom: string;
@@ -13,8 +14,15 @@ const InputLocation = ({ inputDepartFrom, handleChange }: Props) => {
         <Wrapper10>
           <button>
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-              <g>
-                <line></line>
+              <g
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeMiterlimit="10"
+                strokeWidth="1"
+                stroke="#708C91"
+              >
+                <SearchIcon />
               </g>
             </svg>
           </button>

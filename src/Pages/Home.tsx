@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import RideSearchButton from '../components/RideSearchButton';
 import DateWrapper from '../components/DateWrapper';
 import DateInput from '../components/DateInput';
-import PassengerNumberInput from '../components/PassengerNumberInput';
 import LocationSearchInput from '../components/LocationSearchInput';
 import ReverseLocationButton from '../components/ReverseLocationButton';
 import HomeContentBox from '../components/HomeContentBox';
 import UI from '../constants/ui';
 import { useHistory } from 'react-router-dom';
+import { getToday } from '../utils';
 
 const Home = () => {
   const history = useHistory();
   const [inputDepartFrom, setInputDepartFrom] = useState('');
   const [inputArriveAt, setInputArriveAt] = useState('');
-  const [inputDepartDate, setInputDepartDate] = useState('');
+  const [inputDepartDate, setInputDepartDate] = useState(getToday());
   const [inputNumberOfPassenger, setInputNumberOfPassenger] = useState('');
 
   const handleDepartFromChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,9 +26,7 @@ const Home = () => {
   };
 
   const handleDepartDateChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    const date = new window.Date(ev.target.value).toLocaleDateString();
-
-    setInputDepartDate(date);
+    setInputDepartDate(ev.target.value);
   };
 
   const handleNumberOfPassengerInput = (
@@ -40,13 +38,15 @@ const Home = () => {
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
+    const inputDate = new window.Date(inputDepartDate).toLocaleDateString();
+
     history.push(
-      `/search?departFrom=${inputDepartFrom}&departDate=${inputDepartDate}&arriveAt=${inputArriveAt}`,
+      `/search?departFrom=${inputDepartFrom}&departDate=${inputDate}&arriveAt=${inputArriveAt}`,
     );
 
     setInputDepartFrom('');
     setInputArriveAt('');
-    setInputDepartDate('');
+    setInputDepartDate(getToday());
     setInputNumberOfPassenger('');
   };
 
@@ -59,26 +59,19 @@ const Home = () => {
           handleChange={handleDepartFromChange}
         />
         <ReverseLocationButton />
-        <hr></hr>
-        <div></div>
+        <StyledHr />
+        <div />
         <LocationSearchInput
           placeholder={UI.GOING_TO}
           departFrom={inputArriveAt}
           handleChange={handleArriveAtChange}
         />
         <Wrapper>
+          <hr />
           <DateWrapper>
             <DateInput
               departDate={inputDepartDate}
               handleChange={handleDepartDateChange}
-            />
-          </DateWrapper>
-          <div></div>
-          <hr></hr>
-          <DateWrapper>
-            <PassengerNumberInput
-              numberOfPassenger={inputNumberOfPassenger}
-              handleChange={handleNumberOfPassengerInput}
             />
           </DateWrapper>
         </Wrapper>
@@ -107,16 +100,37 @@ const Form = styled.form`
   padding: 8px 0 8px 8px;
   position: relative;
   vertical-align: baseline;
-  width: 928px;
+  width: 780px;
 
   hr {
-    background-color: #ededed;
-    border-style: none;
-    box-sizing: border-box;
-    height: 40px;
-    margin: 0;
+    display: block;
+    unicode-bidi: isolate;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    overflow: hidden;
+    border: none;
+    background-color: rgb(237, 237, 237);
     width: 1px;
+    height: 40px;
+    margin: 0px;
   }
+`;
+
+export const StyledHr = styled.hr`
+  display: block;
+  unicode-bidi: isolate;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  overflow: hidden;
+  border: none;
+  background-color: rgb(237, 237, 237);
+  width: 1px;
+  height: 40px;
+  margin: 0px;
 `;
 
 const Wrapper = styled.div`
