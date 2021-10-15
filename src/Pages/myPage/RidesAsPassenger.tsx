@@ -6,6 +6,7 @@ import PageWrapper from '../../components/PageWrapper';
 import { StyledUl } from '../Search';
 import SearchList from '../../components/searchPage/SearchList';
 import { useQuery } from 'react-query';
+import styled from 'styled-components';
 
 const RidesAsPassenger = () => {
   const history = useHistory();
@@ -20,7 +21,7 @@ const RidesAsPassenger = () => {
   );
 
   const handleClick = (id: string) => {
-    history.push(`/ride/${id}`);
+    history.push(`/rides/${id}`);
   };
 
   useEffect(() => {
@@ -35,8 +36,8 @@ const RidesAsPassenger = () => {
 
   return (
     <PageWrapper>
-      <div>
-        <div>My rides as passenger</div>
+      <Wrapper>
+        <h1>My rides as passenger</h1>
         <StyledUl>
           {rideList?.map(
             ({ _id, departFrom, arriveAt, departTime, driver }) => (
@@ -52,9 +53,33 @@ const RidesAsPassenger = () => {
             ),
           )}
         </StyledUl>
-      </div>
+      </Wrapper>
     </PageWrapper>
   );
 };
+
+const Wrapper = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 662px;
+
+  h1 {
+    white-space: pre-line;
+    color: rgb(5, 71, 82);
+    font-size: 30px;
+    line-height: 1.06;
+    font-weight: 500;
+    --space-bottom: 32px;
+    --font-size-desktop: 40px;
+    margin: 0px;
+    text-align: center;
+    font-size: var(--font-size-desktop);
+    padding: 24px 24px 32px;
+  }
+
+  ul {
+    list-style: none;
+  }
+`;
 
 export default RidesAsPassenger;

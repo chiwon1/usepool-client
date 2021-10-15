@@ -12,6 +12,7 @@ import { IChat } from '../types/chat';
 import { fetchChatList, joinChatRoom } from '../api/chatRoom';
 import { postNewChat } from '../api/chat';
 
+// TODO 2021/10/16 cw: 처음 채팅방 생성하고 바로 채팅될때 소켓 바로 연결안되는 버그 있음.
 const ChatRoom = () => {
   const queryClient = useQueryClient();
   const { user } = useContext(UserContext);
