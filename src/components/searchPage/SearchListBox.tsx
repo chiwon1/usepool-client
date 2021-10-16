@@ -21,9 +21,9 @@ const SearchListBox = ({
     <div>
       <div>
         <Wrapper4>
-          <div></div>
+          <div />
           <Wrapper5>
-            <Wrapper6 aria-hidden="true"></Wrapper6>
+            <Wrapper6 aria-hidden="true" />
             <div>
               <Wrapper7>
                 <Wrapper8>
@@ -80,7 +80,6 @@ const H2wrapper = styled.h2`
   white-space: pre-line;
   color: rgb(5, 71, 82);
   font-size: 22px;
-  font-weight: 400;
   line-height: 24px;
   font-weight: 500;
   padding: 24px 24px 8px;
@@ -109,7 +108,6 @@ const H1wrapper = styled.h1`
   box-sizing: border-box;
   color: #708c91;
   flex: 1 1 0;
-  flex: 1 1 0px;
   font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;

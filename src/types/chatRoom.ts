@@ -1,11 +1,12 @@
 import { IUser } from './user';
+import { IChat } from './chat';
 
 export interface IChatRoom {
   driver: IUser;
   ride: IRideNotPopulated;
   passenger: IUser;
   status: boolean;
-  chatList: string[];
+  chatList: IChat[];
   _id: string;
 }
 

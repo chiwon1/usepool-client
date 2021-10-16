@@ -30,6 +30,7 @@ module.exports = {
     '@typescript-eslint/no-unsafe-return': 'off',
     'no-invalid-this': 'off',
     'require-jsdoc': 'off',
+    'spaced-comment': 'off',
   },
   settings: {
     react: {

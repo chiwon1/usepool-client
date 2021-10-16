@@ -22,7 +22,7 @@ const Pages: FC = () => {
       <Route path="/newRide" component={NewRide} />
       <Route exact path="/search" component={Search} />
       <Route exact path="/rides/:rideId" component={RideDetails} />
-      <Route path="/chatRooms/:chatRoomId" component={ChatRoom} />
+      <Route exact path="/chatRooms/:chatRoomId" component={ChatRoom} />
       <Route exact path="/myRides/asDriver" component={RidesAsDriver} />
       <Route exact path="/myRides/asPassenger" component={RidesAsPassenger} />
       <Route exact path="/inbox" component={Inbox} />
