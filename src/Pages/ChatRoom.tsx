@@ -9,10 +9,9 @@ import useSocket from '../hooks/useSocket';
 import Scrollbars from 'react-custom-scrollbars-2';
 import useInput from '../hooks/useInput';
 import { IChat } from '../types/chat';
-import { fetchChatList, joinChatRoom } from '../api/chatRoom';
+import { fetchChatList } from '../api/chatRoom';
 import { postNewChat } from '../api/chat';
 
-// TODO 2021/10/16 cw: 처음 채팅방 생성하고 바로 채팅될때 소켓 바로 연결안되는 버그 있음.
 const ChatRoom = () => {
   const queryClient = useQueryClient();
   const { user } = useContext(UserContext);
@@ -20,15 +19,6 @@ const ChatRoom = () => {
   const [socket, disconnect] = useSocket(chatRoomId);
 
   const [chat, onChangeChat, setChat] = useInput<string>('');
-  const { data } = useQuery(
-    ['joinChatRoom', { chatRoomId }],
-    joinChatRoom(chatRoomId),
-    {
-      onSuccess: () => {
-        socket?.emit('join-room', chatRoomId);
-      },
-    },
-  );
 
   const { data: chatList } = useQuery<any, any, IChat[]>(
     ['fetchChatList', { chatRoomId }],
@@ -37,9 +27,9 @@ const ChatRoom = () => {
 
   // TODO 2021/10/14 cw: forward ref로 리팩토링하기
   // const scrollbarRef = useRef<Scrollbars>(null);
-
+  //
   useEffect(() => {
-    joinChatRoom(chatRoomId);
+    socket?.emit('join-room', chatRoomId);
   }, [chatRoomId]);
 
   const { mutate } = useMutation(['postNewChat', { chatRoomId }], postNewChat);

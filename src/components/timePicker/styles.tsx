@@ -131,6 +131,7 @@ export const StyledTimePicker = styled.div`
   box-sizing: border-box;
   cursor: pointer;
   padding: ${inputBorderSize.focus};
+  margin-top: 24px !important;
 
   &:hover {
     background-color: ${color.lightGray};
@@ -190,6 +191,7 @@ export const StyledTimePicker = styled.div`
   & > time {
     display: inline-block;
     padding-top: 6px;
+    padding-bottom: 6px;
     vertical-align: middle;
   }
 `;

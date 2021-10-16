@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import React from 'react';
 import { IChat } from '../../types/chat';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
