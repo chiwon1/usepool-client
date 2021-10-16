@@ -2,9 +2,11 @@ import React from 'react';
 import TimeIndicator from './TimeIndicator';
 import LocationIndicator from './LocationIndicator';
 import styled from 'styled-components';
+import UpperRouteIcon from '../UpperRouteIcon';
+import LowerRouteIcon from '../LowerRouteIcon';
 
 type Props = {
-  departTime: string;
+  departTime?: string;
   departFrom: string;
   arriveAt: string;
 };
@@ -16,26 +18,14 @@ const ItineraryBox = ({ departTime, departFrom, arriveAt }: Props) => {
         <li>
           <Wrapper6>
             <TimeIndicator time={departTime} />
-            <Wrapper8>
-              <Wrapper9 />
-              <Wrapper10>
-                <div />
-              </Wrapper10>
-              <Wrapper11 />
-            </Wrapper8>
+            <UpperRouteIcon />
             <LocationIndicator location={departFrom} />
           </Wrapper6>
         </li>
         <li>
           <Wrapper6>
             <TimeIndicator />
-            <Wrapper8>
-              <Wrapper15></Wrapper15>
-              <Wrapper16>
-                <div></div>
-              </Wrapper16>
-              <Wrapper9 />
-            </Wrapper8>
+            <LowerRouteIcon />
             <LocationIndicator location={arriveAt} />
           </Wrapper6>
         </li>
@@ -54,69 +44,6 @@ const Wrapper6 = styled.div`
   display: flex;
   padding-left: 24px;
   padding-right: 24px;
-`;
-
-const Wrapper8 = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  -webkit-box-align: center;
-  align-items: center;
-  min-height: 32px;
-  margin: 0px 8px;
-  width: 8px;
-  flex-shrink: 0;
-`;
-
-const Wrapper9 = styled.div`
-  width: 4px;
-  height: calc(13px);
-  background: transparent;
-`;
-
-const Wrapper10 = styled.div`
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-
-  div {
-    box-sizing: border-box;
-    width: 10px;
-    height: 10px;
-    background-color: rgb(255, 255, 255);
-    border: 2px solid rgb(5, 71, 82);
-    border-radius: 50%;
-  }
-`;
-
-const Wrapper11 = styled.div`
-  width: 4px;
-  height: calc(13px);
-  background: rgb(5, 71, 82);
-  flex: 1 1 0%;
-`;
-
-const Wrapper15 = styled.div`
-  width: 4px;
-  height: calc(13px);
-  background: rgb(5, 71, 82);
-`;
-
-const Wrapper16 = styled.div`
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-
-  div {
-    box-sizing: border-box;
-    width: 10px;
-    height: 10px;
-    background-color: rgb(255, 255, 255);
-    border: 2px solid rgb(5, 71, 82);
-    border-radius: 50%;
-  }
 `;
 
 const Wrapper3 = styled.div`

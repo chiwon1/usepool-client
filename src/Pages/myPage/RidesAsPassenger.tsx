@@ -2,11 +2,11 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../contexts/AuthProvider';
 import { fetchMyRidesAsPassenger } from '../../api/myRides';
-import PageWrapper from '../../components/PageWrapper';
 import { StyledUl } from '../Search';
-import SearchList from '../../components/searchPage/SearchList';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
+import MyPageRideList from '../../components/myPage/MyPageRideList';
+import MyPageContainer from '../../components/myPage/MyPageContainer';
 
 const RidesAsPassenger = () => {
   const history = useHistory();
@@ -35,30 +35,29 @@ const RidesAsPassenger = () => {
   }
 
   return (
-    <PageWrapper>
-      <Wrapper>
+    <MyPageContainer>
+      <ListWrapper>
         <h1>My rides as passenger</h1>
         <StyledUl>
           {rideList?.map(
-            ({ _id, departFrom, arriveAt, departTime, driver }) => (
-              <SearchList
+            ({ _id, departDate, departFrom, arriveAt, departTime }) => (
+              <MyPageRideList
                 key={_id}
+                departDate={departDate}
                 departFrom={departFrom}
                 arriveAt={arriveAt}
                 departTime={departTime}
-                nickname={driver.nickname}
-                profilePicture={driver.profilePicture}
                 handleClick={() => handleClick(_id)}
               />
             ),
           )}
         </StyledUl>
-      </Wrapper>
-    </PageWrapper>
+      </ListWrapper>
+    </MyPageContainer>
   );
 };
 
-const Wrapper = styled.div`
+export const ListWrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   max-width: 662px;

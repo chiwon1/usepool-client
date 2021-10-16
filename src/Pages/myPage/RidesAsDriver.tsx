@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import PageWrapper from '../../components/PageWrapper';
 import { UserContext } from '../../contexts/AuthProvider';
 import { useHistory } from 'react-router-dom';
 import { fetchMyRidesAsDriver } from '../../api/myRides';
-import SearchList from '../../components/searchPage/SearchList';
 import { StyledUl } from '../Search';
 import { useQuery } from 'react-query';
+import MyPageRideList from '../../components/myPage/MyPageRideList';
+import MyPageContainer from '../../components/myPage/MyPageContainer';
+import { ListWrapper } from './RidesAsPassenger';
 
 const RidesAsDriver = () => {
   const history = useHistory();
@@ -19,6 +20,10 @@ const RidesAsDriver = () => {
     fetchMyRidesAsDriver(),
   );
 
+  const handleClick = (id: string) => {
+    history.push(`/rides/${id}`);
+  };
+
   useEffect(() => {
     if (!user) {
       history.push('/login');
@@ -30,26 +35,25 @@ const RidesAsDriver = () => {
   }
 
   return (
-    <PageWrapper>
-      <div>
-        <div>My rides as driver</div>
+    <MyPageContainer>
+      <ListWrapper>
+        <h1>My rides as driver</h1>
         <StyledUl>
           {rideList?.map(
-            ({ _id, departFrom, arriveAt, departTime, driver }) => (
-              <SearchList
+            ({ _id, departDate, departFrom, arriveAt, departTime, driver }) => (
+              <MyPageRideList
                 key={_id}
+                departDate={departDate}
                 departFrom={departFrom}
                 arriveAt={arriveAt}
                 departTime={departTime}
-                nickname={driver.nickname}
-                profilePicture={driver.profilePicture}
-                handleClick={() => console.log('_id', _id)}
+                handleClick={() => handleClick(_id)}
               />
             ),
           )}
         </StyledUl>
-      </div>
-    </PageWrapper>
+      </ListWrapper>
+    </MyPageContainer>
   );
 };
 
