@@ -4,6 +4,7 @@ import { IUserInfo } from '../types/user';
 export interface IGetUserResponse {
   result: string;
   userInfo: IUserInfo;
+  token: string;
 }
 
 export const fetchUserInfo = () => async (): Promise<IUserInfo | undefined> => {

@@ -37,4 +37,8 @@ const setResponseInterceptor = () => {
 
 setResponseInterceptor();
 
+export const updateToken = (token: string) => {
+  axiosInstance.defaults.headers!.authorization = `Bearer ${token}`;
+};
+
 export default axiosInstance;
