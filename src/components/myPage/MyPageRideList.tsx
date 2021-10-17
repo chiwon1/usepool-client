@@ -74,7 +74,6 @@ const SpanWrapper = styled.span`
   color: rgb(5, 71, 82);
   font-size: 22px;
   line-height: 24px;
-  font-weight: 500;
 `;
 
 const Wrapper = styled.div`
@@ -171,10 +170,9 @@ const Wrapper7 = styled.div`
   span {
     white-space: pre-line;
     color: rgb(5, 71, 82);
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 20px;
-    font-weight: 500;
   }
 `;
 

@@ -23,10 +23,10 @@ const ChatRoomList = ({ data }: Props): JSX.Element => {
   } = data;
 
   const sender =
-    user?.nickname === driver.nickname ? passenger.nickname : driver.nickname;
+    user?.userId === driver._id ? passenger.nickname : driver.nickname;
 
   const profilePicture =
-    user?.nickname === driver.nickname
+    user?.userId === driver._id
       ? passenger.profilePicture
       : driver.profilePicture;
 
@@ -76,7 +76,7 @@ const ChatRoomList = ({ data }: Props): JSX.Element => {
         <SpanWrapper5>
           <div>
             <img
-              alt=""
+              alt="profilePicture"
               src={profilePicture ? profilePicture : defaultProfile}
             />
           </div>
@@ -88,9 +88,9 @@ const ChatRoomList = ({ data }: Props): JSX.Element => {
 };
 
 const StyledLi = styled.li`
-  margin: 0px;
-  padding: 0px;
-  border: 0px;
+  margin: 0;
+  padding: 0;
+  border: 0;
   font: inherit;
   vertical-align: baseline;
   -webkit-font-smoothing: antialiased;
@@ -130,10 +130,10 @@ const SpanWrapper = styled.span`
 `;
 
 const SpanWrapper2 = styled.span`
-  flex: 1 1 0%;
+  flex: 1 1 0;
 
   span {
-    margin: 0px;
+    margin: 0;
     font-size: 18px;
     line-height: 20px;
     font-weight: 500;
@@ -183,23 +183,22 @@ const SpanWrapper5 = styled.span`
     width: 48px;
     height: 48px;
     border: none;
-    
+
     img {
       -webkit-font-smoothing: antialiased;
       border-radius: 50%;
-      border-width: 0px;
+      border-width: 0;
       box-sizing: border-box;
-      font-family: gt-eesti, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 16px;
       font-weight: 400;
       height: 100%;
       line-height: 16px;
-      margin: 0px;
+      margin: 0;
       object-fit: cover;
-      padding: 0px;
+      padding: 0;
       vertical-align: baseline;
       width: 100%;
-    }
     }
   }
 `;

@@ -16,7 +16,7 @@ const SearchListBox = ({
   availableNumber,
   children,
   departDate,
-}: Props) => {
+}: Props): JSX.Element => {
   return (
     <div>
       <div>

@@ -1,10 +1,8 @@
-import React, { useCallback, useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useMemo, useRef } from 'react';
 import styled from 'styled-components';
-import { useQuery, useQueryClient } from 'react-query';
-import axiosInstance from '../../api/axios';
+import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../../contexts/AuthProvider';
-import { fetchRideDetails } from '../../api/ride';
 import { IChat } from '../../types/chat';
 import Chat from './Chat';
 import makeSection from '../../utils/makeSection';
@@ -21,7 +19,10 @@ const ChatList = () => {
     fetchChatList(chatRoomId),
   );
 
-  const chatSections = chatList ? makeSection(chatList) : [];
+  const chatSections = useMemo(
+    () => (chatList ? makeSection(chatList) : []),
+    [chatList],
+  );
 
   useEffect(() => {
     if (chatList?.length !== 1) {
@@ -32,28 +33,38 @@ const ChatList = () => {
   }, [chatList]);
 
   return (
-    <ChatZone>
+    <ChatWrapper>
       <Scrollbars autoHide ref={scrollbarRef}>
-        <div>
-          {Object.entries(chatSections).map(([date, chatList], index) => {
-            return (
-              <Section className={`section-${date}`} key={date}>
-                <StickyHeader>
-                  <button>{date}</button>
-                </StickyHeader>
-                {chatList.map((chat, index) => (
-                  <Chat key={index} data={chat} />
-                ))}
-              </Section>
-            );
-          })}
-        </div>
+        <Wrapper>
+          <Wrapper2>
+            <Wrapper3>
+              <div>
+                <div>
+                  {Object.entries(chatSections).map(
+                    ([date, chatList], index) => {
+                      return (
+                        <Section className={`section-${date}`} key={date}>
+                          <StickyHeader>
+                            <p>{date}</p>
+                          </StickyHeader>
+                          {chatList.map((chat, index) => (
+                            <Chat key={index} data={chat} />
+                          ))}
+                        </Section>
+                      );
+                    },
+                  )}
+                </div>
+              </div>
+            </Wrapper3>
+          </Wrapper2>
+        </Wrapper>
       </Scrollbars>
-    </ChatZone>
+    </ChatWrapper>
   );
 };
 
-export const ChatZone = styled.div`
+export const ChatWrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -66,28 +77,35 @@ export const Section = styled.section`
 `;
 
 export const StickyHeader = styled.div`
-  display: flex;
-  justify-content: center;
-  flex: 1;
-  width: 100%;
   position: sticky;
-  top: 14px;
-  & button {
-    font-weight: bold;
-    font-size: 13px;
-    height: 28px;
-    line-height: 27px;
-    padding: 0 16px;
-    z-index: 2;
-    --saf-0: rgba(var(--sk_foreground_low, 29, 28, 29), 0.13);
-    box-shadow: 0 0 0 1px var(--saf-0), 0 1px 3px 0 rgba(0, 0, 0, 0.08);
-    border-radius: 24px;
-    position: relative;
-    top: -13px;
-    background: white;
-    border: none;
-    outline: none;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 24px;
+  word-break: break-word;
+
+  & p {
+    white-space: pre-line;
+    color: rgb(112, 140, 145);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
   }
+`;
+
+const Wrapper = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 662px;
+`;
+
+const Wrapper2 = styled.div`
+  display: flex;
+  align-items: flex-end;
+`;
+
+const Wrapper3 = styled.div`
+  width: 100%;
+  padding-bottom: 6px;
 `;
 
 export default ChatList;

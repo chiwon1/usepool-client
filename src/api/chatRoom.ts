@@ -12,3 +12,9 @@ export const fetchChatList = (roomId: string) => async () => {
 
   return res.chatList;
 };
+
+export const fetchChatRoomInfo = (roomId: string) => async () => {
+  const res = (await axiosInstance.get(`/chatRooms/${roomId}/info`)) as any;
+
+  return res.info as IChatRoom;
+};

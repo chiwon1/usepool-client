@@ -6,7 +6,7 @@ const sockets: { [key: string]: Socket } = {};
 const useSocket = (ride: string): [Socket | undefined, () => void] => {
   const disconnect = useCallback(() => {
     if (ride) {
-      sockets[ride].disconnect();
+      sockets[ride]?.disconnect();
 
       delete sockets[ride];
     }
