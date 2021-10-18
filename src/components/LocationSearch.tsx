@@ -1,13 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import SearchIcon from './SearchIcon';
+import { Autocomplete, LoadScript } from '@react-google-maps/api';
+import { libraries } from './map/SearchMap';
+import { ILocationInfo } from '../types/ride';
 
 type Props = {
-  inputDepartFrom: string;
-  handleChange: React.ChangeEventHandler<HTMLInputElement>;
+  handlePlaceSelect: (value: ILocationInfo) => void;
 };
 
-const InputLocation = ({ inputDepartFrom, handleChange }: Props) => {
+const LocationSearch = ({ handlePlaceSelect }: Props) => {
+  const [autocomplete, setAutocomplete] = useState<any>(null);
+
+  const onLoad = (autocomplete: any) => {
+    setAutocomplete(autocomplete);
+  };
+
+  // lat : 위도
+  const onPlaceChanged = () => {
+    if (autocomplete !== null) {
+      const {
+        formatted_address: formattedAddress,
+        name,
+        geometry: {
+          location: { lat, lng },
+        },
+      } = autocomplete.getPlace();
+
+      const info: ILocationInfo = {
+        address: formattedAddress,
+        name: name,
+        coordinate: [lat(), lng()],
+      };
+
+      console.log('autocomplete.getPlace()', autocomplete.getPlace());
+
+      handlePlaceSelect(info);
+    } else {
+      console.log('autocomplete is not loaded yet');
+    }
+  };
+
   return (
     <Wrapper8 role="combobox">
       <Wrapper9>
@@ -26,13 +59,13 @@ const InputLocation = ({ inputDepartFrom, handleChange }: Props) => {
               </g>
             </svg>
           </button>
-          <input
-            type="text"
-            value={inputDepartFrom}
-            placeholder="e.g, 강남역"
-            onChange={handleChange}
-            required
-          />
+          <Autocomplete
+            onLoad={onLoad}
+            onPlaceChanged={onPlaceChanged}
+            restrictions={{ country: 'kr' }}
+          >
+            <input type="text" placeholder="e.g, 강남역" required />
+          </Autocomplete>
         </Wrapper10>
       </Wrapper9>
     </Wrapper8>
@@ -195,4 +228,4 @@ const Wrapper10 = styled.div`
   }
 `;
 
-export default InputLocation;
+export default LocationSearch;

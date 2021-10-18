@@ -1,6 +1,6 @@
-import React, { useCallback, useContext, useEffect, useRef } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import ChatBox from '../components/chat/ChatBox';
 import ChatList from '../components/chat/ChatList';
 import styled from 'styled-components';
