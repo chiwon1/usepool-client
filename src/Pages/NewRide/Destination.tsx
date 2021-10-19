@@ -32,7 +32,10 @@ const Destination: FC = () => {
             <Wrapper5>
               <H1Wrapper>{'Where are you heading?'}</H1Wrapper>
               <Wrapper7>
-                <LocationSearch handlePlaceSelect={handlePlaceSelect} />
+                <LocationSearch
+                  handlePlaceSelect={handlePlaceSelect}
+                  placeholder={'e.g, 여의도역'}
+                />
               </Wrapper7>
             </Wrapper5>
             <MapWrapper>

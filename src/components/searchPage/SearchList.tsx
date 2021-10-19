@@ -3,18 +3,18 @@ import styled from 'styled-components';
 import LocationDiv from '../LocationDiv';
 
 type Props = {
-  departFrom: string;
+  departureLocation: string;
   arriveAt: string;
-  departTime: string;
+  departureTime: string;
   nickname: string;
   profilePicture?: string;
   handleClick?: () => void;
 };
 
 const SearchList = ({
-  departFrom,
+  departureLocation,
   arriveAt,
-  departTime,
+  departureTime,
   nickname,
   profilePicture,
   handleClick,
@@ -31,9 +31,9 @@ const SearchList = ({
               <Wrapper15>
                 <ul>
                   <LocationDiv
-                    location={departFrom}
+                    location={departureLocation}
                     down={true}
-                    time={departTime}
+                    time={departureTime}
                   />
                   <LocationDiv location={arriveAt} down={false} />
                 </ul>

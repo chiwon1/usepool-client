@@ -6,27 +6,41 @@ import UpperRouteIcon from '../UpperRouteIcon';
 import LowerRouteIcon from '../LowerRouteIcon';
 
 type Props = {
-  departTime?: string;
-  departFrom: string;
-  arriveAt: string;
+  departureTime?: string;
+  depatureLocation: string;
+  depatureAddress: string;
+  destination: string;
+  destinationAddress: string;
 };
 
-const ItineraryBox = ({ departTime, departFrom, arriveAt }: Props) => {
+const ItineraryBox = ({
+  departureTime,
+  depatureLocation,
+  depatureAddress,
+  destination,
+  destinationAddress,
+}: Props) => {
   return (
     <>
       <ul>
         <li>
           <Wrapper6>
-            <TimeIndicator time={departTime} />
+            <TimeIndicator time={departureTime} />
             <UpperRouteIcon />
-            <LocationIndicator location={departFrom} />
+            <LocationIndicator
+              location={depatureLocation}
+              address={depatureAddress}
+            />
           </Wrapper6>
         </li>
         <li>
           <Wrapper6>
             <TimeIndicator />
             <LowerRouteIcon />
-            <LocationIndicator location={arriveAt} />
+            <LocationIndicator
+              location={destination}
+              address={destinationAddress}
+            />
           </Wrapper6>
         </li>
       </ul>

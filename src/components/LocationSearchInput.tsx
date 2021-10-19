@@ -1,17 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ILocationInfo } from '../types/ride';
+import AutoCompleteSearchInput from './AutoCompleteSearchInput';
 
 type Props = {
   placeholder: string;
-  departFrom: string;
-  handleChange: React.ChangeEventHandler<HTMLInputElement>;
+  handlePlaceSelect: (locationInfo: ILocationInfo) => void;
 };
 
-const LocationSearchInput = ({
-  placeholder,
-  departFrom,
-  handleChange,
-}: Props) => {
+const LocationSearchInput = ({ placeholder, handlePlaceSelect }: Props) => {
   return (
     <Wrapper>
       <Wrapper6>
@@ -22,12 +19,9 @@ const LocationSearchInput = ({
                 <Wrapper10 aria-hidden="true"></Wrapper10>
               </SpanWrapper>
               <SpanWrapper2></SpanWrapper2>
-              <input
-                type="text"
-                value={departFrom}
+              <AutoCompleteSearchInput
                 placeholder={placeholder}
-                onChange={handleChange}
-                required
+                handlePlaceSelect={handlePlaceSelect}
               />
             </Wrapper9>
           </Wrapper8>

@@ -11,29 +11,30 @@ const DepartureLocation = () => {
   const { newRideInfo, handleNewRideInfo } = useContext(NewRideContext);
 
   const handlePlaceSelect = (locationInfo: ILocationInfo) => {
-    console.log('locationInfo 출발', locationInfo);
-
     const { address, name, coordinate } = locationInfo;
 
     handleNewRideInfo({
       ...newRideInfo,
-      departLocation: name,
-      departAddress: address,
-      departCoordinate: coordinate,
+      departureLocation: name,
+      departureAddress: address,
+      departureCoordinate: coordinate,
     });
 
     history.push('/newRide/destination');
   };
 
   return (
-    <StyledForm>
+    <StyledForm onSubmit={(ev) => ev.preventDefault()}>
       <Wrapper3>
         <Wrapper4>
           <Wrapper8 role="presentation">
             <Wrapper5>
               <H1Wrapper>{'Where are you leaving from?'}</H1Wrapper>
               <Wrapper7>
-                <LocationSearch handlePlaceSelect={handlePlaceSelect} />
+                <LocationSearch
+                  handlePlaceSelect={handlePlaceSelect}
+                  placeholder={'e.g, 역삼역'}
+                />
               </Wrapper7>
             </Wrapper5>
             <MapWrapper>
@@ -55,7 +56,7 @@ const Wrapper8 = styled.div`
   height: auto;
 `;
 
-const StyledForm = styled.div`
+const StyledForm = styled.form`
   display: flex;
   min-height: calc(100vh - 56px);
   min-height: -webkit-fill-available;

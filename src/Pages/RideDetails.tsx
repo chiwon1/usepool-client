@@ -62,11 +62,13 @@ const RideDetails = () => {
     <Wrapper>
       <div>
         <Wrapper2>
-          <RideDetailsTopBar date={rideDetails.departDate} />
+          <RideDetailsTopBar date={rideDetails.departureDate} />
           <ItineraryBox
-            departTime={rideDetails.departTime}
-            departFrom={rideDetails.departFrom}
-            arriveAt={rideDetails.arriveAt}
+            depatureLocation={rideDetails.departureLocation}
+            depatureAddress={rideDetails.departureAddress}
+            destination={rideDetails.destination}
+            destinationAddress={rideDetails.destinationAddress}
+            departureTime={rideDetails.departureTime}
           />
           <DriverInfoBox
             nickname={rideDetails.driver.nickname}

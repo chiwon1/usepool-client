@@ -32,8 +32,8 @@ const ChatRoom = () => {
   const { mutate } = useMutation(['postNewChat', { chatRoomId }], postNewChat);
 
   const onSubmitForm = useCallback(
-    (e) => {
-      e.preventDefault();
+    (ev) => {
+      ev.preventDefault();
 
       if (chat?.trim()) {
         mutate({
