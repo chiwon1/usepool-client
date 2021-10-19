@@ -44,7 +44,7 @@ const Wrapper = styled.div`
   position: relative !important;
   -webkit-box-flex: 1;
   flex-grow: 1;
-  min-height: 872px;
+  height: 100%;
   height: auto;
   display: flex;
   flex-direction: column;

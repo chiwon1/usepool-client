@@ -19,8 +19,7 @@ const MyPageWrapper = styled.div`
   position: relative !important;
   -webkit-box-flex: 1;
   flex-grow: 1;
-  min-height: 872px;
-  height: auto;
+  height: 100%;
   display: flex;
   flex-direction: column;
   -webkit-box-pack: start;

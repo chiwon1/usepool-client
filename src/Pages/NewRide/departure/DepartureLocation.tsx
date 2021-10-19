@@ -58,14 +58,11 @@ const Wrapper8 = styled.div`
 
 const StyledForm = styled.form`
   display: flex;
-  min-height: calc(100vh - 56px);
-  min-height: -webkit-fill-available;
-  min-height: stretch;
   flex-direction: column;
   justify-content: space-between;
   -webkit-box-flex: 1;
   flex-grow: 1;
-  min-height: 872px;
+  height: 100%;
 `;
 
 const MapWrapper = styled.div`

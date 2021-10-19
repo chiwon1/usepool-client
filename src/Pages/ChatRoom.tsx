@@ -96,7 +96,7 @@ export const Container = styled.div`
   flex-direction: column;
   -webkit-box-pack: start;
   justify-content: flex-start;
-  min-height: 692px;
+  height: 100%;
   padding-bottom: 0;
   -webkit-box-flex: 1;
   flex-grow: 1;

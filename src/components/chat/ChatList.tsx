@@ -69,6 +69,7 @@ export const ChatWrapper = styled.div`
   height: 100%;
   display: flex;
   flex: 1;
+  padding-bottom: 70px;
 `;
 
 export const Section = styled.section`
