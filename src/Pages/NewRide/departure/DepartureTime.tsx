@@ -20,7 +20,7 @@ const DepartureTime: FC = () => {
 
     handleNewRideInfo({
       ...newRideInfo,
-      departTime: inputTime,
+      departureTime: inputTime,
     });
 
     history.push('/newRide/submit');

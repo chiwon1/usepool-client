@@ -40,13 +40,19 @@ const RidesAsPassenger = () => {
         <h1>My rides as passenger</h1>
         <StyledUl>
           {rideList?.map(
-            ({ _id, departDate, departFrom, arriveAt, departTime }) => (
+            ({
+              _id,
+              departureLocation,
+              destination,
+              departureDate,
+              departureTime,
+            }) => (
               <MyPageRideList
                 key={_id}
-                departDate={departDate}
-                departFrom={departFrom}
-                arriveAt={arriveAt}
-                departTime={departTime}
+                departureLocation={departureLocation}
+                destination={destination}
+                departureDate={departureDate}
+                departureTime={departureTime}
                 handleClick={() => handleClick(_id)}
               />
             ),

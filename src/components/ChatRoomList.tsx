@@ -18,7 +18,7 @@ const ChatRoomList = ({ data }: Props): JSX.Element => {
     _id: roomId,
     driver,
     passenger,
-    ride: { departFrom, arriveAt },
+    ride: { departureLocation, destination },
     chatList,
   } = data;
 
@@ -32,7 +32,7 @@ const ChatRoomList = ({ data }: Props): JSX.Element => {
 
   const lastMessageDate = chatList[chatList.length - 1]?.createdAt;
 
-  const formattedDate = dayjs(lastMessageDate).format('MM/D');
+  const formattedDate = dayjs(lastMessageDate).format('DD MMM');
 
   return (
     <StyledLi>
@@ -43,7 +43,7 @@ const ChatRoomList = ({ data }: Props): JSX.Element => {
             <span>
               <SpanWrapper3>
                 <Wrapper>
-                  {departFrom}
+                  {departureLocation}
                   <svg
                     aria-hidden="true"
                     height="16"
@@ -64,7 +64,7 @@ const ChatRoomList = ({ data }: Props): JSX.Element => {
                       <path d="M22 12H2" />
                     </g>
                   </svg>
-                  {arriveAt}
+                  {destination}
                 </Wrapper>
               </SpanWrapper3>
             </span>

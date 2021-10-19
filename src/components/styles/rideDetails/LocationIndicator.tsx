@@ -4,13 +4,14 @@ import styled from 'styled-components';
 
 type Props = {
   location: string;
+  address: string;
 };
 
-const LocationIndicator = ({ location }: Props) => {
+const LocationIndicator = ({ location, address }: Props) => {
   return (
     <Wrapper12>
       <SpanWrapper3>{location}</SpanWrapper3>
-      <SpanWrapper4 />
+      <SpanWrapper4>{address}</SpanWrapper4>
       <RightAddOnIcon />
     </Wrapper12>
   );

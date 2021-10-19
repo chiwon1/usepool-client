@@ -9,45 +9,52 @@ import HomeContentBox from '../components/HomeContentBox';
 import UI from '../constants/ui';
 import { useHistory } from 'react-router-dom';
 import { getToday } from '../utils';
+import AutoCompleteSearchInput from '../components/AutoCompleteSearchInput';
+import { ILocationInfo } from '../types/ride';
+import dayjs from 'dayjs';
 
 const Home = () => {
   const history = useHistory();
-  const [inputDepartFrom, setInputDepartFrom] = useState('');
-  const [inputArriveAt, setInputArriveAt] = useState('');
-  const [inputDepartDate, setInputDepartDate] = useState(getToday());
-  const [inputNumberOfPassenger, setInputNumberOfPassenger] = useState('');
+  const [departureInfo, setDepartureInfo] = useState<ILocationInfo | null>(
+    null,
+  );
+  const [destinationInfo, setDestinationInfo] = useState<ILocationInfo | null>(
+    null,
+  );
+  const [inputDepartureDate, setInputDepartureDate] = useState(getToday());
 
-  const handleDepartFromChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    setInputDepartFrom(ev.target.value);
+  const handleDepartureInfo = (locationInfo: ILocationInfo) => {
+    setDepartureInfo(locationInfo);
   };
 
-  const handleArriveAtChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    setInputArriveAt(ev.target.value);
+  const handleDestinationInfo = (locationInfo: ILocationInfo) => {
+    setDestinationInfo(locationInfo);
   };
 
   const handleDepartDateChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    setInputDepartDate(ev.target.value);
-  };
-
-  const handleNumberOfPassengerInput = (
-    ev: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    setInputNumberOfPassenger(ev.target.value);
+    setInputDepartureDate(ev.target.value);
   };
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
-    const inputDate = new window.Date(inputDepartDate).toLocaleDateString();
+    const formattedDate = dayjs(inputDepartureDate).format('DD MMM YYYY');
 
     history.push(
-      `/search?departFrom=${inputDepartFrom}&departDate=${inputDate}&arriveAt=${inputArriveAt}`,
+      `/search?departureLocation=${departureInfo!.name}&departureCoordinate=${
+        departureInfo!.coordinate[0]
+      }&departureCoordinate=${
+        departureInfo!.coordinate[1]
+      }&departureDate=${formattedDate}&destination=${
+        destinationInfo!.name
+      }&destinationCoordinate=${
+        destinationInfo!.coordinate[0]
+      }&destinationCoordinate=${destinationInfo!.coordinate[1]}`,
     );
 
-    setInputDepartFrom('');
-    setInputArriveAt('');
-    setInputDepartDate(getToday());
-    setInputNumberOfPassenger('');
+    setDepartureInfo(null);
+    setDestinationInfo(null);
+    setInputDepartureDate(getToday());
   };
 
   return (
@@ -55,22 +62,20 @@ const Home = () => {
       <Form onSubmit={handleSubmit}>
         <LocationSearchInput
           placeholder={UI.LEAVING_FROM}
-          departFrom={inputDepartFrom}
-          handleChange={handleDepartFromChange}
+          handlePlaceSelect={handleDepartureInfo}
         />
         <ReverseLocationButton />
         <StyledHr />
         <div />
         <LocationSearchInput
           placeholder={UI.GOING_TO}
-          departFrom={inputArriveAt}
-          handleChange={handleArriveAtChange}
+          handlePlaceSelect={handleDestinationInfo}
         />
         <Wrapper>
           <hr />
           <DateWrapper>
             <DateInput
-              departDate={inputDepartDate}
+              departDate={inputDepartureDate}
               handleChange={handleDepartDateChange}
             />
           </DateWrapper>

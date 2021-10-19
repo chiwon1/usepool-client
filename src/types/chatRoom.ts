@@ -12,10 +12,12 @@ export interface IChatRoom {
 
 interface IRideNotPopulated {
   _id: string;
-  departFrom: string;
-  departDate: string;
-  departTime: string;
-  arriveAt: string;
+  departureLocation: string;
+  departureAddress: string;
+  departureDate: string;
+  departureTime: string;
+  destination: string;
+  destinationAddress: string;
   seatCapacity: number;
   driver: string;
   passengers: [];

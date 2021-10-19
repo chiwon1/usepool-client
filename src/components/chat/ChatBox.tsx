@@ -11,10 +11,10 @@ interface Props {
 const ChatBox = ({ chat, onChangeChat, onSubmitForm }: Props) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const onKeydownChat = useCallback(
-    (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        onSubmitForm(e);
+    (ev) => {
+      if (ev.key === 'Enter' && !ev.shiftKey) {
+        ev.preventDefault();
+        onSubmitForm(ev);
       }
     },
     [onSubmitForm],

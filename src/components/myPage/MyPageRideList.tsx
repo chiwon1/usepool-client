@@ -4,18 +4,18 @@ import UpperRouteIcon from '../styles/UpperRouteIcon';
 import LowerRouteIcon from '../styles/LowerRouteIcon';
 
 type Props = {
-  departDate: string;
-  departTime: string;
-  departFrom: string;
-  arriveAt: string;
+  departureDate: string;
+  departureTime: string;
+  departureLocation: string;
+  destination: string;
   handleClick?: () => void;
 };
 
 const MyPageRideList = ({
-  departDate,
-  departTime,
-  departFrom,
-  arriveAt,
+  departureDate,
+  departureTime,
+  departureLocation,
+  destination,
   handleClick,
 }: Props) => {
   return (
@@ -23,7 +23,7 @@ const MyPageRideList = ({
       <Wrapper2>
         <button>
           <Wrapper>
-            <SpanWrapper>{`${departDate} ${departTime}`}</SpanWrapper>
+            <SpanWrapper>{`${departureDate} ${departureTime}`}</SpanWrapper>
             <Wrapper6>
               <Wrapper8>
                 <StyledUl>
@@ -32,7 +32,7 @@ const MyPageRideList = ({
                       <Wrapper4 />
                       <UpperRouteIcon />
                       <Wrapper7>
-                        <span>{departFrom}</span>
+                        <span>{departureLocation}</span>
                       </Wrapper7>
                     </Wrapper3>
                   </li>
@@ -41,7 +41,7 @@ const MyPageRideList = ({
                       <Wrapper4 />
                       <LowerRouteIcon />
                       <Wrapper7>
-                        <span>{arriveAt}</span>
+                        <span>{destination}</span>
                       </Wrapper7>
                     </Wrapper3>
                   </li>

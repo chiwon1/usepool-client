@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import SearchIcon from './SearchIcon';
+import { ILocationInfo } from '../types/ride';
+import AutoCompleteSearchInput from './AutoCompleteSearchInput';
 
 type Props = {
-  inputDepartFrom: string;
-  handleChange: React.ChangeEventHandler<HTMLInputElement>;
+  handlePlaceSelect: (value: ILocationInfo) => void;
+  placeholder: string;
 };
 
-const InputLocation = ({ inputDepartFrom, handleChange }: Props) => {
+const LocationSearch = ({ handlePlaceSelect, placeholder }: Props) => {
   return (
     <Wrapper8 role="combobox">
       <Wrapper9>
@@ -26,12 +28,9 @@ const InputLocation = ({ inputDepartFrom, handleChange }: Props) => {
               </g>
             </svg>
           </button>
-          <input
-            type="text"
-            value={inputDepartFrom}
-            placeholder="e.g, 강남역"
-            onChange={handleChange}
-            required
+          <AutoCompleteSearchInput
+            handlePlaceSelect={handlePlaceSelect}
+            placeholder={placeholder}
           />
         </Wrapper10>
       </Wrapper9>
@@ -195,4 +194,4 @@ const Wrapper10 = styled.div`
   }
 `;
 
-export default InputLocation;
+export default LocationSearch;

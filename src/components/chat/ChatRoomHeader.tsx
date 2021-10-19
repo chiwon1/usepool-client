@@ -59,8 +59,8 @@ const ChatRoomHeader = () => {
               </SpanWrapper5>
               {info && (
                 <SpanWrapper2>
-                  <SpanWrapper4>{`${info.ride.departFrom} → ${info.ride.arriveAt}`}</SpanWrapper4>
-                  <SpanWrapper3>{`${info.ride.departDate} ${info.ride.departTime}`}</SpanWrapper3>
+                  <SpanWrapper4>{`${info.ride.departureLocation} → ${info.ride.destination}`}</SpanWrapper4>
+                  <SpanWrapper3>{`${info.ride.departureDate} ${info.ride.departureTime}`}</SpanWrapper3>
                 </SpanWrapper2>
               )}
             </SpanWrapper>

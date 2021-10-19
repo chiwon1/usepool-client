@@ -6,14 +6,14 @@ export const postNewRide = async (value: IRide) => {
 };
 
 export const fetchSearchedRides = (value: IRide) => async () => {
-  const { departFrom, departDate, arriveAt } = value;
+  const { departureCoordinate, departureDate, destinationCoordinate } = value;
 
-  if (!departFrom || !departDate || !arriveAt) {
+  if (!departureCoordinate || !departureDate || !destinationCoordinate) {
     return console.log('invalid parameter input for searchRide');
   }
 
   const { searchResult } = (await axiosInstance.get(
-    `/rides/search?departFrom=${departFrom}&arriveAt=${arriveAt}&departDate=${departDate}`,
+    `/rides/search?departureCoordinate=${departureCoordinate[0]}&departureCoordinate=${departureCoordinate[1]}&departureDate=${departureDate}&destinationCoordinate=${destinationCoordinate[0]}&destinationCoordinate=${destinationCoordinate[1]}`,
   )) as any;
 
   return searchResult as ISearchRide[];
