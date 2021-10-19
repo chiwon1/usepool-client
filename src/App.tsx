@@ -7,8 +7,8 @@ import Layout from './components/Layout';
 import Pages from './Pages';
 import AuthProvider from './contexts/AuthProvider';
 import { QueryClientProvider, QueryClient } from 'react-query';
-import { libraries } from './components/map/SearchMap';
 import { LoadScript } from '@react-google-maps/api';
+import { libraries } from './constants/map';
 
 const App: FC = () => {
   const queryClient = new QueryClient();
