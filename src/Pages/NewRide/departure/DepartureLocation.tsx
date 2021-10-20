@@ -1,17 +1,26 @@
-import React, { useContext } from 'react';
+import React, { FC, useContext } from 'react';
 import LocationSearch from '../../../components/LocationSearch';
 import SearchMap from '../../../components/map/SearchMap';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import { NewRideContext } from '../NewRide';
+import { DepartureCoordinateContext, NewRideContext } from '../NewRide';
 import { ILocationInfo } from '../../../types/ride';
+import ContinueButton from '../../../components/ContinueButton';
 
-const DepartureLocation = () => {
+const DepartureLocation: FC = () => {
   const history = useHistory();
   const { newRideInfo, handleNewRideInfo } = useContext(NewRideContext);
+  const { handleDepartureCoordinate: handleCoordinate } = useContext(
+    DepartureCoordinateContext,
+  );
 
   const handlePlaceSelect = (locationInfo: ILocationInfo) => {
     const { address, name, coordinate } = locationInfo;
+
+    handleCoordinate({
+      lat: coordinate[0],
+      lng: coordinate[1],
+    });
 
     handleNewRideInfo({
       ...newRideInfo,
@@ -19,7 +28,9 @@ const DepartureLocation = () => {
       departureAddress: address,
       departureCoordinate: coordinate,
     });
+  };
 
+  const handleClick = () => {
     history.push('/newRide/destination');
   };
 
@@ -36,6 +47,7 @@ const DepartureLocation = () => {
                   placeholder={'e.g, 역삼역'}
                 />
               </Wrapper7>
+              <ContinueButton handleClick={handleClick} />
             </Wrapper5>
             <MapWrapper>
               <SearchMap />
@@ -53,7 +65,7 @@ const Wrapper8 = styled.div`
   justify-content: space-between;
   -webkit-box-flex: 1;
   flex-grow: 1;
-  height: auto;
+  height: 100%;
 `;
 
 const StyledForm = styled.form`
@@ -82,7 +94,7 @@ const Wrapper4 = styled.div`
   -webkit-box-pack: start;
   justify-content: flex-start;
   min-height: 0 !important;
-  height: auto;
+  height: 100%;
 `;
 
 const Wrapper5 = styled.div`
@@ -103,6 +115,9 @@ const H1Wrapper = styled.h1`
   text-align: center;
   vertical-align: baseline;
   white-space: pre-line;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
 `;
 
 const Wrapper7 = styled.div`
@@ -117,6 +132,9 @@ const Wrapper7 = styled.div`
   padding: 0;
   vertical-align: baseline;
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
 `;
 
 export default DepartureLocation;

@@ -3,8 +3,12 @@
 
 /* global Tmapv2 */
 
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import useTmap from '../../hooks/useTmap';
+import {
+  DepartureCoordinateContext,
+  ICoordinate,
+} from '../../Pages/NewRide/NewRide';
 
 export const mapCenter = {
   lat: 37.553878,
@@ -13,17 +17,33 @@ export const mapCenter = {
 
 const { Tmapv2 } = window;
 
-const SearchMap = () => {
-  const mapInstance = useTmap();
+type Props = {
+  destinationCoordinate?: ICoordinate | null;
+};
 
-  const createMarker = () => {
+const SearchMap = ({ destinationCoordinate }: Props) => {
+  const mapInstance = useTmap();
+  const { departureCoordinate, handleDepartureCoordinate } = useContext(
+    DepartureCoordinateContext,
+  );
+
+  const createMarker = (coordinate) => {
     new Tmapv2.Marker({
-      position: new Tmapv2.LatLng(37.553756, 126.925356), //Marker의 중심좌표 설정.
+      position: new Tmapv2.LatLng(coordinate.lat, coordinate.lng), //Marker의 중심좌표 설정.
       map: mapInstance, //Marker가 표시될 Map 설정..
     });
   };
 
-  createMarker();
+  if (departureCoordinate) {
+    createMarker(departureCoordinate);
+
+    mapInstance?.setCenter(
+      new Tmapv2.LatLng(departureCoordinate.lat, departureCoordinate.lng),
+    );
+  }
+
+  console.log('departureCoordinate', departureCoordinate);
+  console.log('destinationCoordinate', destinationCoordinate);
 
   const onComplete = function () {
     const jsonObject = new Tmapv2.extension.GeoJSON();
@@ -39,24 +59,30 @@ const SearchMap = () => {
 
     jsonObject.drawRouteByTraffic(mapInstance, jsonForm, trafficColors);
 
+    const midpointCoordinate = {
+      lat: (departureCoordinate.lat + destinationCoordinate.lat) / 2,
+      lng: (departureCoordinate.lng + destinationCoordinate.lng) / 2,
+    };
+
     mapInstance?.setCenter(
-      new Tmapv2.LatLng(37.55676159947993, 126.94734232774672),
+      new Tmapv2.LatLng(midpointCoordinate.lat, midpointCoordinate.lng),
     );
 
-    mapInstance?.setZoom(14);
+    mapInstance?.setZoom(11);
   };
 
-  const onProgress = () => {
-    console.log('progress');
-  };
+  // const onProgress = () => {};
 
   const onError = () => {
     alert('onError');
   };
 
-  const getRP = () => {
-    const sLatlng = new Tmapv2.LatLng(37.553756, 126.925356);
-    const eLatlng = new Tmapv2.LatLng(37.554034, 126.975598);
+  const getRP = (baseCoordinate, targetCoordinate) => {
+    const sLatlng = new Tmapv2.LatLng(baseCoordinate.lat, baseCoordinate.lng);
+    const eLatlng = new Tmapv2.LatLng(
+      targetCoordinate.lat,
+      targetCoordinate.lng,
+    );
 
     const optionObj = {
       reqCoordType: 'WGS84GEO',
@@ -66,7 +92,7 @@ const SearchMap = () => {
 
     const params = {
       onComplete: onComplete,
-      onProgress: onProgress,
+      // onProgress: onProgress,
       onError: onError,
     };
 
@@ -75,7 +101,11 @@ const SearchMap = () => {
     tData.getRoutePlanJson(sLatlng, eLatlng, optionObj, params);
   };
 
-  getRP();
+  useEffect(() => {
+    if (destinationCoordinate) {
+      getRP(departureCoordinate, destinationCoordinate);
+    }
+  }, [destinationCoordinate]);
 
   return <div id="map" />;
 };
