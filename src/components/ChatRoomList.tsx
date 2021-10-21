@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import RightAddOnIcon from './styles/RightAddOnIcon';
@@ -11,7 +11,7 @@ type Props = {
   data: IChatRoom;
 };
 
-const ChatRoomList = ({ data }: Props): JSX.Element => {
+const ChatRoomList: FC<Props> = ({ data }) => {
   const { user } = useContext(UserContext);
 
   const {

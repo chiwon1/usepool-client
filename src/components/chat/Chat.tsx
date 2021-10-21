@@ -1,15 +1,16 @@
-import React, { useContext, useMemo } from 'react';
-import { IChat } from '../../types/chat';
+import React, { useContext, useMemo, FC } from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
-import defaultProfile from '../../assets/default-profile.svg';
+
 import { UserContext } from '../../contexts/AuthProvider';
+import { IChat } from '../../types/chat';
+import defaultProfile from '../../assets/default-profile.svg';
 
 type Props = {
   data: IChat;
 };
 
-const Chat = ({ data }: Props) => {
+const Chat: FC<Props> = ({ data }) => {
   const { user } = useContext(UserContext);
 
   const { sender } = data;
@@ -24,6 +25,7 @@ const Chat = ({ data }: Props) => {
             <SpanWrapper2>
               <div>
                 <img
+                  alt="Profile-picture"
                   src={
                     data?.senderProfilePicture
                       ? data?.senderProfilePicture

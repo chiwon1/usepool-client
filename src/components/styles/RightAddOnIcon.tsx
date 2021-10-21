@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
-const RightAddOnIcon = () => {
+const RightAddOnIcon: FC = () => {
   return (
     <Wrapper>
       <svg

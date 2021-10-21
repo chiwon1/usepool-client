@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import { postNewRide } from '../../api/ride';
 import { useHistory } from 'react-router-dom';
 import { NewRideContext } from './NewRide';
 import { useMutation, useQueryClient } from 'react-query';
 import { UserContext } from '../../contexts/AuthProvider';
 
-const Submit = () => {
+const Submit: FC = () => {
   const history = useHistory();
   const { newRideInfo, handleNewRideInfo } = useContext(NewRideContext);
   const { user } = useContext(UserContext);

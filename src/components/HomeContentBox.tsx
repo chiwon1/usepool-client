@@ -1,11 +1,7 @@
-import React, { ReactElement } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
-type Props = {
-  children: ReactElement;
-};
-
-const HomeContentBox = ({ children }: Props) => {
+const HomeContentBox: FC = ({ children }) => {
   return (
     <Wrapper1>
       <Wrapper2 />

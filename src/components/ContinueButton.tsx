@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 type Props = {
   handleClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const ContinueButton = ({ handleClick }: Props): JSX.Element => {
+const ContinueButton: FC<Props> = ({ handleClick }) => {
   return (
     <ButtonWrapper>
       <button onClick={handleClick}>Continue</button>

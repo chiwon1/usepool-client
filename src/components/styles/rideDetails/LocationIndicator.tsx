@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import RightAddOnIcon from '../RightAddOnIcon';
 import styled from 'styled-components';
 
@@ -7,7 +7,7 @@ type Props = {
   address: string;
 };
 
-const LocationIndicator = ({ location, address }: Props) => {
+const LocationIndicator: FC<Props> = ({ location, address }) => {
   return (
     <Wrapper12>
       <SpanWrapper3>{location}</SpanWrapper3>

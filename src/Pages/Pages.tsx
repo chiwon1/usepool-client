@@ -8,10 +8,10 @@ const KakaoAuth = loadable(() => import('./KakaoAuth'));
 const NewRide = loadable(() => import('./NewRide'));
 const Search = loadable(() => import('./Search'));
 const RideDetails = loadable(() => import('./RideDetails'));
+const ChatRoom = loadable(() => import('./ChatRoom'));
 const RidesAsDriver = loadable(() => import('./myPage/RidesAsDriver'));
 const RidesAsPassenger = loadable(() => import('./myPage/RidesAsPassenger'));
 const Inbox = loadable(() => import('./Inbox'));
-const ChatRoom = loadable(() => import('./ChatRoom'));
 
 const Pages: FC = () => {
   return (

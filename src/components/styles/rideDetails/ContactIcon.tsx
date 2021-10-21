@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
-const ContactIcon = () => {
+const ContactIcon: FC = () => {
   return (
     <SpanWrapper3>
       <svg

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { ILocationInfo } from '../types/ride';
 import { Autocomplete } from '@react-google-maps/api';
 import styled from 'styled-components';
@@ -8,42 +8,40 @@ type Props = {
   placeholder: string;
 };
 
-const AutoCompleteSearchInput = ({ handlePlaceSelect, placeholder }: Props) => {
-  const [autocomplete, setAutocomplete] = useState<any>(null);
+const AutoCompleteSearchInput: FC<Props> = ({
+  handlePlaceSelect,
+  placeholder,
+}) => {
+  const [autocomplete, setAutocomplete] =
+    useState<google.maps.places.Autocomplete | null>(null);
   const [inputValue, setInputValue] = useState<string>('');
 
   const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(ev.target.value);
   };
 
-  const onLoad = (autocomplete: any) => {
+  const onLoad = (autocomplete: google.maps.places.Autocomplete) => {
     setAutocomplete(autocomplete);
   };
 
-  // lat : 위도
   const onPlaceChanged = () => {
-    if (autocomplete.getPlace().place_id) {
-      const {
-        formatted_address: formattedAddress,
-        name,
-        geometry: {
-          location: { lat, lng },
-        },
-      } = autocomplete.getPlace();
+    if (autocomplete?.getPlace().place_id) {
+      const { formatted_address: formattedAddress, name } =
+        autocomplete.getPlace();
+
+      const { lat, lng } = autocomplete.getPlace().geometry!.location as any;
 
       const info: ILocationInfo = {
-        address: formattedAddress,
-        name: name,
+        address: formattedAddress!,
+        name: name!,
         coordinate: { lat: lat(), lng: lng() },
       };
 
-      setInputValue(name);
+      setInputValue(name!);
 
       handlePlaceSelect(info);
     } else {
       setInputValue('');
-
-      console.log('autocomplete is not loaded yet');
     }
   };
 

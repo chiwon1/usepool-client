@@ -1,11 +1,11 @@
-import React, { ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import styled from 'styled-components';
 
 type Props = {
   children: ReactElement;
 };
 
-const MyPageContainer = ({ children }: Props) => {
+const MyPageContainer: FC<Props> = ({ children }) => {
   return (
     <MyPageWrapper>
       <div>

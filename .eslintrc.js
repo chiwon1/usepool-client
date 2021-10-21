@@ -31,16 +31,12 @@ module.exports = {
     'no-invalid-this': 'off',
     'require-jsdoc': 'off',
     'spaced-comment': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
   },
   settings: {
     react: {
       version: 'detect',
     },
   },
-  ignorePatterns: [
-    '.eslintrc.js',
-    '!.prettierrc.json',
-    'src/service-worker.ts',
-    'src/serviceWorkerRegistration.ts',
-  ],
+  ignorePatterns: ['.eslintrc.js', '!.prettierrc.json'],
 };

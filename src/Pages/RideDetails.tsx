@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { FC, useCallback, useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
@@ -13,16 +13,15 @@ import ItineraryBox from '../components/styles/rideDetails/ItineraryBox';
 import { MapWrapper } from './NewRide/departure/DepartureLocation';
 import Tmap from '../components/map/Tmap';
 
-const RideDetails = () => {
+const RideDetails: FC = () => {
   const { rideId } = useParams<{ rideId: string }>();
   const { user } = useContext(UserContext);
   const history = useHistory();
   const queryClient = useQueryClient();
-  const {
-    isLoading,
-    error,
-    data: rideDetails,
-  } = useQuery(['fetchRideDetails', { rideId }], fetchRideDetails(rideId));
+  const { isLoading, data: rideDetails } = useQuery(
+    ['fetchRideDetails', { rideId }],
+    fetchRideDetails(rideId),
+  );
 
   const { mutate } = useMutation(bookRide, {
     onSuccess: () => {
@@ -52,11 +51,7 @@ const RideDetails = () => {
     }
   }, [user]);
 
-  if (isLoading) {
-    return null;
-  }
-
-  if (!rideDetails) {
+  if (!rideDetails || isLoading) {
     return null;
   }
 

@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import styled from 'styled-components';
+import dayjs from 'dayjs';
+
 import RideSearchButton from '../components/RideSearchButton';
 import DateWrapper from '../components/DateWrapper';
 import DateInput from '../components/DateInput';
 import LocationSearchInput from '../components/LocationSearchInput';
 import ReverseLocationButton from '../components/ReverseLocationButton';
 import HomeContentBox from '../components/HomeContentBox';
-import UI from '../constants/ui';
-import { useHistory } from 'react-router-dom';
-import { getToday } from '../utils';
-import { ILocationInfo } from '../types/ride';
-import dayjs from 'dayjs';
 
-const Home = () => {
+import { getToday } from '../utils';
+import UI from '../constants/ui';
+import { ILocationInfo } from '../types/ride';
+
+const Home: FC = () => {
   const history = useHistory();
   const [departureInfo, setDepartureInfo] = useState<ILocationInfo | null>(
     null,

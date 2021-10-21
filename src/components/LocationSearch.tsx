@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import SearchIcon from './SearchIcon';
 import { ILocationInfo } from '../types/ride';
@@ -9,7 +9,7 @@ type Props = {
   placeholder: string;
 };
 
-const LocationSearch = ({ handlePlaceSelect, placeholder }: Props) => {
+const LocationSearch: FC<Props> = ({ handlePlaceSelect, placeholder }) => {
   return (
     <Wrapper8 role="combobox">
       <Wrapper9>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { ILocationInfo } from '../types/ride';
 import AutoCompleteSearchInput from './AutoCompleteSearchInput';
@@ -8,7 +8,7 @@ type Props = {
   handlePlaceSelect: (locationInfo: ILocationInfo) => void;
 };
 
-const LocationSearchInput = ({ placeholder, handlePlaceSelect }: Props) => {
+const LocationSearchInput: FC<Props> = ({ placeholder, handlePlaceSelect }) => {
   return (
     <Wrapper>
       <Wrapper6>
@@ -27,7 +27,7 @@ const LocationSearchInput = ({ placeholder, handlePlaceSelect }: Props) => {
           </Wrapper8>
         </Wrapper7>
       </Wrapper6>
-      <div></div>
+      <div />
     </Wrapper>
   );
 };
@@ -175,44 +175,6 @@ const Wrapper10 = styled.div`
   padding: 0;
   vertical-align: baseline;
   width: 18px;
-`;
-
-const ButtonWrapper1 = styled.div`
-  -webkit-box-align: center;
-  -webkit-font-smoothing: antialiased;
-  align-items: center;
-  background-color: initial;
-  background-image: none;
-  border-style: none;
-  box-sizing: border-box;
-  color: #708c91;
-  cursor: pointer;
-  display: flex;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  height: 40px;
-  line-height: 24px;
-  margin: 0 8px 0 0;
-  min-width: 0;
-  overflow: hidden;
-  padding: 0;
-  text-align: left;
-  vertical-align: baseline;
-  white-space: nowrap;
-
-  &:disabled {
-    cursor: default;
-    opacity: 0;
-  }
-
-  svg {
-    box-sizing: border-box;
-    fill: #00aff5;
-    flex: 0 0 auto;
-    flex: 0 0 auto;
-    transform: rotate(90deg);
-  }
 `;
 
 export default LocationSearchInput;

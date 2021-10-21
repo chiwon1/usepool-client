@@ -1,14 +1,14 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { FC, useCallback, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import autosize from 'autosize';
 
 interface Props {
   chat: string;
-  onSubmitForm: (e: any) => void;
-  onChangeChat: (e: any) => void;
+  onSubmitForm: (ev: React.FormEvent<HTMLFormElement>) => void;
+  onChangeChat: (ev: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const ChatBox = ({ chat, onChangeChat, onSubmitForm }: Props) => {
+const ChatBox: FC<Props> = ({ chat, onChangeChat, onSubmitForm }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const onKeydownChat = useCallback(
     (ev) => {
@@ -31,7 +31,7 @@ const ChatBox = ({ chat, onChangeChat, onSubmitForm }: Props) => {
       <ChatArea>
         <div>
           <Wrapper>
-            <div></div>
+            <div />
             <div>
               <Form onSubmit={onSubmitForm}>
                 <MentionsTextarea

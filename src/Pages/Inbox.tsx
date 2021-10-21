@@ -1,18 +1,25 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
+import styled from 'styled-components';
 import { useQuery } from 'react-query';
+
+import ChatRoomList from '../components/ChatRoomList';
+import { UserContext } from '../contexts/AuthProvider';
 import { fetchChatRoomList } from '../api/chatRoom';
 import { useHistory } from 'react-router-dom';
-import { UserContext } from '../contexts/AuthProvider';
-import styled from 'styled-components';
-import ChatRoomList from '../components/ChatRoomList';
 
 const Inbox: FC = () => {
   const { user } = useContext(UserContext);
-  const {
-    isLoading,
-    error,
-    data: chatRoomList,
-  } = useQuery(['fetchChatRoomList', { id: user?.userId }], fetchChatRoomList);
+  const history = useHistory();
+  const { isLoading, data: chatRoomList } = useQuery(
+    ['fetchChatRoomList', { id: user?.userId }],
+    fetchChatRoomList,
+  );
+
+  useEffect(() => {
+    if (!user) {
+      history.push('/login');
+    }
+  }, [user]);
 
   if (!chatRoomList || isLoading) {
     return null;

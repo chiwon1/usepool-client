@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import LocationDiv from '../LocationDiv';
 
@@ -11,14 +11,14 @@ type Props = {
   handleClick?: () => void;
 };
 
-const SearchList = ({
+const SearchList: FC<Props> = ({
   departureLocation,
   arriveAt,
   departureTime,
   nickname,
   profilePicture,
   handleClick,
-}: Props) => {
+}) => {
   // TODO 2021/10/10 cw: profilePicture default prop 지정하기
 
   return (

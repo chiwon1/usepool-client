@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import cc from 'classcat';
+import classcat from 'classcat';
 
 import { StyledTimePicker, StyledTimePickerWrapper } from './styles';
 import { prefix } from '../../utils';
@@ -131,7 +131,7 @@ export class TimePicker extends PureComponent<
     const { steps } = this.state;
     return (
       <StyledTimePickerWrapper
-        className={cc([
+        className={classcat([
           prefix({ timePicker: true }),
           { focus: this.state.isFocused },
           className,

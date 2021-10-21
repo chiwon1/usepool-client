@@ -1,9 +1,15 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  FC,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
-import { UserContext } from '../../contexts/AuthProvider';
-import { IRide } from '../../types/ride';
 
 import loadable from '@loadable/component';
+import { UserContext } from '../../contexts/AuthProvider';
+import { IRide } from '../../types/ride';
 
 const DepartureLocation = loadable(
   () => import('./departure/DepartureLocation'),
@@ -28,7 +34,7 @@ export const DepartureCoordinateContext = createContext<{
   handleDepartureCoordinate: (value: ICoordinate | null) => void;
 }>({ departureCoordinate: null, handleDepartureCoordinate: () => null });
 
-const NewRide = () => {
+const NewRide: FC = () => {
   const { user } = useContext(UserContext);
 
   const [newRideInfo, setNewRideInfo] = useState<IRide | null>(null);

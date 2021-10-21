@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
 
@@ -10,13 +10,13 @@ type Props = {
   departureDate: string;
 };
 
-const SearchListBox = ({
+const SearchListBox: FC<Props> = ({
   departureLocation,
   destination,
   availableNumber,
   children,
   departureDate,
-}: Props): JSX.Element => {
+}) => {
   return (
     <div>
       <div>

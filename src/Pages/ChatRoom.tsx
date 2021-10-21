@@ -1,38 +1,35 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { FC, useCallback, useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+
+import styled from 'styled-components';
 import { useMutation, useQueryClient } from 'react-query';
+
+import useSocket from '../hooks/useSocket';
+
 import ChatBox from '../components/chat/ChatBox';
 import ChatList from '../components/chat/ChatList';
-import styled from 'styled-components';
-import useSocket from '../hooks/useSocket';
-import Scrollbars from 'react-custom-scrollbars-2';
-import useInput from '../hooks/useInput';
-import { IChat } from '../types/chat';
-import { fetchChatList } from '../api/chatRoom';
-import { postNewChat } from '../api/chat';
 import ChatRoomHeader from '../components/chat/ChatRoomHeader';
-import { UserContext } from '../contexts/AuthProvider';
 
-const ChatRoom = () => {
+import { UserContext } from '../contexts/AuthProvider';
+import { postNewChat } from '../api/chat';
+import { IChat } from '../types/chat';
+
+const ChatRoom: FC = () => {
   const history = useHistory();
-  const { user } = useContext(UserContext);
   const queryClient = useQueryClient();
+  const { user } = useContext(UserContext);
   const { chatRoomId } = useParams<{ chatRoomId: string }>();
   const [socket, disconnect] = useSocket(chatRoomId);
-
-  const [chat, onChangeChat, setChat] = useInput<string>('');
-
-  // TODO 2021/10/14 cw: forward ref로 리팩토링하기
-  // const scrollbarRef = useRef<Scrollbars>(null);
-
-  useEffect(() => {
-    socket?.emit('join-room', chatRoomId);
-  }, [chatRoomId]);
+  const [chat, setChat] = useState<string>('');
 
   const { mutate } = useMutation(['postNewChat', { chatRoomId }], postNewChat);
 
-  const onSubmitForm = useCallback(
-    (ev) => {
+  const handleChatChange = (ev: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setChat(ev.target.value);
+  };
+
+  const handleSubmit = useCallback(
+    (ev: React.FormEvent<HTMLFormElement>) => {
       ev.preventDefault();
 
       if (chat?.trim()) {
@@ -55,6 +52,10 @@ const ChatRoom = () => {
       },
     );
   }, []);
+
+  useEffect(() => {
+    socket?.emit('join-room', chatRoomId);
+  }, [chatRoomId]);
 
   useEffect(() => {
     socket?.on('chat', onMessage);
@@ -81,8 +82,8 @@ const ChatRoom = () => {
       <ChatList />
       <ChatBox
         chat={chat}
-        onChangeChat={onChangeChat}
-        onSubmitForm={onSubmitForm}
+        onChangeChat={handleChatChange}
+        onSubmitForm={handleSubmit}
       />
     </Container>
   );
@@ -96,7 +97,6 @@ export const Container = styled.div`
   flex-direction: column;
   -webkit-box-pack: start;
   justify-content: flex-start;
-  height: 100%;
   padding-bottom: 0;
   -webkit-box-flex: 1;
   flex-grow: 1;

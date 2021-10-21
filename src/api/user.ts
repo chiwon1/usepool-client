@@ -1,4 +1,4 @@
-import axiosInstance from './axios';
+import axiosInstance from '../utils/axios';
 import { IUserInfo } from '../types/user';
 
 export interface IGetUserResponse {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import TimeIndicator from './TimeIndicator';
 import LocationIndicator from './LocationIndicator';
 import styled from 'styled-components';
@@ -13,13 +13,13 @@ type Props = {
   destinationAddress: string;
 };
 
-const ItineraryBox = ({
+const ItineraryBox: FC<Props> = ({
   departureTime,
   depatureLocation,
   depatureAddress,
   destination,
   destinationAddress,
-}: Props) => {
+}) => {
   return (
     <>
       <ul>

@@ -25,11 +25,7 @@ const Search: FC = () => {
   } = useQueryString();
 
   const [availableNumber, setAvailableNumber] = useState<number>(0);
-  const {
-    isLoading,
-    error,
-    data: rideList,
-  } = useQuery(
+  const { isLoading, data: rideList } = useQuery(
     'fetchSearchedRides',
     fetchSearchedRides({
       departureCoordinate: {

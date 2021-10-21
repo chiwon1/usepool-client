@@ -1,4 +1,4 @@
-import axiosInstance from './axios';
+import axiosInstance from '../utils/axios';
 import { IGetUserResponse } from './user';
 
 export const getAuth = async (authCode: string): Promise<IGetUserResponse> => {
@@ -6,6 +6,4 @@ export const getAuth = async (authCode: string): Promise<IGetUserResponse> => {
   return await axiosInstance.post<string, IGetUserResponse>(
     `/login?authCode=${authCode}`,
   );
-
-  // TODO 2021/10/14 cw: try catch 로 userInfo 못가져온 경우 핸들링으로 리팩토링
 };

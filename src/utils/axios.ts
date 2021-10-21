@@ -8,24 +8,19 @@ export const axiosInstance = axios.create({
 });
 
 const setResponseInterceptor = () => {
-  const parseResponseData = (res: AxiosResponse) => res.data;
+  const parseResponseData = (res: AxiosResponse): AxiosResponse => res.data;
 
   const handleResponseError = (err: AxiosError) => {
     if (err.response) {
-      const error =
-        err.response?.status < 500
-          ? {
-              statusCode: err.response?.status,
-              message: err.response?.data,
-            }
-          : {
-              statusCode: 500,
-              message: ERROR.INTERNAL_SERVER_ERROR,
-            };
-
-      console.log('error', error);
-    } else {
-      console.log('error', err);
+      return err.response?.status < 500
+        ? {
+            statusCode: err.response?.status,
+            message: err.response?.data,
+          }
+        : {
+            statusCode: 500,
+            message: ERROR.INTERNAL_SERVER_ERROR,
+          };
     }
   };
 
@@ -37,7 +32,7 @@ const setResponseInterceptor = () => {
 
 setResponseInterceptor();
 
-export const updateToken = (token: string) => {
+export const updateToken = (token: string): void => {
   axiosInstance.defaults.headers!.authorization = `Bearer ${token}`;
 };
 

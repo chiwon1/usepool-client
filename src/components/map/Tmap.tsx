@@ -1,9 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-/* global Tmapv2 */
-
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import useTmap from '../../hooks/useTmap';
 import { ICoordinate } from '../../Pages/NewRide/NewRide';
 
@@ -12,23 +10,21 @@ export const mapCenter = {
   lng: 126.96961,
 };
 
-const { Tmapv2 } = window;
-
 type Props = {
   departureCoordinate?: ICoordinate | null;
   destinationCoordinate?: ICoordinate | null;
 };
 
-const Tmap = ({
+const Tmap: FC<Props> = ({
   departureCoordinate,
   destinationCoordinate,
-}: Props): JSX.Element => {
+}: Props) => {
   const mapInstance = useTmap();
   const [markerState, setMarkerState] = useState(null);
 
   const createMarker = (coordinate) => {
-    const marker = new Tmapv2.Marker({
-      position: new Tmapv2.LatLng(coordinate.lat, coordinate.lng), //Marker의 중심좌표 설정.
+    const marker = new window.Tmapv2.Marker({
+      position: new window.Tmapv2.LatLng(coordinate.lat, coordinate.lng), //Marker의 중심좌표 설정.
       map: mapInstance, //Marker가 표시될 Map 설정..
     });
 
@@ -36,7 +32,7 @@ const Tmap = ({
   };
 
   const onComplete = function () {
-    const jsonObject = new Tmapv2.extension.GeoJSON();
+    const jsonObject = new window.Tmapv2.extension.GeoJSON();
     const jsonForm = jsonObject.rpTrafficRead(this._responseData);
     const trafficColors = {
       trafficDefaultColor: '#000000', //교통 정보가 없을 때
@@ -51,7 +47,7 @@ const Tmap = ({
       lng: (departureCoordinate.lng + destinationCoordinate.lng) / 2,
     };
     mapInstance?.setCenter(
-      new Tmapv2.LatLng(midpointCoordinate.lat, midpointCoordinate.lng),
+      new window.Tmapv2.LatLng(midpointCoordinate.lat, midpointCoordinate.lng),
     );
     mapInstance?.setZoom(12);
   };
@@ -61,8 +57,11 @@ const Tmap = ({
   };
 
   const getRP = (baseCoordinate, targetCoordinate) => {
-    const sLatlng = new Tmapv2.LatLng(baseCoordinate.lat, baseCoordinate.lng);
-    const eLatlng = new Tmapv2.LatLng(
+    const sLatlng = new window.Tmapv2.LatLng(
+      baseCoordinate.lat,
+      baseCoordinate.lng,
+    );
+    const eLatlng = new window.Tmapv2.LatLng(
       targetCoordinate.lat,
       targetCoordinate.lng,
     );
@@ -79,7 +78,7 @@ const Tmap = ({
       onError: onError,
     };
 
-    const tData = new Tmapv2.extension.TData();
+    const tData = new window.Tmapv2.extension.TData();
 
     tData.getRoutePlanJson(sLatlng, eLatlng, optionObj, params);
   };
@@ -92,7 +91,10 @@ const Tmap = ({
       createMarker(departureCoordinate);
 
       mapInstance?.setCenter(
-        new Tmapv2.LatLng(departureCoordinate.lat, departureCoordinate.lng),
+        new window.Tmapv2.LatLng(
+          departureCoordinate.lat,
+          departureCoordinate.lng,
+        ),
       );
     }
   });

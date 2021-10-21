@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import UpperRouteIcon from '../styles/UpperRouteIcon';
 import LowerRouteIcon from '../styles/LowerRouteIcon';
@@ -11,13 +11,13 @@ type Props = {
   handleClick?: () => void;
 };
 
-const MyPageRideList = ({
+const MyPageRideList: FC<Props> = ({
   departureDate,
   departureTime,
   departureLocation,
   destination,
   handleClick,
-}: Props) => {
+}) => {
   return (
     <StyledLi onClick={handleClick}>
       <Wrapper2>

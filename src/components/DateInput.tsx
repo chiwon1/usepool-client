@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 type Props = {
   departDate: string;
   handleChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
-const DateInput = ({ departDate, handleChange }: Props) => {
+const DateInput: FC<Props> = ({ departDate, handleChange }) => {
   return (
     <>
       <input type="date" value={departDate} onChange={handleChange} />

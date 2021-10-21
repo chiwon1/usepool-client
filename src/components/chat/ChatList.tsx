@@ -1,17 +1,15 @@
-import React, { useContext, useEffect, useMemo, useRef } from 'react';
+import React, { FC, useEffect, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { UserContext } from '../../contexts/AuthProvider';
 import { IChat } from '../../types/chat';
 import Chat from './Chat';
 import makeSection from '../../utils/makeSection';
 import Scrollbars from 'react-custom-scrollbars-2';
 import { fetchChatList } from '../../api/chatRoom';
 
-const ChatList = () => {
+const ChatList: FC = () => {
   const { chatRoomId } = useParams<{ chatRoomId: string }>();
-  const { user } = useContext(UserContext);
   const scrollbarRef = useRef<Scrollbars>(null);
 
   const { data: chatList } = useQuery<any, any, IChat[]>(
@@ -40,20 +38,18 @@ const ChatList = () => {
             <Wrapper3>
               <div>
                 <div>
-                  {Object.entries(chatSections).map(
-                    ([date, chatList], index) => {
-                      return (
-                        <Section className={`section-${date}`} key={date}>
-                          <StickyHeader>
-                            <p>{date}</p>
-                          </StickyHeader>
-                          {chatList.map((chat, index) => (
-                            <Chat key={index} data={chat} />
-                          ))}
-                        </Section>
-                      );
-                    },
-                  )}
+                  {Object.entries(chatSections).map(([date, chatList]) => {
+                    return (
+                      <Section className={`section-${date}`} key={date}>
+                        <StickyHeader>
+                          <p>{date}</p>
+                        </StickyHeader>
+                        {chatList.map((chat, index) => (
+                          <Chat key={index} data={chat} />
+                        ))}
+                      </Section>
+                    );
+                  })}
                 </div>
               </div>
             </Wrapper3>

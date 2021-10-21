@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import RightAddOnIcon from '../styles/RightAddOnIcon';
 import styled from 'styled-components';
@@ -6,7 +6,7 @@ import { useQuery } from 'react-query';
 import { fetchChatRoomInfo } from '../../api/chatRoom';
 import { IChatRoom } from '../../types/chatRoom';
 
-const ChatRoomHeader = () => {
+const ChatRoomHeader: FC = () => {
   const { chatRoomId } = useParams<{ chatRoomId: string }>();
 
   const { data: info, isLoading } = useQuery<any, any, IChatRoom>(

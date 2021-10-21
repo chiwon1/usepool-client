@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { IChat } from '../types/chat';
 
-const makeSection = (chatList: IChat[]) => {
+const makeSection = (chatList: IChat[]): { [p: string]: IChat[] } => {
   const sections: { [key: string]: IChat[] } = {};
 
   chatList.forEach((chat) => {
