@@ -13,7 +13,7 @@ export const fetchSearchedRides = (value: IRide) => async () => {
   }
 
   const { searchResult } = (await axiosInstance.get(
-    `/rides/search?departureCoordinate=${departureCoordinate[0]}&departureCoordinate=${departureCoordinate[1]}&departureDate=${departureDate}&destinationCoordinate=${destinationCoordinate[0]}&destinationCoordinate=${destinationCoordinate[1]}`,
+    `/rides/search?departureCoordinate=${departureCoordinate.lat}&departureCoordinate=${departureCoordinate.lng}&departureDate=${departureDate}&destinationCoordinate=${destinationCoordinate.lat}&destinationCoordinate=${destinationCoordinate.lng}`,
   )) as any;
 
   return searchResult as ISearchRide[];

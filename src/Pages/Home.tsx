@@ -9,7 +9,6 @@ import HomeContentBox from '../components/HomeContentBox';
 import UI from '../constants/ui';
 import { useHistory } from 'react-router-dom';
 import { getToday } from '../utils';
-import AutoCompleteSearchInput from '../components/AutoCompleteSearchInput';
 import { ILocationInfo } from '../types/ride';
 import dayjs from 'dayjs';
 
@@ -40,16 +39,12 @@ const Home = () => {
 
     const formattedDate = dayjs(inputDepartureDate).format('DD MMM YYYY');
 
+    if (!departureInfo || !destinationInfo) {
+      return;
+    }
+
     history.push(
-      `/search?departureLocation=${departureInfo!.name}&departureCoordinate=${
-        departureInfo!.coordinate[0]
-      }&departureCoordinate=${
-        departureInfo!.coordinate[1]
-      }&departureDate=${formattedDate}&destination=${
-        destinationInfo!.name
-      }&destinationCoordinate=${
-        destinationInfo!.coordinate[0]
-      }&destinationCoordinate=${destinationInfo!.coordinate[1]}`,
+      `/search?departureLocation=${departureInfo.name}&departureCoordinate=${departureInfo.coordinate.lat}&departureCoordinate=${departureInfo.coordinate.lng}&departureDate=${formattedDate}&destination=${destinationInfo.name}&destinationCoordinate=${destinationInfo.coordinate.lat}&destinationCoordinate=${destinationInfo.coordinate.lng}`,
     );
 
     setDepartureInfo(null);

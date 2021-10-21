@@ -1,8 +1,7 @@
-import React, { ReactElement, useState, createContext, useEffect } from 'react';
+import React, { ReactElement, useState, createContext } from 'react';
 import { IUserInfo } from '../types/user';
 import { fetchUserInfo } from '../api/user';
 import { useQuery } from 'react-query';
-import { fetchRideDetails } from '../api/ride';
 
 export const UserContext = createContext<{
   user: IUserInfo | null;
@@ -19,14 +18,6 @@ const AuthProvider = ({ children }: Props) => {
   const handleUser = (value: IUserInfo | null) => {
     setUser(value);
   };
-
-  const { data: userInfo } = useQuery(['fetchUserInfo'], fetchUserInfo(), {
-    onSuccess: () => {
-      if (userInfo) {
-        setUser(userInfo);
-      }
-    },
-  });
 
   return (
     <UserContext.Provider value={{ user, handleUser }}>

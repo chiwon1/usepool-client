@@ -32,9 +32,15 @@ const Search: FC = () => {
   } = useQuery(
     'fetchSearchedRides',
     fetchSearchedRides({
-      departureCoordinate: (departureCoordinate as string[]).map(Number),
+      departureCoordinate: {
+        lat: Number(departureCoordinate?.[0]),
+        lng: Number(departureCoordinate?.[1]),
+      },
       departureDate: departureDate as string,
-      destinationCoordinate: (destinationCoordinate as string[]).map(Number),
+      destinationCoordinate: {
+        lat: Number(destinationCoordinate?.[0]),
+        lng: Number(destinationCoordinate?.[1]),
+      },
     }),
   );
 

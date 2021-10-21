@@ -34,7 +34,7 @@ const AutoCompleteSearchInput = ({ handlePlaceSelect, placeholder }: Props) => {
       const info: ILocationInfo = {
         address: formattedAddress,
         name: name,
-        coordinate: [lat(), lng()],
+        coordinate: { lat: lat(), lng: lng() },
       };
 
       setInputValue(name);

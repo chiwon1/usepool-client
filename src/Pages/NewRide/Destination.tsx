@@ -1,12 +1,15 @@
 import React, { FC, useContext, useState } from 'react';
 import LocationSearch from '../../components/LocationSearch';
 import { useHistory } from 'react-router-dom';
-import { ICoordinate, NewRideContext } from './NewRide';
-import FormNewRide from '../../components/FormNewRide';
-import SearchMap from '../../components/map/SearchMap';
+import {
+  DepartureCoordinateContext,
+  ICoordinate,
+  NewRideContext,
+} from './NewRide';
 import styled from 'styled-components';
 import { ILocationInfo } from '../../types/ride';
 import ContinueButton from '../../components/ContinueButton';
+import Tmap from '../../components/map/Tmap';
 
 const Destination: FC = () => {
   const history = useHistory();
@@ -14,13 +17,12 @@ const Destination: FC = () => {
   const [destinationCoordinate, setDestinationCoordinate] =
     useState<ICoordinate | null>(null);
 
+  const { departureCoordinate } = useContext(DepartureCoordinateContext);
+
   const handlePlaceSelect = (locationInfo: ILocationInfo) => {
     const { address, name, coordinate } = locationInfo;
 
-    setDestinationCoordinate({
-      lat: coordinate[0],
-      lng: coordinate[1],
-    });
+    setDestinationCoordinate(coordinate);
 
     handleNewRideInfo({
       ...newRideInfo,
@@ -31,6 +33,10 @@ const Destination: FC = () => {
   };
 
   const handleClick = () => {
+    if (!destinationCoordinate) {
+      return;
+    }
+
     history.push('/newRide/departure-date');
   };
 
@@ -50,7 +56,10 @@ const Destination: FC = () => {
               <ContinueButton handleClick={handleClick} />
             </Wrapper5>
             <MapWrapper>
-              <SearchMap destinationCoordinate={destinationCoordinate} />
+              <Tmap
+                departureCoordinate={departureCoordinate}
+                destinationCoordinate={destinationCoordinate}
+              />
             </MapWrapper>
           </Wrapper8>
         </Wrapper4>

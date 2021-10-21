@@ -24,9 +24,11 @@ const Submit = () => {
   useEffect(() => {
     mutate(newRideInfo!);
 
-    handleNewRideInfo(null);
-
     history.replace('/');
+
+    return () => {
+      handleNewRideInfo(null);
+    };
   }, []);
 
   return <></>;
