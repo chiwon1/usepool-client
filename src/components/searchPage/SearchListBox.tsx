@@ -1,22 +1,22 @@
-import React, { ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
 
 type Props = {
   children: ReactElement;
-  departFrom: string;
-  arriveAt: string;
+  departureLocation: string;
+  destination: string;
   availableNumber: number;
-  departDate: string;
+  departureDate: string;
 };
 
-const SearchListBox = ({
-  departFrom,
-  arriveAt,
+const SearchListBox: FC<Props> = ({
+  departureLocation,
+  destination,
   availableNumber,
   children,
-  departDate,
-}: Props): JSX.Element => {
+  departureDate,
+}) => {
   return (
     <div>
       <div>
@@ -27,11 +27,11 @@ const SearchListBox = ({
             <div>
               <Wrapper7>
                 <Wrapper8>
-                  <H2wrapper>{dayjs(departDate).format('MM/D')}</H2wrapper>
+                  <H2wrapper>{dayjs(departureDate).format('DD MMM')}</H2wrapper>
                   <Wrapper9>
                     <Wrapper10>
                       <H1wrapper>
-                        {`${departFrom} → ${arriveAt}: 
+                        {`${departureLocation} → ${destination}: 
                         ${availableNumber} rides available`}
                       </H1wrapper>
                     </Wrapper10>

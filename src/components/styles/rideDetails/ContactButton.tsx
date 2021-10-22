@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import ContactIcon from './ContactIcon';
 import styled from 'styled-components';
 
@@ -7,7 +7,7 @@ type Props = {
   nickname: string;
 };
 
-const ContactButton = ({ handleClick, nickname }: Props) => {
+const ContactButton: FC<Props> = ({ handleClick, nickname }) => {
   return (
     <Wrapper17>
       <StyledButton onClick={handleClick}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   departDate: string;
 };
 
-const SearchTopBar = ({ departFrom, arriveAt, departDate }: Props) => {
+const SearchTopBar: FC<Props> = ({ departFrom, arriveAt, departDate }) => {
   return (
     <Wrapper role="presentation">
       <Wrapper2>

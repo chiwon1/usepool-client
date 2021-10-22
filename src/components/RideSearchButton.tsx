@@ -61,7 +61,7 @@ const Wrapper = styled.div`
     text-align: left;
     vertical-align: baseline;
     white-space: nowrap;
-    width: 88px;
+    width: 90px;
 
     &:disabled {
       cursor: default;

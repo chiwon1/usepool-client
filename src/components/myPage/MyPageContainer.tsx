@@ -1,11 +1,11 @@
-import React, { ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import styled from 'styled-components';
 
 type Props = {
   children: ReactElement;
 };
 
-const MyPageContainer = ({ children }: Props) => {
+const MyPageContainer: FC<Props> = ({ children }) => {
   return (
     <MyPageWrapper>
       <div>
@@ -19,8 +19,7 @@ const MyPageWrapper = styled.div`
   position: relative !important;
   -webkit-box-flex: 1;
   flex-grow: 1;
-  min-height: 872px;
-  height: auto;
+  height: 100%;
   display: flex;
   flex-direction: column;
   -webkit-box-pack: start;

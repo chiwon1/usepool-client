@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
-const UpperRouteIcon = () => {
+const UpperRouteIcon: FC = () => {
   return (
     <Wrapper8>
       <Wrapper9 />

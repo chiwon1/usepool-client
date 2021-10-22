@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 type Props = {
@@ -6,7 +6,7 @@ type Props = {
   buttonName: string;
 };
 
-const MenuList = ({ handleClick, buttonName }: Props) => {
+const MenuList: FC<Props> = ({ handleClick, buttonName }) => {
   return (
     <MenuListWrapper onClick={handleClick}>
       <div>

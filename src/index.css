@@ -15,9 +15,7 @@ html {
 html,
 body,
 #root {
-  height: 100vh;
-  height: -webkit-fill-available;
-  height: stretch;
+  height: calc(100vh - 72px);
 }
 
 html,

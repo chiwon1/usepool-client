@@ -1,14 +1,10 @@
-import React, { ReactElement } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
-type Props = {
-  children: ReactElement;
-};
-
-const HomeContentBox = ({ children }: Props) => {
+const HomeContentBox: FC = ({ children }) => {
   return (
     <Wrapper1>
-      <Wrapper2></Wrapper2>
+      <Wrapper2 />
       <Wrapper3>
         <H1Wrapper>Usepool</H1Wrapper>
         <Wrapper4>{children}</Wrapper4>
@@ -35,14 +31,14 @@ const Wrapper1 = styled.div`
 const Wrapper2 = styled.div`
   -webkit-font-smoothing: antialiased;
   background-position: center center;
-  background-position: center center;
+  background-image: url(https://cdn.blablacar.com/kairos/assets/build/images/carpool_blablabus_large-e3d8eff32c13cdafc080a100f03628bd.svg);
   background-size: cover;
   border-width: 0;
   box-sizing: border-box;
   font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
-  height: 45vh;
+  height: 100%;
   left: 0;
   line-height: 16px;
   margin: 0;

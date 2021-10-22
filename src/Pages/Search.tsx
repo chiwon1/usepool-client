@@ -16,20 +16,27 @@ import { useQuery } from 'react-query';
 const Search: FC = () => {
   const history = useHistory();
   const { user } = useContext(UserContext);
-  const { departFrom, arriveAt, departDate } = useQueryString();
-  const query = useQueryString();
+  const {
+    departureLocation,
+    departureCoordinate,
+    departureDate,
+    destination,
+    destinationCoordinate,
+  } = useQueryString();
 
   const [availableNumber, setAvailableNumber] = useState<number>(0);
-  const {
-    isLoading,
-    error,
-    data: rideList,
-  } = useQuery(
+  const { isLoading, data: rideList } = useQuery(
     'fetchSearchedRides',
     fetchSearchedRides({
-      departFrom: departFrom as string,
-      departDate: departDate as string,
-      arriveAt: arriveAt as string,
+      departureCoordinate: {
+        lat: Number(departureCoordinate?.[0]),
+        lng: Number(departureCoordinate?.[1]),
+      },
+      departureDate: departureDate as string,
+      destinationCoordinate: {
+        lat: Number(destinationCoordinate?.[0]),
+        lng: Number(destinationCoordinate?.[1]),
+      },
     }),
   );
 
@@ -37,7 +44,7 @@ const Search: FC = () => {
     history.push(`/rides/${id}`);
   };
 
-  if (!departFrom || !arriveAt || !departDate) {
+  if (!departureLocation || !destination || !departureDate) {
     history.push(`/`);
   }
 
@@ -60,27 +67,33 @@ const Search: FC = () => {
   return (
     <>
       <SearchTopBar
-        departFrom={departFrom as string}
-        arriveAt={arriveAt as string}
-        departDate={departDate as string}
+        departFrom={departureLocation as string}
+        departDate={departureDate as string}
+        arriveAt={destination as string}
       />
       <PageWrapper>
         <Wrapper role="presentation">
           <SearchHeader availableNumber={availableNumber} />
           <SearchListBox
-            departFrom={departFrom as string}
-            arriveAt={arriveAt as string}
+            departureLocation={departureLocation as string}
+            destination={destination as string}
+            departureDate={departureDate as string}
             availableNumber={availableNumber}
-            departDate={departDate as string}
           >
             <StyledUl>
               {rideList?.map(
-                ({ _id, departFrom, arriveAt, departTime, driver }) => (
+                ({
+                  _id,
+                  departureLocation,
+                  destination,
+                  departureTime,
+                  driver,
+                }) => (
                   <SearchList
                     key={_id}
-                    departFrom={departFrom}
-                    arriveAt={arriveAt}
-                    departTime={departTime}
+                    departureLocation={departureLocation}
+                    arriveAt={destination}
+                    departureTime={departureTime}
                     nickname={driver.nickname}
                     profilePicture={driver.profilePicture}
                     handleClick={() => handleClick(_id)}

@@ -4,7 +4,7 @@ import { UserContext } from '../contexts/AuthProvider';
 
 import MenuList from './MenuList';
 import { useHistory } from 'react-router-dom';
-import axiosInstance from '../api/axios';
+import axiosInstance from '../utils/axios';
 import UI from '../constants/ui';
 import { loginWithKakao } from '../utils/kakaoLogin';
 

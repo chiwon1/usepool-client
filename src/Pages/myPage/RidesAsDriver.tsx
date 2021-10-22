@@ -1,21 +1,21 @@
-import React, { useContext, useEffect } from 'react';
-import { UserContext } from '../../contexts/AuthProvider';
+import React, { FC, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { fetchMyRidesAsDriver } from '../../api/myRides';
-import { StyledUl } from '../Search';
+
 import { useQuery } from 'react-query';
+
 import MyPageRideList from '../../components/myPage/MyPageRideList';
 import MyPageContainer from '../../components/myPage/MyPageContainer';
-import { ListWrapper } from './RidesAsPassenger';
 
-const RidesAsDriver = () => {
+import { ListWrapper } from './RidesAsPassenger';
+import { UserContext } from '../../contexts/AuthProvider';
+import { StyledUl } from '../Search';
+
+import { fetchMyRidesAsDriver } from '../../api/myRides';
+
+const RidesAsDriver: FC = () => {
   const history = useHistory();
   const { user } = useContext(UserContext);
-  const {
-    isLoading,
-    error,
-    data: rideList,
-  } = useQuery(
+  const { isLoading, data: rideList } = useQuery(
     ['fetchMyRidesAsDriver', { id: user?.userId }],
     fetchMyRidesAsDriver(),
   );
@@ -40,13 +40,19 @@ const RidesAsDriver = () => {
         <h1>My rides as driver</h1>
         <StyledUl>
           {rideList?.map(
-            ({ _id, departDate, departFrom, arriveAt, departTime, driver }) => (
+            ({
+              _id,
+              departureLocation,
+              destination,
+              departureDate,
+              departureTime,
+            }) => (
               <MyPageRideList
                 key={_id}
-                departDate={departDate}
-                departFrom={departFrom}
-                arriveAt={arriveAt}
-                departTime={departTime}
+                departureLocation={departureLocation}
+                destination={destination}
+                departureDate={departureDate}
+                departureTime={departureTime}
                 handleClick={() => handleClick(_id)}
               />
             ),

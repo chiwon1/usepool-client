@@ -1,20 +1,28 @@
-import axiosInstance from './axios';
+import axiosInstance from '../utils/axios';
 import { IChatRoom } from '../types/chatRoom';
+import { IChat } from '../types/chat';
 
-export const fetchChatRoomList = async () => {
-  const res = (await axiosInstance.get('/chatRooms/list')) as any;
+export const fetchChatRoomList = async (): Promise<IChatRoom[]> => {
+  const res: { chatRoomList: IChatRoom[] } = await axiosInstance.get(
+    '/chatRooms/list',
+  );
 
-  return res.chatRoomList as IChatRoom[];
+  return res.chatRoomList;
 };
 
-export const fetchChatList = (roomId: string) => async () => {
-  const res = (await axiosInstance.get(`/chatRooms/${roomId}`)) as any;
+export const fetchChatList = (roomId: string) => async (): Promise<IChat[]> => {
+  const res: { chatList: IChat[] } = await axiosInstance.get(
+    `/chatRooms/${roomId}`,
+  );
 
   return res.chatList;
 };
 
-export const fetchChatRoomInfo = (roomId: string) => async () => {
-  const res = (await axiosInstance.get(`/chatRooms/${roomId}/info`)) as any;
+export const fetchChatRoomInfo =
+  (roomId: string) => async (): Promise<IChatRoom> => {
+    const res: { info: IChatRoom } = await axiosInstance.get(
+      `/chatRooms/${roomId}/info`,
+    );
 
-  return res.info as IChatRoom;
-};
+    return res.info;
+  };

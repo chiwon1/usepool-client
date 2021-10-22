@@ -1,36 +1,52 @@
-import axiosInstance from './axios';
+import axiosInstance from '../utils/axios';
 import { IRide, ISearchRide } from '../types/ride';
+import { AxiosResponse } from 'axios';
 
-export const postNewRide = async (value: IRide) => {
+export const postNewRide = async (
+  value: IRide,
+): Promise<AxiosResponse<IRide>> => {
   return await axiosInstance.post(`/rides/new`, value);
 };
 
-export const fetchSearchedRides = (value: IRide) => async () => {
-  const { departFrom, departDate, arriveAt } = value;
+export const fetchSearchedRides =
+  (value: IRide) => async (): Promise<void | ISearchRide[]> => {
+    const { departureCoordinate, departureDate, destinationCoordinate } = value;
 
-  if (!departFrom || !departDate || !arriveAt) {
-    return console.log('invalid parameter input for searchRide');
-  }
+    if (!departureCoordinate || !departureDate || !destinationCoordinate) {
+      return console.log('invalid parameter input for searchRide');
+    }
 
-  const { searchResult } = (await axiosInstance.get(
-    `/rides/search?departFrom=${departFrom}&arriveAt=${arriveAt}&departDate=${departDate}`,
-  )) as any;
+    const { searchResult }: { searchResult: ISearchRide[] } =
+      await axiosInstance.get(
+        `/rides/search?departureCoordinate=${departureCoordinate.lat}&departureCoordinate=${departureCoordinate.lng}&departureDate=${departureDate}&destinationCoordinate=${destinationCoordinate.lat}&destinationCoordinate=${destinationCoordinate.lng}`,
+      );
 
-  return searchResult as ISearchRide[];
-};
+    return searchResult;
+  };
 
-export const fetchRideDetails = (id: string) => async () => {
-  const { details } = (await axiosInstance.get(`/rides/${id}`)) as any;
+export const fetchRideDetails =
+  (id: string) => async (): Promise<ISearchRide> => {
+    const { details }: { details: ISearchRide } = await axiosInstance.get(
+      `/rides/${id}`,
+    );
 
-  return details as ISearchRide;
-};
+    return details;
+  };
 
-export const bookRide = async (rideId: string) => {
+export const bookRide = async (
+  rideId: string,
+): Promise<
+  AxiosResponse<{
+    result: string;
+  }>
+> => {
   return await axiosInstance.post(`/rides/${rideId}`);
 };
 
-export const postNewChatRoom = async (rideId: string) => {
-  const res = (await axiosInstance.post(`/rides/${rideId}/newChatRoom`)) as any;
+export const postNewChatRoom = async (rideId: string): Promise<string> => {
+  const res: { roomId: string } = await axiosInstance.post(
+    `/rides/${rideId}/newChatRoom`,
+  );
 
-  return res.roomId as string;
+  return res.roomId;
 };

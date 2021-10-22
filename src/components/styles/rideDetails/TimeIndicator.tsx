@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 type Props = {
   time?: string;
 };
 
-const TimeIndicator = ({ time }: Props) => {
+const TimeIndicator: FC<Props> = ({ time }) => {
   return (
     <Wrapper7>
       <time>{time}</time>

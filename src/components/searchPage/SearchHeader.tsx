@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 type Props = {
   availableNumber: number;
 };
 
-const SearchHeader = ({ availableNumber }: Props) => {
+const SearchHeader: FC<Props> = ({ availableNumber }) => {
   return (
     <Wrapper4>
       <Wrapper5>
@@ -45,7 +45,7 @@ const SearchHeader = ({ availableNumber }: Props) => {
                     <circle cx="7.33" cy="12.33" fill="#FFF" r="2.67" />
                     <circle cx="20.67" cy="12.33" fill="#FFF" r="2.67" />
                   </g>
-                  <SpanWrapper2></SpanWrapper2>
+                  <SpanWrapper2 />
                 </svg>
                 <SpanWrapper3>Carpool</SpanWrapper3>
               </SpanWrapper>

@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
-const LowerRouteIcon = () => {
+const LowerRouteIcon: FC = () => {
   return (
     <Wrapper8>
-      <Wrapper15></Wrapper15>
+      <Wrapper15 />
       <Wrapper16>
-        <div></div>
+        <div />
       </Wrapper16>
       <Wrapper9 />
     </Wrapper8>

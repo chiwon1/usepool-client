@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { FC, useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import RightAddOnIcon from './styles/RightAddOnIcon';
@@ -11,14 +11,14 @@ type Props = {
   data: IChatRoom;
 };
 
-const ChatRoomList = ({ data }: Props): JSX.Element => {
+const ChatRoomList: FC<Props> = ({ data }) => {
   const { user } = useContext(UserContext);
 
   const {
     _id: roomId,
     driver,
     passenger,
-    ride: { departFrom, arriveAt },
+    ride: { departureLocation, destination },
     chatList,
   } = data;
 
@@ -32,7 +32,7 @@ const ChatRoomList = ({ data }: Props): JSX.Element => {
 
   const lastMessageDate = chatList[chatList.length - 1]?.createdAt;
 
-  const formattedDate = dayjs(lastMessageDate).format('MM/D');
+  const formattedDate = dayjs(lastMessageDate).format('DD MMM');
 
   return (
     <StyledLi>
@@ -43,7 +43,7 @@ const ChatRoomList = ({ data }: Props): JSX.Element => {
             <span>
               <SpanWrapper3>
                 <Wrapper>
-                  {departFrom}
+                  {departureLocation}
                   <svg
                     aria-hidden="true"
                     height="16"
@@ -64,7 +64,7 @@ const ChatRoomList = ({ data }: Props): JSX.Element => {
                       <path d="M22 12H2" />
                     </g>
                   </svg>
-                  {arriveAt}
+                  {destination}
                 </Wrapper>
               </SpanWrapper3>
             </span>

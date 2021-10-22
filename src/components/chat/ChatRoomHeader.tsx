@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import RightAddOnIcon from '../styles/RightAddOnIcon';
 import styled from 'styled-components';
@@ -6,7 +6,7 @@ import { useQuery } from 'react-query';
 import { fetchChatRoomInfo } from '../../api/chatRoom';
 import { IChatRoom } from '../../types/chatRoom';
 
-const ChatRoomHeader = () => {
+const ChatRoomHeader: FC = () => {
   const { chatRoomId } = useParams<{ chatRoomId: string }>();
 
   const { data: info, isLoading } = useQuery<any, any, IChatRoom>(
@@ -59,8 +59,8 @@ const ChatRoomHeader = () => {
               </SpanWrapper5>
               {info && (
                 <SpanWrapper2>
-                  <SpanWrapper4>{`${info.ride.departFrom} → ${info.ride.arriveAt}`}</SpanWrapper4>
-                  <SpanWrapper3>{`${info.ride.departDate} ${info.ride.departTime}`}</SpanWrapper3>
+                  <SpanWrapper4>{`${info.ride.departureLocation} → ${info.ride.destination}`}</SpanWrapper4>
+                  <SpanWrapper3>{`${info.ride.departureDate} ${info.ride.departureTime}`}</SpanWrapper3>
                 </SpanWrapper2>
               )}
             </SpanWrapper>

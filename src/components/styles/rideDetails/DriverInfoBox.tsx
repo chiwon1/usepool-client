@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import RightAddOnIcon from '../RightAddOnIcon';
 import styled from 'styled-components';
 import defaultProfile from '../../../assets/default-profile.svg';
@@ -8,7 +8,7 @@ type Props = {
   profilePicture?: string;
 };
 
-const DriverInfoBox = ({ nickname, profilePicture }: Props) => {
+const DriverInfoBox: FC<Props> = ({ nickname, profilePicture }) => {
   return (
     <Wrapper4>
       <SpanWrapper1>

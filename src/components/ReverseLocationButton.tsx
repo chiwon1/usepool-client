@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
-const ReverseLocationButton = () => {
+const ReverseLocationButton: FC = () => {
   return (
     <Wrapper>
       <StyledButton disabled={true} type="button">

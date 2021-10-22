@@ -17,8 +17,7 @@ const Wrapper = styled.main`
   box-sizing: content-box;
   display: block;
   height: -webkit-fill-available;
-  height: auto;
-  min-height: 692px;
+  height: 100%;
   padding-top: 72px;
   position: relative;
 `;
@@ -34,7 +33,7 @@ const Wrapper2 = styled.div`
   height: auto;
   line-height: 16px;
   margin: 0;
-  min-height: 692px;
+  height: 100%;
   padding: 0;
   position: relative;
   vertical-align: baseline;
@@ -54,7 +53,7 @@ const Wrapper3 = styled.div`
   justify-content: flex-start;
   line-height: 16px;
   margin: 0;
-  min-height: 692px;
+  height: 100%;
   padding: 0;
   vertical-align: baseline;
 `;

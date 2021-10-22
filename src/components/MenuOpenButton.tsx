@@ -2,8 +2,6 @@ import React, { FC, useCallback, useContext, useState } from 'react';
 import styled from 'styled-components';
 
 import Menu from './Menu';
-
-// TODO 2021/10/03 cw: svg 를 컴포넌트 형태로 가져오기
 import defaultProfile from '../assets/default-profile.svg';
 import menuIcon from '../assets/menu-icon.svg';
 import { UserContext } from '../contexts/AuthProvider';
@@ -26,7 +24,7 @@ const MenuOpenButton: FC = () => {
         {user && <span>{user.nickname}</span>}
         <ProfileWrapper>
           <img
-            src={user ? user.profilePicture : defaultProfile}
+            src={user?.profilePicture ? user.profilePicture : defaultProfile}
             alt="myPageIcon"
           />
         </ProfileWrapper>

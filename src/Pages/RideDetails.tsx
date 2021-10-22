@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { FC, useCallback, useContext, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
@@ -10,17 +10,18 @@ import Bookbutton from '../components/styles/rideDetails/Bookbutton';
 import ContactButton from '../components/styles/rideDetails/ContactButton';
 import DriverInfoBox from '../components/styles/rideDetails/DriverInfoBox';
 import ItineraryBox from '../components/styles/rideDetails/ItineraryBox';
+import { MapWrapper } from './NewRide/departure/DepartureLocation';
+import Tmap from '../components/map/Tmap';
 
-const RideDetails = () => {
+const RideDetails: FC = () => {
   const { rideId } = useParams<{ rideId: string }>();
   const { user } = useContext(UserContext);
   const history = useHistory();
   const queryClient = useQueryClient();
-  const {
-    isLoading,
-    error,
-    data: rideDetails,
-  } = useQuery(['fetchRideDetails', { rideId }], fetchRideDetails(rideId));
+  const { isLoading, data: rideDetails } = useQuery(
+    ['fetchRideDetails', { rideId }],
+    fetchRideDetails(rideId),
+  );
 
   const { mutate } = useMutation(bookRide, {
     onSuccess: () => {
@@ -50,42 +51,57 @@ const RideDetails = () => {
     }
   }, [user]);
 
-  if (isLoading) {
-    return null;
-  }
-
-  if (!rideDetails) {
+  if (!rideDetails || isLoading) {
     return null;
   }
 
   return (
-    <Wrapper>
-      <div>
-        <Wrapper2>
-          <RideDetailsTopBar date={rideDetails.departDate} />
-          <ItineraryBox
-            departTime={rideDetails.departTime}
-            departFrom={rideDetails.departFrom}
-            arriveAt={rideDetails.arriveAt}
-          />
-          <DriverInfoBox
-            nickname={rideDetails.driver.nickname}
-            profilePicture={rideDetails.driver.profilePicture}
-          />
-        </Wrapper2>
-      </div>
-      <ContactButton
-        handleClick={handleContactClick}
-        nickname={rideDetails.driver.nickname}
-      />
-      <Bookbutton handleClick={handleBookClick} />
-    </Wrapper>
+    <Container>
+      <Wrapper>
+        <div>
+          <Wrapper2>
+            <RideDetailsTopBar date={rideDetails.departureDate} />
+            <ItineraryBox
+              depatureLocation={rideDetails.departureLocation}
+              depatureAddress={rideDetails.departureAddress}
+              destination={rideDetails.destination}
+              destinationAddress={rideDetails.destinationAddress}
+              departureTime={rideDetails.departureTime}
+            />
+            <DriverInfoBox
+              nickname={rideDetails.driver.nickname}
+              profilePicture={rideDetails.driver.profilePicture}
+            />
+          </Wrapper2>
+        </div>
+        <ContactButton
+          handleClick={handleContactClick}
+          nickname={rideDetails.driver.nickname}
+        />
+        <Bookbutton handleClick={handleBookClick} />
+      </Wrapper>
+      <MapWrapper>
+        <Tmap
+          departureCoordinate={rideDetails.departureCoordinate}
+          destinationCoordinate={rideDetails.destinationCoordinate}
+        />
+      </MapWrapper>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-grow: 1;
+  height: 100%;
+`;
 
 const Wrapper = styled.div`
   -webkit-box-flex: 1;
   flex-grow: 1;
+  width: 50%;
 `;
 
 const Wrapper2 = styled.div`

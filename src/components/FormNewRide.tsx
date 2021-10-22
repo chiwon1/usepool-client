@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import styled from 'styled-components';
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   InputTitle: string;
 };
 
-const FormNewRide = ({ handleSubmit, children, InputTitle }: Props) => {
+const FormNewRide: FC<Props> = ({ handleSubmit, children, InputTitle }) => {
   return (
     <form onSubmit={handleSubmit}>
       <Wrapper3>

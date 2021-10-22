@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
   time?: string;
 };
 
-const LocationDiv = ({ down, location, time }: Props) => {
+const LocationDiv: FC<Props> = ({ down, location, time }) => {
   return (
     <StyledLi2>
       <Wrapper16>

@@ -1,9 +1,15 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  FC,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
-import { UserContext } from '../../contexts/AuthProvider';
-import { IRide } from '../../types/ride';
 
 import loadable from '@loadable/component';
+import { UserContext } from '../../contexts/AuthProvider';
+import { IRide } from '../../types/ride';
 
 const DepartureLocation = loadable(
   () => import('./departure/DepartureLocation'),
@@ -18,13 +24,29 @@ export const NewRideContext = createContext<{
   handleNewRideInfo: (value: IRide | null) => void;
 }>({ newRideInfo: null, handleNewRideInfo: () => null });
 
-const NewRide = () => {
+export interface ICoordinate {
+  lat: number;
+  lng: number;
+}
+
+export const DepartureCoordinateContext = createContext<{
+  departureCoordinate: ICoordinate | null;
+  handleDepartureCoordinate: (value: ICoordinate | null) => void;
+}>({ departureCoordinate: null, handleDepartureCoordinate: () => null });
+
+const NewRide: FC = () => {
   const { user } = useContext(UserContext);
 
   const [newRideInfo, setNewRideInfo] = useState<IRide | null>(null);
+  const [departureCoordinate, setDepartureCoordinate] =
+    useState<ICoordinate | null>(null);
 
   const handleNewRideInfo = (value: IRide | null) => {
     setNewRideInfo(value);
+  };
+
+  const handleDepartureCoordinate = (value: ICoordinate | null) => {
+    setDepartureCoordinate(value);
   };
 
   const history = useHistory();
@@ -37,20 +59,32 @@ const NewRide = () => {
 
   return (
     <NewRideContext.Provider value={{ newRideInfo, handleNewRideInfo }}>
-      <Switch>
-        <Route exact path="/newRide">
-          <Redirect to="/newRide/departure-location" />
-        </Route>
-        <Route
-          exact
-          path="/newRide/departure-location"
-          component={DepartureLocation}
-        />
-        <Route exact path="/newRide/destination" component={Destination} />
-        <Route exact path="/newRide/departure-date" component={DepartureDate} />
-        <Route exact path="/newRide/departure-time" component={DepartureTime} />
-        <Route exact path="/newRide/submit" component={Submit} />
-      </Switch>
+      <DepartureCoordinateContext.Provider
+        value={{ departureCoordinate, handleDepartureCoordinate }}
+      >
+        <Switch>
+          <Route exact path="/newRide">
+            <Redirect to="/newRide/departure-location" />
+          </Route>
+          <Route
+            exact
+            path="/newRide/departure-location"
+            component={DepartureLocation}
+          />
+          <Route exact path="/newRide/destination" component={Destination} />
+          <Route
+            exact
+            path="/newRide/departure-date"
+            component={DepartureDate}
+          />
+          <Route
+            exact
+            path="/newRide/departure-time"
+            component={DepartureTime}
+          />
+          <Route exact path="/newRide/submit" component={Submit} />
+        </Switch>
+      </DepartureCoordinateContext.Provider>
     </NewRideContext.Provider>
   );
 };

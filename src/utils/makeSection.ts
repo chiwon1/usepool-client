@@ -1,16 +1,16 @@
 import dayjs from 'dayjs';
 import { IChat } from '../types/chat';
 
-const makeSection = (chatList: IChat[]) => {
+const makeSection = (chatList: IChat[]): { [p: string]: IChat[] } => {
   const sections: { [key: string]: IChat[] } = {};
 
   chatList.forEach((chat) => {
-    const monthDate = dayjs(chat.createdAt).format('YYYY-MM-DD');
+    const formattedDate = dayjs(chat.createdAt).format('DD MMM YYYY');
 
-    if (Array.isArray(sections[monthDate])) {
-      sections[monthDate].push(chat);
+    if (Array.isArray(sections[formattedDate])) {
+      sections[formattedDate].push(chat);
     } else {
-      sections[monthDate] = [chat];
+      sections[formattedDate] = [chat];
     }
   });
 

@@ -1,14 +1,19 @@
-import axiosInstance from './axios';
+import axiosInstance from '../utils/axios';
 import { ISearchRide } from '../types/ride';
 
-export const fetchMyRidesAsDriver = () => async () => {
-  const { rides } = (await axiosInstance.get('/myRides/asDriver')) as any;
+export const fetchMyRidesAsDriver = () => async (): Promise<ISearchRide[]> => {
+  const { rides }: { rides: ISearchRide[] } = await axiosInstance.get(
+    '/myRides/asDriver',
+  );
 
-  return rides as ISearchRide[];
+  return rides;
 };
 
-export const fetchMyRidesAsPassenger = () => async () => {
-  const { rides } = (await axiosInstance.get('/myRides/asPassenger')) as any;
+export const fetchMyRidesAsPassenger =
+  () => async (): Promise<ISearchRide[]> => {
+    const { rides }: { rides: ISearchRide[] } = await axiosInstance.get(
+      '/myRides/asPassenger',
+    );
 
-  return rides as ISearchRide[];
-};
+    return rides;
+  };

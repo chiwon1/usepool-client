@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useCallback, useContext, useState } from 'react';
 import FormNewRide from '../../../components/FormNewRide';
 import { useHistory } from 'react-router-dom';
 import { NewRideContext } from '../NewRide';
@@ -9,22 +9,25 @@ const DepartureTime: FC = () => {
   const history = useHistory();
   const { newRideInfo, handleNewRideInfo } = useContext(NewRideContext);
 
-  const [inputTime, setInputTime] = React.useState<string>();
+  const [inputTime, setInputTime] = useState<string>();
 
-  const handleChange = (value: string) => {
+  const handleChange = useCallback((value: string) => {
     setInputTime(value);
-  };
+  }, []);
 
-  const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
-    ev.preventDefault();
+  const handleSubmit = useCallback(
+    (ev: React.FormEvent<HTMLFormElement>) => {
+      ev.preventDefault();
 
-    handleNewRideInfo({
-      ...newRideInfo,
-      departTime: inputTime,
-    });
+      handleNewRideInfo({
+        ...newRideInfo,
+        departureTime: inputTime,
+      });
 
-    history.push('/newRide/submit');
-  };
+      history.push('/newRide/submit');
+    },
+    [newRideInfo, inputTime],
+  );
 
   return (
     <FormNewRide

@@ -1,17 +1,36 @@
+export interface ILocationInfo {
+  address: string;
+  name: string;
+  coordinate: ICoordinate;
+}
+
+export interface ICoordinate {
+  lat: number;
+  lng: number;
+}
+
 export interface IRide {
-  departFrom?: string;
-  departDate?: string | null;
-  departTime?: string | null;
-  arriveAt?: string;
+  departureLocation?: string;
+  departureAddress?: string;
+  departureCoordinate?: ICoordinate;
+  departureDate?: string | null;
+  departureTime?: string | null;
+  destination?: string;
+  destinationAddress?: string;
+  destinationCoordinate?: ICoordinate;
 }
 
 // TODO 2021/10/14 cw: 변수명수정하기
 export interface ISearchRide {
   _id: string;
-  departFrom: string;
-  departDate: string;
-  departTime: string;
-  arriveAt: string;
+  departureLocation: string;
+  departureAddress: string;
+  departureCoordinate: ICoordinate;
+  departureDate: string;
+  departureTime: string;
+  destination: string;
+  destinationAddress: string;
+  destinationCoordinate: ICoordinate;
   driver: {
     _id: string;
     kakaoId: number;

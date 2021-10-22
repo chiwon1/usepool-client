@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useCallback, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -15,18 +15,21 @@ const DepartureDate: FC = () => {
   const { newRideInfo, handleNewRideInfo } = useContext(NewRideContext);
   const [inputDate, setInputDate] = useState<Date>(new Date());
 
-  const handleClick = (date: Date) => {
-    setInputDate(date);
+  const handleClick = useCallback(
+    (date: Date) => {
+      setInputDate(date);
 
-    const formattedDate = dayjs(date).format('MM/D/YYYY');
+      const formattedDate = dayjs(date).format('DD MMM YYYY');
 
-    handleNewRideInfo({
-      ...newRideInfo,
-      departDate: formattedDate,
-    });
+      handleNewRideInfo({
+        ...newRideInfo,
+        departureDate: formattedDate,
+      });
 
-    history.push('/newRide/departure-time');
-  };
+      history.push('/newRide/departure-time');
+    },
+    [newRideInfo],
+  );
 
   return (
     <>

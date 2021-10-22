@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 type Props = {
   handleClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
-const Bookbutton = ({ handleClick }: Props) => {
+const Bookbutton: FC<Props> = ({ handleClick }) => {
   return (
     <Wrapper18>
       <div>

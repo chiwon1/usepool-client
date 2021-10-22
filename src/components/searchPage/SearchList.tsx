@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import LocationDiv from '../LocationDiv';
 
 type Props = {
-  departFrom: string;
+  departureLocation: string;
   arriveAt: string;
-  departTime: string;
+  departureTime: string;
   nickname: string;
   profilePicture?: string;
   handleClick?: () => void;
 };
 
-const SearchList = ({
-  departFrom,
+const SearchList: FC<Props> = ({
+  departureLocation,
   arriveAt,
-  departTime,
+  departureTime,
   nickname,
   profilePicture,
   handleClick,
-}: Props) => {
+}) => {
   // TODO 2021/10/10 cw: profilePicture default prop 지정하기
 
   return (
@@ -31,9 +31,9 @@ const SearchList = ({
               <Wrapper15>
                 <ul>
                   <LocationDiv
-                    location={departFrom}
+                    location={departureLocation}
                     down={true}
-                    time={departTime}
+                    time={departureTime}
                   />
                   <LocationDiv location={arriveAt} down={false} />
                 </ul>

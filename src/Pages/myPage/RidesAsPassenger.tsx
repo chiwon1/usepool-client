@@ -1,21 +1,20 @@
-import React, { useContext, useEffect } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { UserContext } from '../../contexts/AuthProvider';
-import { fetchMyRidesAsPassenger } from '../../api/myRides';
-import { StyledUl } from '../Search';
-import { useQuery } from 'react-query';
+
 import styled from 'styled-components';
+import { useQuery } from 'react-query';
+
+import { StyledUl } from '../Search';
+import { UserContext } from '../../contexts/AuthProvider';
 import MyPageRideList from '../../components/myPage/MyPageRideList';
 import MyPageContainer from '../../components/myPage/MyPageContainer';
 
-const RidesAsPassenger = () => {
+import { fetchMyRidesAsPassenger } from '../../api/myRides';
+
+const RidesAsPassenger: FC = () => {
   const history = useHistory();
   const { user } = useContext(UserContext);
-  const {
-    isLoading,
-    error,
-    data: rideList,
-  } = useQuery(
+  const { isLoading, data: rideList } = useQuery(
     ['fetchMyRidesAsPassenger', { id: user?.userId }],
     fetchMyRidesAsPassenger(),
   );
@@ -40,13 +39,19 @@ const RidesAsPassenger = () => {
         <h1>My rides as passenger</h1>
         <StyledUl>
           {rideList?.map(
-            ({ _id, departDate, departFrom, arriveAt, departTime }) => (
+            ({
+              _id,
+              departureLocation,
+              destination,
+              departureDate,
+              departureTime,
+            }) => (
               <MyPageRideList
                 key={_id}
-                departDate={departDate}
-                departFrom={departFrom}
-                arriveAt={arriveAt}
-                departTime={departTime}
+                departureLocation={departureLocation}
+                destination={destination}
+                departureDate={departureDate}
+                departureTime={departureTime}
                 handleClick={() => handleClick(_id)}
               />
             ),
