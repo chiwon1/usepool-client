@@ -1,11 +1,14 @@
-import React, { FC, useContext } from 'react';
-import LocationSearch from '../../../components/LocationSearch';
-import styled from 'styled-components';
+import React, { FC, useCallback, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+
 import { DepartureCoordinateContext, NewRideContext } from '../NewRide';
-import { ILocationInfo } from '../../../types/ride';
+
+import LocationSearch from '../../../components/LocationSearch';
 import ContinueButton from '../../../components/ContinueButton';
 import Tmap from '../../../components/map/Tmap';
+
+import { ILocationInfo } from '../../../types/ride';
 
 const DepartureLocation: FC = () => {
   const history = useHistory();
@@ -13,26 +16,29 @@ const DepartureLocation: FC = () => {
   const { departureCoordinate, handleDepartureCoordinate: handleCoordinate } =
     useContext(DepartureCoordinateContext);
 
-  const handlePlaceSelect = (locationInfo: ILocationInfo) => {
-    const { address, name, coordinate } = locationInfo;
+  const handlePlaceSelect = useCallback(
+    (locationInfo: ILocationInfo) => {
+      const { address, name, coordinate } = locationInfo;
 
-    handleCoordinate(coordinate);
+      handleCoordinate(coordinate);
 
-    handleNewRideInfo({
-      ...newRideInfo,
-      departureLocation: name,
-      departureAddress: address,
-      departureCoordinate: coordinate,
-    });
-  };
+      handleNewRideInfo({
+        ...newRideInfo,
+        departureLocation: name,
+        departureAddress: address,
+        departureCoordinate: coordinate,
+      });
+    },
+    [newRideInfo],
+  );
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     if (!departureCoordinate) {
       return;
     }
 
     history.push('/newRide/destination');
-  };
+  }, [departureCoordinate]);
 
   return (
     <StyledForm onSubmit={(ev) => ev.preventDefault()}>

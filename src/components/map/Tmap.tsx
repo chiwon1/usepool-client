@@ -82,6 +82,7 @@ const Tmap: FC<Props> = ({
 
     tData.getRoutePlanJson(sLatlng, eLatlng, optionObj, params);
   };
+
   useEffect(() => {
     if (destinationCoordinate) {
       markerState?.setMap(mapInstance, null);
