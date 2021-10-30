@@ -98,8 +98,6 @@ export const Container = styled.div`
   -webkit-box-pack: start;
   justify-content: flex-start;
   padding-bottom: 0;
-  -webkit-box-flex: 1;
-  flex-grow: 1;
   height: calc(100vh - 150px);
 `;
 

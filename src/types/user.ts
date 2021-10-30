@@ -12,3 +12,9 @@ export interface IUser {
   ridesAsPassenger: string[];
   __v: number;
 }
+
+export interface IGetUserResponse {
+  result: string;
+  userInfo: IUserInfo;
+  token: string;
+}

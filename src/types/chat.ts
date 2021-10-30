@@ -1,5 +1,4 @@
 export interface IChat {
-  // DM 채팅
   _id: string;
   sender: string;
   senderNickname: string;

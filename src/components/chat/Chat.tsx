@@ -20,9 +20,9 @@ const Chat: FC<Props> = ({ data }) => {
   return (
     <ChatWrapper>
       <Wrapper>
-        <SpanWrapper3>
+        <span>
           {!isSenderUser && (
-            <SpanWrapper2>
+            <span>
               <div>
                 <img
                   alt="Profile-picture"
@@ -33,30 +33,28 @@ const Chat: FC<Props> = ({ data }) => {
                   }
                 />
               </div>
-            </SpanWrapper2>
+            </span>
           )}
           {!isSenderUser && (
-            <SpanWrapper1>
+            <StyledSpan>
               <span>{data.senderNickname}</span>
-            </SpanWrapper1>
+            </StyledSpan>
           )}
-        </SpanWrapper3>
+        </span>
       </Wrapper>
-      <Wrapper2>
-        <Wrapper3 className={isSenderUser ? 'user' : undefined}>
-          {isSenderUser && (
-            <SpanWrapper4>{dayjs(data.createdAt).format('HH:mm')}</SpanWrapper4>
-          )}
+      <SendTimeWrapper>
+        <div className={isSenderUser ? 'user' : undefined}>
+          {isSenderUser && <span>{dayjs(data.createdAt).format('HH:mm')}</span>}
           <blockquote className={isSenderUser ? 'user' : undefined}>
             <div className={isSenderUser ? 'user' : undefined}>
               <p>{data.contents}</p>
             </div>
           </blockquote>
           {!isSenderUser && (
-            <SpanWrapper4>{dayjs(data.createdAt).format('HH:mm')}</SpanWrapper4>
+            <span>{dayjs(data.createdAt).format('HH:mm')}</span>
           )}
-        </Wrapper3>
-      </Wrapper2>
+        </div>
+      </SendTimeWrapper>
     </ChatWrapper>
   );
 };
@@ -72,41 +70,61 @@ const Wrapper = styled.div`
   padding-right: 24px;
   position: relative;
   display: flex;
-  padding-top: 16px;
-  padding-bottom: 16px;
   -webkit-box-align: center;
   align-items: center;
-  flex: 1 1 0%;
-  border: 0px;
+  flex: 1 1 0;
   background: none;
   white-space: pre-line;
   padding-top: 4px !important;
   padding-bottom: 4px !important;
-  background: none;
   text-decoration: none;
   user-select: none;
   -webkit-tap-highlight-color: rgba(221, 221, 221, 0.4);
 
-  & span {
+  & > span {
     display: flex;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
     -webkit-box-align: center;
     align-items: center;
+
+    & > span {
+      display: inline-flex;
+      min-width: 24px;
+      -webkit-box-align: center;
+      align-items: center;
+      margin-right: 16px;
+
+      & > div {
+        box-sizing: border-box;
+        border-radius: 50%;
+        position: relative;
+        width: 48px;
+        height: 48px;
+        border: none;
+
+        & > img {
+          border-radius: 50%;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
   }
 `;
 
-const Wrapper2 = styled.div`
+const SendTimeWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
   & > span {
-    margin: 0px;
     font-weight: 400;
     color: rgb(112, 140, 145);
     font-size: 13px;
     line-height: 16px;
     display: flex;
-    margin-left: 40px;
-    margin-right: 48px;
+    margin: 0 48px 0 40px;
     padding-left: 16px;
   }
 
@@ -114,13 +132,64 @@ const Wrapper2 = styled.div`
     justify-content: flex-end;
     margin-right: 6px;
   }
+
+  & > div {
+    word-break: break-word;
+    display: flex;
+    margin-left: 48px;
+    margin-right: 48px;
+
+    & > span {
+      font-weight: 400;
+      color: rgb(112, 140, 145);
+      font-size: 13px;
+      line-height: 16px;
+      display: flex;
+      padding-left: 8px;
+      margin-top: 30px;
+      min-width: 50px;
+    }
+
+    & > blockquote {
+      margin: 0;
+      display: inline-block;
+      padding-bottom: 4px;
+
+      & > div {
+        position: relative;
+        padding: 16px;
+        border-radius: 0px 16px 16px;
+        background: rgb(237, 237, 237);
+        color: rgb(5, 71, 82);
+        font-size: 16px;
+        line-height: 20px;
+
+        & > p {
+          margin: 0px;
+          white-space: pre-line;
+          font-size: 16px;
+          font-weight: bolder;
+        }
+      }
+
+      & > .user {
+        position: relative;
+        padding: 16px;
+        font-size: 16px;
+        line-height: 20px;
+        background: rgb(5, 71, 82);
+        color: rgb(255, 255, 255);
+        border-radius: 16px 16px 0px 16px;
+      }
+    }
+  }
 `;
 
-const SpanWrapper1 = styled.span`
-  flex: 1 1 0%;
+const StyledSpan = styled.span`
+  flex: 1 1 0;
 
   & > span {
-    margin: 0px;
+    margin: 0;
     font-weight: 400;
     color: rgb(5, 71, 82);
     font-size: 18px;
@@ -128,96 +197,5 @@ const SpanWrapper1 = styled.span`
     display: block;
   }
 `;
-
-const SpanWrapper2 = styled.span`
-  display: inline-flex;
-  min-width: 24px;
-  -webkit-box-align: center;
-  align-items: center;
-  margin-right: 16px;
-
-  & > div {
-    border: 2px dashed rgb(221, 221, 221);
-    box-sizing: border-box;
-    border-radius: 50%;
-    position: relative;
-    width: 48px;
-    height: 48px;
-    border: none;
-
-    & > img {
-      border-radius: 50%;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-`;
-
-const SpanWrapper3 = styled.span`
-  display: flex;
-  -webkit-box-flex: 1;
-  flex-grow: 1;
-  -webkit-box-align: center;
-  align-items: center;
-`;
-
-const Wrapper3 = styled.div`
-  word-break: break-word;
-  display: flex;
-  margin-left: 48px;
-  margin-right: 48px;
-
-  & > span {
-    margin: 0px;
-    font-weight: 400;
-    color: rgb(112, 140, 145);
-    font-size: 13px;
-    line-height: 16px;
-    display: flex;
-    padding-left: 8px;
-    margin-top: 30px;
-    min-width: 50px;
-  }
-
-  & > blockquote {
-    margin: 0px;
-    display: inline-block;
-    padding-bottom: 4px;
-
-    & > div {
-      position: relative;
-      padding: 16px;
-      border-radius: 0px 16px 16px;
-      background: rgb(237, 237, 237);
-      color: rgb(5, 71, 82);
-      font-size: 16px;
-      line-height: 20px;
-
-      & > p {
-        margin: 0px;
-        white-space: pre-line;
-        font-size: 16px;
-        font-weight: bolder;
-      }
-    }
-
-    & > .user {
-      position: relative;
-      padding: 16px;
-      border-radius: 0px 16px 16px;
-      background: rgb(237, 237, 237);
-      color: rgb(5, 71, 82);
-      font-size: 16px;
-      line-height: 20px;
-      background: rgb(5, 71, 82);
-      color: rgb(255, 255, 255);
-      border-top-left-radius: 16px;
-      border-bottom-right-radius: 0px;
-    }
-  }
-`;
-
-const SpanWrapper4 = styled.span``;
 
 export default Chat;

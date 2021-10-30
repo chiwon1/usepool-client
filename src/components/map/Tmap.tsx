@@ -3,7 +3,7 @@
 
 import React, { FC, useEffect, useState } from 'react';
 import useTmap from '../../hooks/useTmap';
-import { ICoordinate } from '../../Pages/NewRide/NewRide';
+import { ICoordinate } from '../../types/ride';
 
 export const mapCenter = {
   lat: 37.553878,
@@ -24,8 +24,8 @@ const Tmap: FC<Props> = ({
 
   const createMarker = (coordinate) => {
     const marker = new window.Tmapv2.Marker({
-      position: new window.Tmapv2.LatLng(coordinate.lat, coordinate.lng), //Marker의 중심좌표 설정.
-      map: mapInstance, //Marker가 표시될 Map 설정..
+      position: new window.Tmapv2.LatLng(coordinate.lat, coordinate.lng),
+      map: mapInstance,
     });
 
     setMarkerState(marker);
@@ -35,11 +35,11 @@ const Tmap: FC<Props> = ({
     const jsonObject = new window.Tmapv2.extension.GeoJSON();
     const jsonForm = jsonObject.rpTrafficRead(this._responseData);
     const trafficColors = {
-      trafficDefaultColor: '#000000', //교통 정보가 없을 때
-      trafficType1Color: '#009900', //원할
-      trafficType2Color: '#7A8E0A', //서행
-      trafficType3Color: '#8E8111', //정체
-      trafficType4Color: '#FF0000', //정체
+      trafficDefaultColor: '#000000',
+      trafficType1Color: '#009900',
+      trafficType2Color: '#7A8E0A',
+      trafficType3Color: '#8E8111',
+      trafficType4Color: '#FF0000',
     };
     jsonObject.drawRouteByTraffic(mapInstance, jsonForm, trafficColors);
     const midpointCoordinate = {
@@ -51,7 +51,7 @@ const Tmap: FC<Props> = ({
     );
     mapInstance?.setZoom(12);
   };
-  // const onProgress = () => {};
+
   const onError = () => {
     alert('onError');
   };
@@ -74,7 +74,6 @@ const Tmap: FC<Props> = ({
 
     const params = {
       onComplete: onComplete,
-      // onProgress: onProgress,
       onError: onError,
     };
 

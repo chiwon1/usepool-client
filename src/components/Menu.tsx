@@ -13,7 +13,6 @@ const Menu: FC = () => {
 
   const history = useHistory();
 
-  // TODO 2021/10/14 cw: hook으로 리팩토링
   const logout = async () => {
     handleUser!(null);
     await axiosInstance.post('/logout');

@@ -6,8 +6,6 @@ import { Redirect } from 'react-router-dom';
 const Login: FC = () => {
   const { user } = useContext(UserContext);
 
-  console.log('Login page');
-
   if (!user) {
     loginWithKakao();
   }

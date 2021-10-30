@@ -70,7 +70,6 @@ export const ListWrapper = styled.div`
   h1 {
     white-space: pre-line;
     color: rgb(5, 71, 82);
-    font-size: 30px;
     line-height: 1.06;
     font-weight: 500;
     --space-bottom: 32px;
