@@ -86,68 +86,49 @@ const Home: FC = () => {
 
 const Form = styled.form`
   -webkit-box-align: center;
-  -webkit-font-smoothing: antialiased;
   align-items: center;
-  background-color: #fff;
+  background-color: ${({ theme: { background } }) => background.white};
   border-radius: 16px;
-  border-width: 0;
   box-shadow: rgba(0, 0, 0, 0.16) 0 1pt 4pt, rgba(0, 0, 0, 0.08) 0 2pt 8pt;
-  box-sizing: border-box;
   display: flex;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   height: 56px;
   line-height: 16px;
-  margin: 0;
   padding: 8px 0 8px 8px;
   position: relative;
-  vertical-align: baseline;
   width: 780px;
 
   hr {
-    display: block;
     unicode-bidi: isolate;
     margin-block-start: 0.5em;
     margin-block-end: 0.5em;
     margin-inline-start: auto;
     margin-inline-end: auto;
     overflow: hidden;
-    border: none;
     background-color: rgb(237, 237, 237);
     width: 1px;
     height: 40px;
-    margin: 0px;
+    margin: 0;
   }
 `;
 
 export const StyledHr = styled.hr`
-  display: block;
   unicode-bidi: isolate;
   margin-block-start: 0.5em;
   margin-block-end: 0.5em;
   margin-inline-start: auto;
   margin-inline-end: auto;
-  overflow: hidden;
-  border: none;
   background-color: rgb(237, 237, 237);
   width: 1px;
   height: 40px;
-  margin: 0px;
 `;
 
 const Wrapper = styled.div`
-  -webkit-font-smoothing: antialiased;
-  border-width: 0;
-  box-sizing: border-box;
   display: flex;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 16px;
-  margin: 0;
-  padding: 0;
-  vertical-align: baseline;
 `;
 
 export default Home;

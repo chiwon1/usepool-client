@@ -19,13 +19,11 @@ const SearchList: FC<Props> = ({
   profilePicture,
   handleClick,
 }) => {
-  // TODO 2021/10/10 cw: profilePicture default prop 지정하기
-
   return (
     <StyledLi onClick={handleClick}>
       <Wrapper11>
         <Wrapper12 />
-        <Awrapper>
+        <StyledA>
           <Wrapper13>
             <Wrapper14>
               <Wrapper15>
@@ -37,7 +35,7 @@ const SearchList: FC<Props> = ({
                   />
                   <LocationDiv location={arriveAt} down={false} />
                 </ul>
-                <div></div>
+                <div />
               </Wrapper15>
               <span />
             </Wrapper14>
@@ -45,7 +43,7 @@ const SearchList: FC<Props> = ({
               <SpanWrapper1>
                 <SpanWrapper2>
                   <Wrapper17>
-                    <img src={profilePicture} />
+                    <img src={profilePicture} alt="User-profile-picture" />
                   </Wrapper17>
                 </SpanWrapper2>
                 <SpanWrapper3>
@@ -54,7 +52,7 @@ const SearchList: FC<Props> = ({
               </SpanWrapper1>
             </Wrapper16>
           </Wrapper13>
-        </Awrapper>
+        </StyledA>
       </Wrapper11>
     </StyledLi>
   );
@@ -86,18 +84,17 @@ const Wrapper12 = styled.div`
   position: absolute;
   background: rgb(255, 255, 255);
   border-radius: 16px;
-  inset: 0px;
+  inset: 0;
   opacity: 0.8;
   display: none;
   z-index: 3;
 `;
 
-const Awrapper = styled.a`
+const StyledA = styled.a`
   color: rgb(0, 175, 245);
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
   display: block;
-  text-decoration: none;
 `;
 
 const Wrapper13 = styled.div`
@@ -117,7 +114,7 @@ const Wrapper14 = styled.div`
 `;
 
 const Wrapper15 = styled.div`
-  min-width: 0px;
+  min-width: 0;
   position: relative;
   left: -24px;
 `;
@@ -127,23 +124,19 @@ const Wrapper16 = styled.div`
   display: flex;
   -webkit-box-align: center;
   align-items: center;
-  flex: 1 1 0%;
-  border: 0px;
+  flex: 1 1 0;
+  border: 0;
   background: none;
   white-space: pre-line;
-  padding-left: 0px;
-  padding-right: 0px;
-  padding-top: 8px;
-  padding-bottom: 0px;
+  padding: 8px 0 0;
 `;
 
 const SpanWrapper1 = styled.span`
   display: flex;
   -webkit-box-flex: 1;
-  flex-grow: 1;
   -webkit-box-align: center;
   align-items: center;
-  flex: 1 1 0%;
+  flex: 1 1 0;
 `;
 
 const SpanWrapper2 = styled.span`
@@ -155,7 +148,6 @@ const SpanWrapper2 = styled.span`
 `;
 
 const Wrapper17 = styled.div`
-  border: 2px dashed rgb(221, 221, 221);
   box-sizing: border-box;
   border-radius: 50%;
   position: relative;
@@ -172,7 +164,7 @@ const Wrapper17 = styled.div`
 `;
 
 const SpanWrapper3 = styled.span`
-  flex: 1 1 0%;
+  flex: 1 1 0;
   word-break: break-word;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -181,7 +173,7 @@ const SpanWrapper3 = styled.span`
 `;
 
 const SpanWrapper4 = styled.span`
-  margin: 0px;
+  margin: 0;
   font-weight: 400;
   color: rgb(5, 71, 82);
   font-size: 18px;

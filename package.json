@@ -13,7 +13,6 @@
     "react-custom-scrollbars-2": "^4.4.0",
     "react-day-picker": "^7.4.10",
     "react-dom": "^17.0.2",
-    "react-mentions": "^4.3.0",
     "react-query": "^3.26.0",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
@@ -26,7 +25,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "test:cypress": "start-server-and-test start http://localhost:3000 cypress",
+    "cypress-open": "cypress open",
+    "cypress": "cypress run"
   },
   "eslintConfig": {
     "extends": [
@@ -47,7 +49,6 @@
     ]
   },
   "devDependencies": {
-    "typescript": "^4.0.3",
     "@types/autosize": "^4.0.0",
     "@types/jest": "^26.0.15",
     "@types/loadable__component": "^5.13.4",
@@ -60,14 +61,17 @@
     "@typescript-eslint/eslint-plugin": "^4.32.0",
     "@typescript-eslint/parser": "^4.32.0",
     "classcat": "^5.0.3",
+    "cypress": "^8.7.0",
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.0",
     "lint-staged": "^11.1.2",
-    "prettier": "2.4.1"
+    "prettier": "2.4.1",
+    "typescript": "^4.0.3"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,html,json}": [

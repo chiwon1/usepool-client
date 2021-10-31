@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import { QueryClientProvider, QueryClient } from 'react-query';
+
 import theme from './contexts/theme';
+import AuthProvider from './contexts/AuthProvider';
+import { LoadScript } from '@react-google-maps/api';
 
 import Layout from './components/Layout';
 import Pages from './Pages';
-import AuthProvider from './contexts/AuthProvider';
-import { QueryClientProvider, QueryClient } from 'react-query';
-import { LoadScript } from '@react-google-maps/api';
 import { libraries } from './constants/map';
 
 const App: FC = () => {

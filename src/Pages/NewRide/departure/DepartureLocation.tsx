@@ -41,40 +41,62 @@ const DepartureLocation: FC = () => {
   }, [departureCoordinate]);
 
   return (
-    <StyledForm onSubmit={(ev) => ev.preventDefault()}>
-      <Wrapper3>
-        <Wrapper4>
-          <Wrapper8 role="presentation">
-            <Wrapper5>
-              <H1Wrapper>{'Where are you leaving from?'}</H1Wrapper>
-              <Wrapper7>
+    <SearchLocationForm onSubmit={(ev) => ev.preventDefault()}>
+      <SearchLocationInputWrapper>
+        <div>
+          <div role="presentation">
+            <div>
+              <SearchLocationTitle>
+                {'Where are you leaving from?'}
+              </SearchLocationTitle>
+              <SearchInputWrapper>
                 <LocationSearch
                   handlePlaceSelect={handlePlaceSelect}
                   placeholder={'e.g, 역삼역'}
                 />
-              </Wrapper7>
+              </SearchInputWrapper>
               <ContinueButton handleClick={handleClick} />
-            </Wrapper5>
+            </div>
             <MapWrapper>
               <Tmap departureCoordinate={departureCoordinate} />
             </MapWrapper>
-          </Wrapper8>
-        </Wrapper4>
-      </Wrapper3>
-    </StyledForm>
+          </div>
+        </div>
+      </SearchLocationInputWrapper>
+    </SearchLocationForm>
   );
 };
 
-const Wrapper8 = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  -webkit-box-flex: 1;
-  flex-grow: 1;
-  height: 100%;
+export const SearchLocationInputWrapper = styled.div`
+  position: relative !important;
+  height: auto !important;
+  min-height: 0 !important;
+  flex-grow: 2;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    min-height: 0 !important;
+    height: 100%;
+
+    & > div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      -webkit-box-flex: 1;
+      flex-grow: 1;
+      height: 100%;
+
+      & > div {
+        width: 50%;
+      }
+    }
+  }
 `;
 
-const StyledForm = styled.form`
+export const SearchLocationForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -87,56 +109,29 @@ export const MapWrapper = styled.div`
   width: 50%;
 `;
 
-const Wrapper3 = styled.div`
-  position: relative !important;
-  height: auto !important;
-  min-height: 0 !important;
-  flex-grow: 2;
-`;
-
-const Wrapper4 = styled.div`
-  display: flex;
-  flex-direction: column;
-  -webkit-box-pack: start;
-  justify-content: flex-start;
-  min-height: 0 !important;
-  height: 100%;
-`;
-
-const Wrapper5 = styled.div`
-  width: 50%;
-`;
-
-const H1Wrapper = styled.h1`
-  -webkit-font-smoothing: antialiased;
+export const SearchLocationTitle = styled.h1`
   border-width: 0;
-  box-sizing: border-box;
-  color: #054752;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: ${({
+    theme: {
+      font: { color },
+    },
+  }) => color.navy};
   font-size: 40px;
   font-weight: 500;
   line-height: 1.06;
-  margin: 0;
   padding: 24px 24px 32px;
   text-align: center;
-  vertical-align: baseline;
   white-space: pre-line;
   margin-left: auto;
   margin-right: auto;
   max-width: 600px;
 `;
 
-const Wrapper7 = styled.div`
-  -webkit-font-smoothing: antialiased;
+export const SearchInputWrapper = styled.div`
   border-width: 0;
-  box-sizing: border-box;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 16px;
-  margin: 0;
-  padding: 0;
-  vertical-align: baseline;
   text-align: center;
   margin-left: auto;
   margin-right: auto;

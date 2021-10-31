@@ -35,11 +35,11 @@ const Inbox: FC = () => {
         </div>
         <div>
           <TitleWrapper>
-            <StyeldUl>
+            <StyledUl>
               {chatRoomList?.map((chatRoom) => (
                 <ChatRoomList key={chatRoom._id} data={chatRoom} />
               ))}
-            </StyeldUl>
+            </StyledUl>
           </TitleWrapper>
         </div>
       </div>
@@ -51,7 +51,6 @@ const Wrapper = styled.div`
   position: relative !important;
   -webkit-box-flex: 1;
   flex-grow: 1;
-  height: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -67,7 +66,6 @@ const TitleWrapper = styled.div`
   h1 {
     white-space: pre-line;
     color: rgb(5, 71, 82);
-    font-size: 30px;
     line-height: 1.06;
     font-weight: 500;
     --space-bottom: 32px;
@@ -80,11 +78,10 @@ const TitleWrapper = styled.div`
   }
 `;
 
-const StyeldUl = styled.ul`
+const StyledUl = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: column;
-  list-style-type: none;
 `;
 
 export default Inbox;

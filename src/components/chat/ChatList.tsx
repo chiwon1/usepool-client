@@ -34,8 +34,8 @@ const ChatList: FC = () => {
     <ChatWrapper>
       <Scrollbars autoHide ref={scrollbarRef}>
         <Wrapper>
-          <Wrapper2>
-            <Wrapper3>
+          <div>
+            <div>
               <div>
                 <div>
                   {Object.entries(chatSections).map(([date, chatList]) => {
@@ -52,8 +52,8 @@ const ChatList: FC = () => {
                   })}
                 </div>
               </div>
-            </Wrapper3>
-          </Wrapper2>
+            </div>
+          </div>
         </Wrapper>
       </Scrollbars>
     </ChatWrapper>
@@ -93,16 +93,16 @@ const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   max-width: 662px;
-`;
 
-const Wrapper2 = styled.div`
-  display: flex;
-  align-items: flex-end;
-`;
+  & > div {
+    display: flex;
+    align-items: flex-end;
 
-const Wrapper3 = styled.div`
-  width: 100%;
-  padding-bottom: 6px;
+    & > div {
+      width: 100%;
+      padding-bottom: 6px;
+    }
+  }
 `;
 
 export default ChatList;

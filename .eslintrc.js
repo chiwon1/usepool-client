@@ -10,6 +10,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:prettier/recommended',
+    'plugin:cypress/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -32,6 +33,7 @@ module.exports = {
     'require-jsdoc': 'off',
     'spaced-comment': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    'cypress/no-unnecessary-waiting': 'off',
   },
   settings: {
     react: {

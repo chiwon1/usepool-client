@@ -20,7 +20,6 @@ export interface IRide {
   destinationCoordinate?: ICoordinate;
 }
 
-// TODO 2021/10/14 cw: 변수명수정하기
 export interface ISearchRide {
   _id: string;
   departureLocation: string;

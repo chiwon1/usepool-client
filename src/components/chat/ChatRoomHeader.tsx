@@ -85,17 +85,13 @@ const Wrapper = styled.div`
     top: 72px;
 
     & > a {
-      padding-left: 24px;
-      padding-right: 24px;
       position: relative;
       display: flex;
-      padding-top: 16px;
-      padding-bottom: 16px;
+      padding: 16px 24px;
       -webkit-box-align: center;
       align-items: center;
-      flex: 1 1 0%;
-      border: 0px;
-      background: none;
+      flex: 1 1 0;
+      border: 0;
       white-space: pre-line;
       background: none;
       text-decoration: none;
@@ -142,7 +138,7 @@ const SpanWrapper2 = styled.span`
   font: inherit;
   vertical-align: baseline;
   -webkit-font-smoothing: antialiased;
-  flex: 1 1 0%;
+  flex: 1 1 0;
 `;
 
 const SpanWrapper3 = styled.span`

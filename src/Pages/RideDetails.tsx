@@ -112,14 +112,11 @@ const Wrapper2 = styled.div`
   h1 {
     white-space: pre-line;
     color: rgb(5, 71, 82);
-    font-size: 30px;
     line-height: 1.06;
     font-weight: 500;
     --space-bottom: 32px;
     --font-size-desktop: 40px;
-    padding-left: 24px;
-    padding-right: 24px;
-    margin: 0px;
+    margin: 0;
     text-align: center;
     font-size: var(--font-size-desktop);
     padding: 24px 24px 32px;
