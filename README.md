@@ -21,6 +21,9 @@
 
 Usepool은 웹 상에서 간단히 이용할 수 있는 위치기반 카풀 매칭 서비스 입니다.
 
+<img style="width:1000px" src="./readme-assets/ui-example.gif" alt="Usepool-Logo">
+
+<br/>
 <br/>
 
 ## Index
@@ -53,7 +56,7 @@ Usepool은 웹 상에서 간단히 이용할 수 있는 위치기반 카풀 매�
 ## Tech Stack
 
 Base  
-`react, Typescript`
+`react, typescript`
 
 Style  
 `styled-component`
