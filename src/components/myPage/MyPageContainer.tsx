@@ -9,7 +9,7 @@ const MyPageContainer: FC<Props> = ({ children }) => {
   return (
     <MyPageWrapper>
       <div>
-        <Wrapper2>{children}</Wrapper2>
+        <Wrapper>{children}</Wrapper>
       </div>
     </MyPageWrapper>
   );
@@ -26,7 +26,7 @@ const MyPageWrapper = styled.div`
   justify-content: flex-start;
 `;
 
-const Wrapper2 = styled.div`
+const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   max-width: 662px;

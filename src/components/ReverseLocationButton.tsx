@@ -24,10 +24,7 @@ const ReverseLocationButton: FC = () => {
 };
 
 const Wrapper = styled.div`
-  -webkit-font-smoothing: antialiased;
   border-width: 0;
-  box-sizing: border-box;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 16px;
@@ -38,7 +35,6 @@ const Wrapper = styled.div`
 
 const StyledButton = styled.button`
   -webkit-box-align: center;
-  -webkit-font-smoothing: antialiased;
   align-items: center;
   background-color: initial;
   background-image: none;
@@ -47,7 +43,6 @@ const StyledButton = styled.button`
   color: #708c91;
   cursor: pointer;
   display: flex;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   height: 40px;
@@ -68,7 +63,6 @@ const StyledButton = styled.button`
   svg {
     box-sizing: border-box;
     fill: #00aff5;
-    flex: 0 0 auto;
     flex: 0 0 auto;
     transform: rotate(90deg);
   }

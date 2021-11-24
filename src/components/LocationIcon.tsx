@@ -7,53 +7,53 @@ type Props = {
   time?: string;
 };
 
-const LocationDiv: FC<Props> = ({ down, location, time }) => {
+const LocationIcon: FC<Props> = ({ down, location, time }) => {
   return (
-    <StyledLi2>
-      <Wrapper16>
-        <Wrapper17>
+    <ListWrapper>
+      <div>
+        <TimeContainer>
           <time>{time}</time>
           <span>&nbsp;</span>
-        </Wrapper17>
+        </TimeContainer>
         {down ? (
-          <Wrapper18>
-            <Wrapper19 />
-            <Wrapper20>
-              <div></div>
-            </Wrapper20>
-            <Wrapper21 />
-          </Wrapper18>
-        ) : (
-          <Wrapper18>
-            <Wrapper24></Wrapper24>
-            <Wrapper25>
+          <IconContainer>
+            <StyledDiv />
+            <UpperIconWrapper>
               <div />
-            </Wrapper25>
-            <Wrapper26></Wrapper26>
-          </Wrapper18>
+            </UpperIconWrapper>
+            <ConnectionIcon />
+          </IconContainer>
+        ) : (
+          <IconContainer>
+            <UpperCircleIcon />
+            <LowerIconWrapper>
+              <div />
+            </LowerIconWrapper>
+            <LowerCircleIcon />
+          </IconContainer>
         )}
-        <Wrapper22>
+        <LocationContainer>
           <span>{location}</span>
           <div>
-            <Wrapper23></Wrapper23>
+            <div />
           </div>
-        </Wrapper22>
-      </Wrapper16>
-    </StyledLi2>
+        </LocationContainer>
+      </div>
+    </ListWrapper>
   );
 };
 
-const StyledLi2 = styled.li`
+const ListWrapper = styled.li`
   min-height: 32px;
+
+  & > div {
+    display: flex;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 `;
 
-const Wrapper16 = styled.div`
-  display: flex;
-  padding-left: 24px;
-  padding-right: 24px;
-`;
-
-const Wrapper17 = styled.div`
+const TimeContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 8px;
@@ -62,7 +62,6 @@ const Wrapper17 = styled.div`
     white-space: pre-line;
     color: rgb(5, 71, 82);
     font-size: 18px;
-    font-weight: 400;
     line-height: 20px;
     font-weight: 500;
     width: 48px;
@@ -81,7 +80,7 @@ const Wrapper17 = styled.div`
   }
 `;
 
-const Wrapper18 = styled.div`
+const IconContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -93,13 +92,13 @@ const Wrapper18 = styled.div`
   flex-shrink: 0;
 `;
 
-const Wrapper19 = styled.div`
+const StyledDiv = styled.div`
   width: 4px;
   height: calc(13px);
   background: transparent;
 `;
 
-const Wrapper20 = styled.div`
+const UpperIconWrapper = styled.div`
   position: absolute;
   top: 12px;
   left: 50%;
@@ -115,14 +114,14 @@ const Wrapper20 = styled.div`
   }
 `;
 
-const Wrapper21 = styled.div`
+const ConnectionIcon = styled.div`
   width: 4px;
   height: calc(13px);
   background: rgb(5, 71, 82);
   flex: 1 1 0%;
 `;
 
-const Wrapper22 = styled.div`
+const LocationContainer = styled.div`
   position: relative;
   flex: 1 1 0%;
   padding: 8px 0px;
@@ -131,27 +130,28 @@ const Wrapper22 = styled.div`
     white-space: pre-line;
     color: rgb(5, 71, 82);
     font-size: 18px;
-    font-weight: 400;
     line-height: 20px;
     font-weight: 500;
   }
+
+  & > div {
+    & > div {
+      display: flex;
+      line-height: 0;
+      -webkit-box-align: center;
+      align-items: center;
+      padding-top: 4px;
+    }
+  }
 `;
 
-const Wrapper23 = styled.div`
-  display: flex;
-  line-height: 0;
-  -webkit-box-align: center;
-  align-items: center;
-  padding-top: 4px;
-`;
-
-const Wrapper24 = styled.div`
+const UpperCircleIcon = styled.div`
   width: 4px;
   height: calc(13px);
   background: rgb(5, 71, 82);
 `;
 
-const Wrapper25 = styled.div`
+const LowerIconWrapper = styled.div`
   position: absolute;
   top: 12px;
   left: 50%;
@@ -167,11 +167,11 @@ const Wrapper25 = styled.div`
   }
 `;
 
-const Wrapper26 = styled.div`
+const LowerCircleIcon = styled.div`
   width: 4px;
   height: calc(13px);
   background: transparent;
-  flex: 1 1 0%;
+  flex: 1 1 0;
 `;
 
-export default LocationDiv;
+export default LocationIcon;

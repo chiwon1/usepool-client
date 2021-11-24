@@ -3,17 +3,17 @@ import styled from 'styled-components';
 
 const HomeContentBox: FC = ({ children }) => {
   return (
-    <Wrapper1>
-      <Wrapper2 />
-      <Wrapper3>
-        <H1Wrapper>Usepool</H1Wrapper>
-        <Wrapper4>{children}</Wrapper4>
-      </Wrapper3>
-    </Wrapper1>
+    <Wrapper>
+      <StyledDiv />
+      <TitleContainer>
+        <h1>Usepool</h1>
+        <div>{children}</div>
+      </TitleContainer>
+    </Wrapper>
   );
 };
 
-const Wrapper1 = styled.div`
+const Wrapper = styled.div`
   position: relative;
   z-index: 1;
   margin-bottom: 24px;
@@ -28,14 +28,12 @@ const Wrapper1 = styled.div`
   flex-grow: 1;
 `;
 
-const Wrapper2 = styled.div`
-  -webkit-font-smoothing: antialiased;
+const StyledDiv = styled.div`
   background-position: center center;
   background-image: url(https://cdn.blablacar.com/kairos/assets/build/images/carpool_blablabus_large-e3d8eff32c13cdafc080a100f03628bd.svg);
   background-size: cover;
   border-width: 0;
   box-sizing: border-box;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   height: 100%;
@@ -62,11 +60,8 @@ const Wrapper2 = styled.div`
   }
 `;
 
-const Wrapper3 = styled.div`
-  -webkit-font-smoothing: antialiased;
+const TitleContainer = styled.div`
   border-width: 0;
-  box-sizing: border-box;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 16px;
@@ -75,48 +70,42 @@ const Wrapper3 = styled.div`
   padding: 0 24px;
   vertical-align: baseline;
   width: 100%;
-`;
 
-const H1Wrapper = styled.div`
-  -webkit-box-pack: center;
-  -webkit-font-smoothing: antialiased;
-  align-items: flex-start;
-  border-width: 0;
-  box-sizing: border-box;
-  color: #fff;
-  display: flex;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 60px;
-  font-weight: 500;
-  height: 9vh;
-  justify-content: center;
-  line-height: 60px;
-  margin: 4.5vh 0 0;
-  padding: 0;
-  text-align: center;
-  vertical-align: baseline;
-  width: 100%;
-`;
+  & > h1 {
+    -webkit-box-pack: center;
+    align-items: flex-start;
+    border-width: 0;
+    color: #fff;
+    display: flex;
+    font-size: 60px;
+    font-weight: 500;
+    height: 9vh;
+    justify-content: center;
+    line-height: 60px;
+    margin: 4.5vh 0 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: baseline;
+    width: 100%;
+  }
 
-const Wrapper4 = styled.div`
-  -webkit-box-align: center;
-  -webkit-box-pack: center;
-  -webkit-font-smoothing: antialiased;
-  align-items: center;
-  border-width: 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  justify-content: center;
-  line-height: 16px;
-  margin: 18vh 0 0;
-  min-height: 13.5vh;
-  padding: 0;
-  vertical-align: baseline;
-  width: 100%;
+  & > div {
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    align-items: center;
+    border-width: 0;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+    font-weight: 400;
+    justify-content: center;
+    line-height: 16px;
+    margin: 18vh 0 0;
+    min-height: 13.5vh;
+    padding: 0;
+    vertical-align: baseline;
+    width: 100%;
+  }
 `;
 
 export default HomeContentBox;

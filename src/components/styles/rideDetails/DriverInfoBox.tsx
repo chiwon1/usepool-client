@@ -10,40 +10,39 @@ type Props = {
 
 const DriverInfoBox: FC<Props> = ({ nickname, profilePicture }) => {
   return (
-    <Wrapper4>
-      <SpanWrapper1>
+    <Wrapper>
+      <NicknameWrapper>
         <span>{nickname}</span>
-      </SpanWrapper1>
-      <SpanWrapper2>
-        <Wrapper5>
-          <img src={profilePicture ? profilePicture : defaultProfile} />
-        </Wrapper5>
-      </SpanWrapper2>
+      </NicknameWrapper>
+      <ProfilePictureContainer>
+        <div>
+          <img
+            src={profilePicture ? profilePicture : defaultProfile}
+            alt="Profile-picture"
+          />
+        </div>
+      </ProfilePictureContainer>
       <RightAddOnIcon />
-    </Wrapper4>
+    </Wrapper>
   );
 };
 
-const Wrapper4 = styled.div`
-  padding-left: 24px;
-  padding-right: 24px;
+const Wrapper = styled.div`
   position: relative;
   display: flex;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding: 16px 24px;
   -webkit-box-align: center;
   align-items: center;
-  flex: 1 1 0%;
-  border: 0px;
+  flex: 1 1 0;
+  border: 0;
   background: none;
   white-space: pre-line;
-  background: none;
   text-decoration: none;
   user-select: none;
   -webkit-tap-highlight-color: rgba(221, 221, 221, 0.4);
 `;
 
-const SpanWrapper1 = styled.span`
+const NicknameWrapper = styled.span`
   display: flex;
   -webkit-box-flex: 1;
   flex-grow: 1;
@@ -51,8 +50,8 @@ const SpanWrapper1 = styled.span`
   align-items: center;
 
   span {
-    flex: 1 1 0%;
-    margin: 0px;
+    flex: 1 1 0;
+    margin: 0;
     font-weight: 500;
     color: rgb(5, 71, 82);
     font-size: 18px;
@@ -61,7 +60,7 @@ const SpanWrapper1 = styled.span`
   }
 `;
 
-const SpanWrapper2 = styled.span`
+const ProfilePictureContainer = styled.span`
   display: inline-flex;
   min-width: 24px;
   -webkit-box-align: center;
@@ -71,21 +70,21 @@ const SpanWrapper2 = styled.span`
   svg {
     fill: #708c91;
   }
-`;
 
-const Wrapper5 = styled.div`
-  box-sizing: border-box;
-  border-radius: 50%;
-  position: relative;
-  width: 48px;
-  height: 48px;
-  border: none;
-
-  img {
+  & > div {
+    box-sizing: border-box;
     border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border: none;
+
+    img {
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 `;
 

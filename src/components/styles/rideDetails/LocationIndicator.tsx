@@ -9,17 +9,17 @@ type Props = {
 
 const LocationIndicator: FC<Props> = ({ location, address }) => {
   return (
-    <Wrapper12>
-      <SpanWrapper3>{location}</SpanWrapper3>
-      <SpanWrapper4>{address}</SpanWrapper4>
+    <Wrapper>
+      <LocationContainer>{location}</LocationContainer>
+      <AddressContainer>{address}</AddressContainer>
       <RightAddOnIcon />
-    </Wrapper12>
+    </Wrapper>
   );
 };
 
-const Wrapper12 = styled.div`
+const Wrapper = styled.div`
   position: relative;
-  flex: 1 1 0%;
+  flex: 1 1 0;
   padding: 8px 24px 8px 0px;
 
   svg {
@@ -30,16 +30,15 @@ const Wrapper12 = styled.div`
   }
 `;
 
-const SpanWrapper3 = styled.span`
+const LocationContainer = styled.span`
   white-space: pre-line;
   color: rgb(5, 71, 82);
   font-size: 18px;
-  font-weight: 400;
   line-height: 20px;
   font-weight: 500;
 `;
 
-const SpanWrapper4 = styled.span`
+const AddressContainer = styled.span`
   white-space: pre-line;
   font-size: 13px;
   font-weight: 400;

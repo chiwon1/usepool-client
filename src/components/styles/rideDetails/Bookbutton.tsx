@@ -7,15 +7,15 @@ type Props = {
 
 const Bookbutton: FC<Props> = ({ handleClick }) => {
   return (
-    <Wrapper18>
+    <Wrapper>
       <div>
         <StyledButton onClick={handleClick}>Book</StyledButton>
       </div>
-    </Wrapper18>
+    </Wrapper>
   );
 };
 
-const Wrapper18 = styled.div`
+const Wrapper = styled.div`
   position: sticky;
   flex: 1 1 100%;
   bottom: 0px;

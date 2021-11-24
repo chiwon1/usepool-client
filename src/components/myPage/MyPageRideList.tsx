@@ -20,56 +20,78 @@ const MyPageRideList: FC<Props> = ({
 }) => {
   return (
     <StyledLi onClick={handleClick}>
-      <Wrapper2>
+      <div>
         <button>
           <Wrapper>
-            <SpanWrapper>{`${departureDate} ${departureTime}`}</SpanWrapper>
-            <Wrapper6>
-              <Wrapper8>
+            <StyledSpan>{`${departureDate} ${departureTime}`}</StyledSpan>
+            <div>
+              <div>
                 <StyledUl>
                   <li>
-                    <Wrapper3>
-                      <Wrapper4 />
+                    <DepartureContainer>
+                      <UpperStyledDiv />
                       <UpperRouteIcon />
-                      <Wrapper7>
+                      <LocationWrapper>
                         <span>{departureLocation}</span>
-                      </Wrapper7>
-                    </Wrapper3>
+                      </LocationWrapper>
+                    </DepartureContainer>
                   </li>
                   <li>
-                    <Wrapper3>
-                      <Wrapper4 />
+                    <DepartureContainer>
+                      <UpperStyledDiv />
                       <LowerRouteIcon />
-                      <Wrapper7>
+                      <LocationWrapper>
                         <span>{destination}</span>
-                      </Wrapper7>
-                    </Wrapper3>
+                      </LocationWrapper>
+                    </DepartureContainer>
                   </li>
                 </StyledUl>
-              </Wrapper8>
-            </Wrapper6>
+              </div>
+            </div>
           </Wrapper>
         </button>
-      </Wrapper2>
+      </div>
     </StyledLi>
   );
 };
-
-const Wrapper6 = styled.div`
-  display: flex;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-`;
 
 const StyledLi = styled.li`
   margin-bottom: 8px;
   padding-left: 24px;
   padding-right: 24px;
   isolation: isolate;
+
+  & > div {
+    border-radius: 16px;
+    box-shadow: rgb(0 0 0 / 16%) 0px 1pt 4pt, rgb(0 0 0 / 8%) 0px 2pt 8pt;
+    list-style-type: none;
+    transition: box-shadow 200ms ease-in 0s;
+    background-color: rgb(255, 255, 255);
+    flex: 1 1 0%;
+    position: relative;
+
+    button {
+      -webkit-tap-highlight-color: transparent;
+      border-width: 0;
+      box-sizing: border-box;
+      color: #00aff5;
+      display: block;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 16px;
+      margin: 0;
+      padding: 0;
+      text-decoration: none;
+      vertical-align: baseline;
+      width: 100%;
+      text-align: left;
+      background: none;
+      cursor: pointer;
+    }
+  }
 `;
 
-const SpanWrapper = styled.span`
+const StyledSpan = styled.span`
   margin: 0px;
   color: rgb(5, 71, 82);
   font-size: 22px;
@@ -78,12 +100,10 @@ const SpanWrapper = styled.span`
 
 const Wrapper = styled.div`
   -webkit-box-pack: justify;
-  -webkit-font-smoothing: antialiased;
   border-width: 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   height: 100%;
@@ -96,36 +116,18 @@ const Wrapper = styled.div`
   :hover {
     box-shadow: rgba(0, 0, 0, 0.08) 0 2pt 8pt, rgba(0, 0, 0, 0.08) 0 2pt 16pt;
   }
-`;
 
-const Wrapper2 = styled.div`
-  border-radius: 16px;
-  box-shadow: rgb(0 0 0 / 16%) 0px 1pt 4pt, rgb(0 0 0 / 8%) 0px 2pt 8pt;
-  list-style-type: none;
-  transition: box-shadow 200ms ease-in 0s;
-  background-color: rgb(255, 255, 255);
-  flex: 1 1 0%;
-  position: relative;
+  & > div {
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
 
-  button {
-    -webkit-font-smoothing: antialiased;
-    -webkit-tap-highlight-color: transparent;
-    border-width: 0;
-    box-sizing: border-box;
-    color: #00aff5;
-    display: block;
-    font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 16px;
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    vertical-align: baseline;
-    width: 100%;
-    text-align: left;
-    background: none;
-    cursor: pointer;
+    & > div {
+      min-width: 0px;
+      position: relative;
+      left: -24px;
+    }
   }
 `;
 
@@ -137,13 +139,13 @@ const StyledUl = styled.ul`
   }
 `;
 
-const Wrapper3 = styled.div`
+const DepartureContainer = styled.div`
   display: flex;
   padding-left: 24px;
   padding-right: 24px;
 `;
 
-const Wrapper4 = styled.div`
+const UpperStyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 0px;
@@ -152,7 +154,6 @@ const Wrapper4 = styled.div`
     white-space: pre-line;
     color: rgb(5, 71, 82);
     font-size: 18px;
-    font-weight: 400;
     line-height: 20px;
     font-weight: 500;
     width: 48px;
@@ -161,7 +162,7 @@ const Wrapper4 = styled.div`
   }
 `;
 
-const Wrapper7 = styled.div`
+const LocationWrapper = styled.div`
   position: relative;
   flex: 1 1 0%;
   padding: 8px 0px;
@@ -174,12 +175,6 @@ const Wrapper7 = styled.div`
     font-weight: 400;
     line-height: 20px;
   }
-`;
-
-const Wrapper8 = styled.div`
-  min-width: 0px;
-  position: relative;
-  left: -24px;
 `;
 
 export default MyPageRideList;

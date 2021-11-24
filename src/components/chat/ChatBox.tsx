@@ -60,7 +60,7 @@ const ChatBox: FC<Props> = ({ chat, onChangeChat, onSubmitForm }) => {
                 </StyledButton>
               </Form>
             </div>
-            <div></div>
+            <div />
           </Wrapper>
         </div>
       </ChatArea>
@@ -102,7 +102,6 @@ export const MentionsTextarea = styled.textarea`
   max-height: 76px;
   min-height: 20px;
   resize: none;
-  height: 20px;
 `;
 
 const Wrapper = styled.div`
@@ -129,38 +128,22 @@ const Wrapper = styled.div`
 `;
 
 const StyledButton = styled.button`
-  position: relative;
   box-sizing: border-box;
-  display: inline-flex;
-  padding: 0px 24px;
   border: 1px solid transparent;
-  border-radius: 48px;
-  font-size: 16px;
-  line-height: 1;
-  text-align: center;
   text-decoration: none;
   cursor: pointer;
   font-family: inherit;
-  height: 48px;
-  min-width: 48px;
   max-width: 100%;
   overflow: hidden;
   user-select: none;
   -webkit-box-align: center;
   align-items: center;
   transition: max-width 500ms ease-in 0s, background-color 200ms ease-in 0s;
-  white-space: nowrap;
   background-color: transparent;
   border-radius: inherit;
-  color: rgb(0, 175, 245);
-  padding: inherit;
-  display: inherit;
-  line-height: inherit;
   font-size: inherit;
-  text-align: left;
   min-width: inherit;
   min-height: inherit;
-  height: auto;
   white-space: normal;
   display: inline-block;
   text-align: center;
@@ -168,7 +151,6 @@ const StyledButton = styled.button`
   line-height: 0;
   width: 48px;
   height: 48px;
-  background-color: transparent;
   color: rgb(112, 140, 145);
   position: absolute;
   bottom: 0px;

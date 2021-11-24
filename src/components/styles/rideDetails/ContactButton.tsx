@@ -9,26 +9,26 @@ type Props = {
 
 const ContactButton: FC<Props> = ({ handleClick, nickname }) => {
   return (
-    <Wrapper17>
+    <Wrapper>
       <StyledButton onClick={handleClick}>
-        <SpanWrapper5>
+        <span>
           <ContactIcon />
-          <SpanWrapper4>
+          <NicknameWrapper>
             <span>{`Contact ${nickname}`}</span>
-          </SpanWrapper4>
-        </SpanWrapper5>
+          </NicknameWrapper>
+        </span>
       </StyledButton>
-    </Wrapper17>
+    </Wrapper>
   );
 };
 
-const Wrapper17 = styled.div`
+const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   max-width: 662px;
 `;
 
-const SpanWrapper4 = styled.span`
+const NicknameWrapper = styled.span`
   flex: 1 1 0%;
 
   span {
@@ -69,6 +69,14 @@ const StyledButton = styled.button`
 
   :disabled {
     cursor: default;
+  }
+
+  & > span {
+    display: flex;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    -webkit-box-align: center;
+    align-items: center;
   }
 `;
 

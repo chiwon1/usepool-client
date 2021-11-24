@@ -15,17 +15,17 @@ const SearchResultList: FC = () => {
               >
                 <g>
                   <g>
-                    <circle></circle>
-                    <path></path>
+                    <circle />
+                    <path />
                   </g>
                 </g>
               </svg>
             </span>
-            <span>Manchester</span>
+            <span />
           </span>
         </button>
         <div>
-          <hr></hr>
+          <hr />
         </div>
       </li>
     </ul>

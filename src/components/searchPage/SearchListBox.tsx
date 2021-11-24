@@ -20,42 +20,42 @@ const SearchListBox: FC<Props> = ({
   return (
     <div>
       <div>
-        <Wrapper4>
+        <Container>
           <div />
-          <Wrapper5>
-            <Wrapper6 aria-hidden="true" />
+          <Wrapper>
+            <StyledDiv aria-hidden="true" />
             <div>
-              <Wrapper7>
-                <Wrapper8>
-                  <H2wrapper>{dayjs(departureDate).format('DD MMM')}</H2wrapper>
-                  <Wrapper9>
-                    <Wrapper10>
-                      <H1wrapper>
+              <ItineraryContainer>
+                <div>
+                  <h2>{dayjs(departureDate).format('DD MMM')}</h2>
+                  <div>
+                    <div>
+                      <h1>
                         {`${departureLocation} → ${destination}: 
                         ${availableNumber} rides available`}
-                      </H1wrapper>
-                    </Wrapper10>
-                  </Wrapper9>
+                      </h1>
+                    </div>
+                  </div>
                   {children}
-                </Wrapper8>
-              </Wrapper7>
+                </div>
+              </ItineraryContainer>
             </div>
-          </Wrapper5>
-        </Wrapper4>
+          </Wrapper>
+        </Container>
       </div>
     </div>
   );
 };
 
-const Wrapper4 = styled.div`
+const Container = styled.div`
   opacity: 1;
 `;
 
-const Wrapper5 = styled.div`
+const Wrapper = styled.div`
   position: relative;
 `;
 
-const Wrapper6 = styled.div`
+const StyledDiv = styled.div`
   position: absolute;
   background: rgb(255, 255, 255);
   width: 100%;
@@ -66,56 +66,56 @@ const Wrapper6 = styled.div`
   transition: opacity 420ms ease-in-out 0s, visibility 420ms ease-in-out 0s;
 `;
 
-const Wrapper7 = styled.div`
+const ItineraryContainer = styled.div`
   display: flex;
   justify-content: space-between;
-`;
 
-const Wrapper8 = styled.div`
-  width: 614px;
-  margin: 0 auto;
-`;
+  & > div {
+    width: 614px;
+    margin: 0 auto;
 
-const H2wrapper = styled.h2`
-  white-space: pre-line;
-  color: rgb(5, 71, 82);
-  font-size: 22px;
-  line-height: 24px;
-  font-weight: 500;
-  padding: 24px 24px 8px;
-`;
+    & > h2 {
+      white-space: pre-line;
+      color: rgb(5, 71, 82);
+      font-size: 22px;
+      line-height: 24px;
+      font-weight: 500;
+      padding: 24px 24px 8px;
+    }
 
-const Wrapper9 = styled.div`
-  -webkit-font-smoothing: antialiased;
-  border-width: 0;
-  box-sizing: border-box;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 16px;
-  margin: 0;
-  padding: 0 24px;
-  vertical-align: baseline;
-`;
+    & > div {
+      -webkit-font-smoothing: antialiased;
+      border-width: 0;
+      box-sizing: border-box;
+      font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 16px;
+      margin: 0;
+      padding: 0 24px;
+      vertical-align: baseline;
 
-const Wrapper10 = styled.div`
-  display: flex !important;
-`;
+      & > div {
+        display: flex !important;
 
-const H1wrapper = styled.h1`
-  -webkit-font-smoothing: antialiased;
-  border-width: 0;
-  box-sizing: border-box;
-  color: #708c91;
-  flex: 1 1 0;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
-  margin: 0;
-  padding: 8px 0;
-  vertical-align: baseline;
-  white-space: pre-line;
+        & > h1 {
+          -webkit-font-smoothing: antialiased;
+          border-width: 0;
+          box-sizing: border-box;
+          color: #708c91;
+          flex: 1 1 0;
+          font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 20px;
+          margin: 0;
+          padding: 8px 0;
+          vertical-align: baseline;
+          white-space: pre-line;
+        }
+      }
+    }
+  }
 `;
 
 export default SearchListBox;
