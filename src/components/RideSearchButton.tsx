@@ -24,10 +24,8 @@ const RideSearchButton: FC = () => {
 };
 
 const Wrapper = styled.div`
-  -webkit-font-smoothing: antialiased;
   border-width: 0;
   box-sizing: border-box;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 16px;
@@ -38,7 +36,6 @@ const Wrapper = styled.div`
   button {
     -webkit-box-align: center;
     -webkit-box-pack: center;
-    -webkit-font-smoothing: antialiased;
     align-items: center;
     background-color: #00aff5;
     background-image: none;
@@ -48,7 +45,6 @@ const Wrapper = styled.div`
     color: #708c91;
     cursor: pointer;
     display: flex;
-    font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 16px;
     font-weight: 400;
     height: 56px;

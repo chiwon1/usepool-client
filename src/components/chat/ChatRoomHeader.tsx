@@ -24,7 +24,7 @@ const ChatRoomHeader: FC = () => {
         <div>
           <Link to={`/rides/${info.ride._id}`}>
             <SpanWrapper>
-              <SpanWrapper5>
+              <span>
                 <svg
                   aria-hidden="true"
                   height="24"
@@ -56,12 +56,12 @@ const ChatRoomHeader: FC = () => {
                     />
                   </g>
                 </svg>
-              </SpanWrapper5>
+              </span>
               {info && (
-                <SpanWrapper2>
-                  <SpanWrapper4>{`${info.ride.departureLocation} → ${info.ride.destination}`}</SpanWrapper4>
-                  <SpanWrapper3>{`${info.ride.departureDate} ${info.ride.departureTime}`}</SpanWrapper3>
-                </SpanWrapper2>
+                <DestinationInfoContainer>
+                  <LocationWrapper>{`${info.ride.departureLocation} → ${info.ride.destination}`}</LocationWrapper>
+                  <DateWrapper>{`${info.ride.departureDate} ${info.ride.departureTime}`}</DateWrapper>
+                </DestinationInfoContainer>
               )}
             </SpanWrapper>
             <RightAddOnIcon />
@@ -117,36 +117,36 @@ const SpanWrapper = styled.span`
   -webkit-box-align: center;
   align-items: center;
   margin-right: 16px;
-`;
 
-const SpanWrapper5 = styled.span`
-  display: inline-flex;
-  min-width: 24px;
-  -webkit-box-align: center;
-  align-items: center;
-  margin-right: 16px;
+  & > span {
+    display: inline-flex;
+    min-width: 24px;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-right: 16px;
 
-  & > svg {
-    fill: rgb(112, 140, 145);
+    & > svg {
+      fill: rgb(112, 140, 145);
+    }
   }
 `;
 
-const SpanWrapper2 = styled.span`
-  margin: 0px;
-  padding: 0px;
-  border: 0px;
+const DestinationInfoContainer = styled.span`
+  margin: 0;
+  padding: 0;
+  border: 0;
   font: inherit;
   vertical-align: baseline;
   -webkit-font-smoothing: antialiased;
   flex: 1 1 0;
 `;
 
-const SpanWrapper3 = styled.span`
+const DateWrapper = styled.span`
   font-size: 16px;
   color: rgb(112, 140, 145);
 `;
 
-const SpanWrapper4 = styled.span`
+const LocationWrapper = styled.span`
   margin: 0px;
   font-weight: 400;
   font-size: 18px;

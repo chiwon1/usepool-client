@@ -37,11 +37,11 @@ const ChatRoomList: FC<Props> = ({ data }) => {
   return (
     <StyledLi>
       <StyledLink to={`/chatRooms/${roomId}`}>
-        <SpanWrapper>
-          <SpanWrapper2>
+        <StyledSpan>
+          <span>
             <span>{sender}</span>
             <span>
-              <SpanWrapper3>
+              <DestinationContainer>
                 <Wrapper>
                   {departureLocation}
                   <svg
@@ -66,21 +66,21 @@ const ChatRoomList: FC<Props> = ({ data }) => {
                   </svg>
                   {destination}
                 </Wrapper>
-              </SpanWrapper3>
+              </DestinationContainer>
             </span>
-            <SpanWrapper4>
+            <DateContainer>
               <time>{formattedDate}</time>
-            </SpanWrapper4>
-          </SpanWrapper2>
-        </SpanWrapper>
-        <SpanWrapper5>
+            </DateContainer>
+          </span>
+        </StyledSpan>
+        <ProfilePictureContainer>
           <div>
             <img
               alt="profilePicture"
               src={profilePicture ? profilePicture : defaultProfile}
             />
           </div>
-        </SpanWrapper5>
+        </ProfilePictureContainer>
         <RightAddOnIcon />
       </StyledLink>
     </StyledLi>
@@ -121,24 +121,24 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const SpanWrapper = styled.span`
+const StyledSpan = styled.span`
   display: flex;
   -webkit-box-flex: 1;
   flex-grow: 1;
   -webkit-box-align: center;
   align-items: center;
-`;
 
-const SpanWrapper2 = styled.span`
-  flex: 1 1 0;
+  & > span {
+    flex: 1 1 0;
 
-  span {
-    margin: 0;
-    font-size: 18px;
-    line-height: 20px;
-    font-weight: 500;
-    display: block;
-    color: rgb(112, 140, 145);
+    span {
+      margin: 0;
+      font-size: 18px;
+      line-height: 20px;
+      font-weight: 500;
+      display: block;
+      color: rgb(112, 140, 145);
+    }
   }
 `;
 
@@ -156,20 +156,20 @@ const Wrapper = styled.div`
   }
 `;
 
-const SpanWrapper3 = styled.span`
+const DestinationContainer = styled.span`
   display: flex;
   word-break: break-word;
   max-height: 2.5em;
   overflow: hidden;
 `;
 
-const SpanWrapper4 = styled.span`
+const DateContainer = styled.span`
   time {
     font-size: 13px;
   }
 `;
 
-const SpanWrapper5 = styled.span`
+const ProfilePictureContainer = styled.span`
   display: inline-flex;
   min-width: 24px;
   -webkit-box-align: center;

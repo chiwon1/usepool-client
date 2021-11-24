@@ -24,34 +24,34 @@ const ItineraryBox: FC<Props> = ({
     <>
       <ul>
         <li>
-          <Wrapper6>
+          <Wrapper>
             <TimeIndicator time={departureTime} />
             <UpperRouteIcon />
             <LocationIndicator
               location={depatureLocation}
               address={depatureAddress}
             />
-          </Wrapper6>
+          </Wrapper>
         </li>
         <li>
-          <Wrapper6>
+          <Wrapper>
             <TimeIndicator />
             <LowerRouteIcon />
             <LocationIndicator
               location={destination}
               address={destinationAddress}
             />
-          </Wrapper6>
+          </Wrapper>
         </li>
       </ul>
-      <Wrapper3>
+      <StyledDiv>
         <hr />
-      </Wrapper3>
+      </StyledDiv>
     </>
   );
 };
 
-const Wrapper6 = styled.div`
+const Wrapper = styled.div`
   color: rgb(0, 175, 245);
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
@@ -60,7 +60,7 @@ const Wrapper6 = styled.div`
   padding-right: 24px;
 `;
 
-const Wrapper3 = styled.div`
+const StyledDiv = styled.div`
   padding-top: 8px;
   padding-bottom: 8px;
 
@@ -74,7 +74,6 @@ const Wrapper3 = styled.div`
     overflow: hidden;
     border: none;
     background-color: rgb(237, 237, 237);
-    height: 1px;
     margin: 0px;
     height: 8px;
   }

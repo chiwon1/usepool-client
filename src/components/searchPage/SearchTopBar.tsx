@@ -10,11 +10,11 @@ type Props = {
 const SearchTopBar: FC<Props> = ({ departFrom, arriveAt, departDate }) => {
   return (
     <Wrapper role="presentation">
-      <Wrapper2>
-        <Awrapper>
-          <Wrapper3>
-            <Wrapper4>
-              <Wrapper5>
+      <div>
+        <a>
+          <div>
+            <div>
+              <div>
                 <svg
                   aria-hidden="true"
                   height="24"
@@ -30,14 +30,14 @@ const SearchTopBar: FC<Props> = ({ departFrom, arriveAt, departDate }) => {
                     strokeWidth="1"
                     stroke="#708C91"
                   >
-                    <line x1="22" x2="16.4" y1="22" y2="16.4"></line>
-                    <circle cx="10" cy="10" r="9"></circle>
+                    <line x1="22" x2="16.4" y1="22" y2="16.4" />
+                    <circle cx="10" cy="10" r="9" />
                   </g>
                 </svg>
-                <Wrapper6>
-                  <Pwrapper>
-                    <SpanWrapper>
-                      <SpanWrapper4>{departFrom}</SpanWrapper4>
+                <LocationContainer>
+                  <p>
+                    <StyledSpan>
+                      <DepartWrapper>{departFrom}</DepartWrapper>
                       <svg
                         aria-hidden="true"
                         height="24"
@@ -58,27 +58,24 @@ const SearchTopBar: FC<Props> = ({ departFrom, arriveAt, departDate }) => {
                           <path d="M22 12H2" />
                         </g>
                       </svg>
-                      <SpanWrapper2>{arriveAt}</SpanWrapper2>
-                    </SpanWrapper>
-                  </Pwrapper>
-                  <SpanWrapper3>{departDate}</SpanWrapper3>
-                </Wrapper6>
-              </Wrapper5>
-            </Wrapper4>
-          </Wrapper3>
-        </Awrapper>
-      </Wrapper2>
+                      <ArrivalWrapper>{arriveAt}</ArrivalWrapper>
+                    </StyledSpan>
+                  </p>
+                  <DepartDateWrapper>{departDate}</DepartDateWrapper>
+                </LocationContainer>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  -webkit-font-smoothing: antialiased;
   background-color: #fff;
   border-width: 0;
-  box-sizing: border-box;
   display: flex;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   height: 76px;
@@ -91,100 +88,83 @@ const Wrapper = styled.div`
   transition: top 250ms ease-in-out;
   vertical-align: baseline;
   z-index: 5;
-`;
 
-const Wrapper2 = styled.div`
-  -webkit-font-smoothing: antialiased;
-  border-width: 0;
-  box-sizing: border-box;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 16px;
-  margin: 0 auto;
-  max-width: 662px;
-  padding: 0;
-  vertical-align: baseline;
-  width: 100%;
-`;
+  & > div {
+    border-width: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 16px;
+    margin: 0 auto;
+    max-width: 662px;
+    padding: 0;
+    vertical-align: baseline;
+    width: 100%;
 
-const Awrapper = styled.a`
-  -webkit-font-smoothing: antialiased;
-  -webkit-tap-highlight-color: transparent;
-  border-width: 0;
-  box-sizing: border-box;
-  color: #00aff5;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 16px;
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-  vertical-align: baseline;
-`;
+    & > a {
+      -webkit-tap-highlight-color: transparent;
+      border-width: 0;
+      color: #00aff5;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 16px;
+      margin: 0;
+      padding: 0;
+      text-decoration: none;
+      vertical-align: baseline;
 
-const Wrapper3 = styled.div`
-  -webkit-font-smoothing: antialiased;
-  border-width: 0;
-  box-sizing: border-box;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 16px;
-  margin: 0;
-  padding: 0;
-  vertical-align: baseline;
-`;
+      & > div {
+        border-width: 0;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 16px;
+        margin: 0;
+        padding: 0;
+        vertical-align: baseline;
 
-const Wrapper4 = styled.div`
-  -webkit-font-smoothing: antialiased;
-  border-width: 0;
-  box-sizing: border-box;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 16px;
-  margin: 0;
-  padding: 8px 24px;
-  vertical-align: baseline;
-  width: 100%;
-`;
+        & > div {
+          border-width: 0;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 16px;
+          margin: 0;
+          padding: 8px 24px;
+          vertical-align: baseline;
+          width: 100%;
 
-const Wrapper5 = styled.div`
-  -webkit-box-align: center;
-  -webkit-font-smoothing: antialiased;
-  align-items: center;
-  background-color: #ededed;
-  border-radius: 16px;
-  border-width: 0;
-  box-sizing: border-box;
-  color: #054752;
-  display: flex;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 54px;
-  margin: 0;
-  min-height: 54px;
-  padding: 0 16px;
-  text-decoration: none;
-  vertical-align: baseline;
+          & > div {
+            -webkit-box-align: center;
+            align-items: center;
+            background-color: #ededed;
+            border-radius: 16px;
+            border-width: 0;
+            color: #054752;
+            display: flex;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 54px;
+            margin: 0;
+            min-height: 54px;
+            padding: 0 16px;
+            text-decoration: none;
+            vertical-align: baseline;
 
-  svg {
-    box-sizing: border-box;
-    fill: #708c91;
-    flex-shrink: 0;
+            svg {
+              box-sizing: border-box;
+              fill: #708c91;
+              flex-shrink: 0;
+            }
+          }
+        }
+      }
+    }
   }
 `;
 
-const Wrapper6 = styled.div`
-  -webkit-font-smoothing: antialiased;
+const LocationContainer = styled.div`
   border-width: 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 54px;
@@ -199,15 +179,25 @@ const Wrapper6 = styled.div`
   &:not(:first-child) {
     margin-left: 16px;
   }
+
+  & > p {
+    border-width: 0;
+    color: #054752;
+    display: flex;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    width: 100%;
+  }
 `;
 
 const Pwrapper = styled.p`
-  -webkit-font-smoothing: antialiased;
   border-width: 0;
-  box-sizing: border-box;
   color: #054752;
   display: flex;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
@@ -217,11 +207,8 @@ const Pwrapper = styled.p`
   width: 100%;
 `;
 
-const SpanWrapper = styled.span`
-  -webkit-font-smoothing: antialiased;
+const StyledSpan = styled.span`
   border-width: 0;
-  box-sizing: border-box;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
@@ -230,12 +217,9 @@ const SpanWrapper = styled.span`
   vertical-align: baseline;
 
   span {
-    -webkit-font-smoothing: antialiased;
     border-width: 0;
     box-sizing: border-box;
-    font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 16px;
-    font-weight: 400;
     line-height: 20px;
     margin: 0;
     padding: 0;
@@ -256,11 +240,9 @@ const SpanWrapper = styled.span`
   }
 `;
 
-const SpanWrapper2 = styled.span`
-  -webkit-font-smoothing: antialiased;
+const ArrivalWrapper = styled.span`
   border-width: 0;
   box-sizing: border-box;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
@@ -269,12 +251,10 @@ const SpanWrapper2 = styled.span`
   vertical-align: baseline;
 `;
 
-const SpanWrapper3 = styled.span`
-  -webkit-font-smoothing: antialiased;
+const DepartDateWrapper = styled.span`
   border-width: 0;
   box-sizing: border-box;
   color: #708c91;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 20px;
@@ -283,7 +263,7 @@ const SpanWrapper3 = styled.span`
   vertical-align: baseline;
 `;
 
-const SpanWrapper4 = styled.span`
+const DepartWrapper = styled.span`
   font-weight: bolder;
 `;
 

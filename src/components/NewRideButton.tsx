@@ -8,14 +8,12 @@ const NewRideButton: FC = () => {
 };
 
 const StyledLink = styled(Link)`
-  -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   align-items: center;
   border-width: 0;
   box-sizing: border-box;
   color: #00aff5;
   display: flex;
-  font-family: gt-eesti, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 16px;
   font-weight: 500;
   line-height: 16px;

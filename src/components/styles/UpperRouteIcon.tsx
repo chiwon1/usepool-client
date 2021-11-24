@@ -3,17 +3,17 @@ import styled from 'styled-components';
 
 const UpperRouteIcon: FC = () => {
   return (
-    <Wrapper8>
-      <Wrapper9 />
-      <Wrapper10>
+    <Wrapper>
+      <StyledDiv />
+      <IconContainer>
         <div />
-      </Wrapper10>
-      <Wrapper11 />
-    </Wrapper8>
+      </IconContainer>
+      <StyledDiv2 />
+    </Wrapper>
   );
 };
 
-const Wrapper8 = styled.div`
+const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -25,13 +25,13 @@ const Wrapper8 = styled.div`
   flex-shrink: 0;
 `;
 
-const Wrapper9 = styled.div`
+const StyledDiv = styled.div`
   width: 4px;
   height: calc(13px);
   background: transparent;
 `;
 
-const Wrapper10 = styled.div`
+const IconContainer = styled.div`
   position: absolute;
   top: 12px;
   left: 50%;
@@ -47,7 +47,7 @@ const Wrapper10 = styled.div`
   }
 `;
 
-const Wrapper11 = styled.div`
+const StyledDiv2 = styled.div`
   width: 4px;
   height: calc(13px);
   background: rgb(5, 71, 82);

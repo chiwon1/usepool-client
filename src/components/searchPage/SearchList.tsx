@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import LocationDiv from '../LocationDiv';
+import LocationIcon from '../LocationIcon';
 
 type Props = {
   departureLocation: string;
@@ -21,39 +21,39 @@ const SearchList: FC<Props> = ({
 }) => {
   return (
     <StyledLi onClick={handleClick}>
-      <Wrapper11>
-        <Wrapper12 />
+      <Wrapper>
+        <div />
         <StyledA>
-          <Wrapper13>
-            <Wrapper14>
-              <Wrapper15>
+          <div>
+            <div>
+              <div>
                 <ul>
-                  <LocationDiv
+                  <LocationIcon
                     location={departureLocation}
                     down={true}
                     time={departureTime}
                   />
-                  <LocationDiv location={arriveAt} down={false} />
+                  <LocationIcon location={arriveAt} down={false} />
                 </ul>
                 <div />
-              </Wrapper15>
+              </div>
               <span />
-            </Wrapper14>
-            <Wrapper16>
-              <SpanWrapper1>
-                <SpanWrapper2>
-                  <Wrapper17>
+            </div>
+            <ProfileContainer>
+              <span>
+                <PictureContainer>
+                  <div>
                     <img src={profilePicture} alt="User-profile-picture" />
-                  </Wrapper17>
-                </SpanWrapper2>
-                <SpanWrapper3>
-                  <SpanWrapper4>{nickname}</SpanWrapper4>
-                </SpanWrapper3>
-              </SpanWrapper1>
-            </Wrapper16>
-          </Wrapper13>
+                  </div>
+                </PictureContainer>
+                <NicknameContainer>
+                  <span>{nickname}</span>
+                </NicknameContainer>
+              </span>
+            </ProfileContainer>
+          </div>
         </StyledA>
-      </Wrapper11>
+      </Wrapper>
     </StyledLi>
   );
 };
@@ -65,7 +65,7 @@ const StyledLi = styled.li`
   isolation: isolate;
 `;
 
-const Wrapper11 = styled.div`
+const Wrapper = styled.div`
   border-radius: 16px;
   box-shadow: rgb(0 0 0 / 16%) 0px 1pt 4pt, rgb(0 0 0 / 8%) 0px 2pt 8pt;
   list-style-type: none;
@@ -78,16 +78,16 @@ const Wrapper11 = styled.div`
   :hover {
     box-shadow: rgba(0, 0, 0, 0.08) 0 2pt 8pt, rgba(0, 0, 0, 0.08) 0 2pt 16pt;
   }
-`;
 
-const Wrapper12 = styled.div`
-  position: absolute;
-  background: rgb(255, 255, 255);
-  border-radius: 16px;
-  inset: 0;
-  opacity: 0.8;
-  display: none;
-  z-index: 3;
+  & > div {
+    position: absolute;
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    inset: 0;
+    opacity: 0.8;
+    display: none;
+    z-index: 3;
+  }
 `;
 
 const StyledA = styled.a`
@@ -95,31 +95,31 @@ const StyledA = styled.a`
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
   display: block;
+
+  & > div {
+    height: 100%;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+
+    & > div {
+      display: flex;
+      flex-direction: row;
+      -webkit-box-pack: justify;
+      justify-content: space-between;
+
+      & > div {
+        min-width: 0;
+        position: relative;
+        left: -24px;
+      }
+    }
+  }
 `;
 
-const Wrapper13 = styled.div`
-  height: 100%;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-`;
-
-const Wrapper14 = styled.div`
-  display: flex;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-`;
-
-const Wrapper15 = styled.div`
-  min-width: 0;
-  position: relative;
-  left: -24px;
-`;
-
-const Wrapper16 = styled.div`
+const ProfileContainer = styled.div`
   position: relative;
   display: flex;
   -webkit-box-align: center;
@@ -129,56 +129,56 @@ const Wrapper16 = styled.div`
   background: none;
   white-space: pre-line;
   padding: 8px 0 0;
+
+  & > span {
+    display: flex;
+    -webkit-box-flex: 1;
+    -webkit-box-align: center;
+    align-items: center;
+    flex: 1 1 0;
+  }
 `;
 
-const SpanWrapper1 = styled.span`
-  display: flex;
-  -webkit-box-flex: 1;
-  -webkit-box-align: center;
-  align-items: center;
-  flex: 1 1 0;
-`;
-
-const SpanWrapper2 = styled.span`
+const PictureContainer = styled.span`
   display: inline-flex;
   min-width: 24px;
   -webkit-box-align: center;
   align-items: center;
   margin-right: 16px;
-`;
 
-const Wrapper17 = styled.div`
-  box-sizing: border-box;
-  border-radius: 50%;
-  position: relative;
-  width: 48px;
-  height: 48px;
-  border: none;
-
-  img {
+  & > div {
+    box-sizing: border-box;
     border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border: none;
+
+    img {
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 `;
 
-const SpanWrapper3 = styled.span`
+const NicknameContainer = styled.span`
   flex: 1 1 0;
   word-break: break-word;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
-`;
 
-const SpanWrapper4 = styled.span`
-  margin: 0;
-  font-weight: 400;
-  color: rgb(5, 71, 82);
-  font-size: 18px;
-  line-height: 20px;
-  display: block;
+  & > span {
+    margin: 0;
+    font-weight: 400;
+    color: rgb(5, 71, 82);
+    font-size: 18px;
+    line-height: 20px;
+    display: block;
+  }
 `;
 
 export default SearchList;
