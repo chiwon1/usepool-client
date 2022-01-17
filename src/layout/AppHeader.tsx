@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
-import MenuOpenButton from '../MenuOpenButton';
-import Logo from '../Logo';
+import MenuOpenButton from '../components/MenuOpenButton';
+import Logo from '../components/Logo';
 
-import NewRideButton from '../NewRideButton';
+import NewRideButton from '../components/NewRideButton';
 
 const AppHeader: FC = () => {
   return (

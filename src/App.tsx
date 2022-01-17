@@ -7,8 +7,8 @@ import theme from './contexts/theme';
 import AuthProvider from './contexts/AuthProvider';
 import { LoadScript } from '@react-google-maps/api';
 
-import Layout from './components/Layout';
-import Pages from './Pages';
+import Layout from './layout';
+import Pages from './pages';
 import { libraries } from './constants/map';
 
 const App: FC = () => {
